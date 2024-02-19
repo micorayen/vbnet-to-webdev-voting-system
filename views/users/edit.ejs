@@ -1,0 +1,70 @@
+<% layout('layouts/boilerplate') %>
+
+<div class="row">
+  <h1 class="text-center mb-4">Update your account</h1>
+  <div class="col-md-6 offset-md-3 mb-5">
+    <form
+    action="/users/<%= user._id %>?_method=PATCH"
+    method="POST"
+    novalidate
+    class="validated-form"
+  >
+      <div class="mb-3">
+        <label class="form-label" for="yearLevel" for="roles"
+          >Account type:
+        </label>
+        <select
+          class="form-select"
+          id="roles"
+          name="user[role]"
+          aria-label="Default select example"
+        >
+          <% for(let role of roles) { %>
+
+          <option value="<%= role %>" <%= user.role  === role ? 'selected':''%>><%= role %></option>
+          <% } %>
+
+  
+        </select>
+        <div class="invalid-feedback">Choose your year level</div>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label" for="fullName">Full name: </label>
+        <input
+          class="form-control"
+          type="text"
+          name="user[fullName]"
+          id="fullName"
+          placeholder="eg. John Doe"
+          value="<%= user.fullName %>"
+          required
+        />
+        <div class="invalid-feedback">Please provide your full name</div>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label" for="username">Username: </label>
+        <input
+          class="form-control"
+          type="text"
+          name="user[username]"
+          id="username"
+          placeholder="Create a username"
+          value="<%= user.username%>"
+          required
+        />
+        <div class="invalid-feedback">Please provide your username</div>
+      </div>
+
+      <div class="mb-3 d-grid">
+        <button class="btn btn-primary">Update Account</button>
+      </div>
+
+    </form>
+    <hr />
+    <div class="row">
+      <a class="mb-3 text-center" href="/users">Back to all accounts</a>
+    </div>
+  </div>
+</div>
