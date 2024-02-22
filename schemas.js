@@ -8,3 +8,14 @@ module.exports.userSchema = Joi.object({
     password: Joi.string(),
   }).required(),
 });
+
+module.exports.voterSchema = Joi.object({
+  voter: Joi.object({
+    voteStatus: Joi.string(),
+    fullName: Joi.string().required(),
+    course: Joi.string().required(),
+    yearLevel: Joi.string().required(),
+    username: Joi.string().required(), // Change into Student IdNumber
+    password: Joi.string(),
+  }).required(),
+});

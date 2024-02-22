@@ -1,9 +1,9 @@
-# Revamping Old Project: Voting System
+﻿# Revamping Old Project: Voting System
 
 <br>
 
 _Project: School-based Voting System_<br>
-_Cause: Hands-on Practice Web Technologies learn from the Course_
+_Cause: Hands-on Practice Web Technologies learned from the Course_
 
 ## Description
 

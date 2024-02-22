@@ -10,7 +10,7 @@
     class="validated-form"
   >
       <div class="mb-3">
-        <label class="form-label" for="yearLevel" for="roles"
+        <label class="form-label" for="roles" for="roles"
           >Account type:
         </label>
         <select
@@ -23,10 +23,8 @@
 
           <option value="<%= role %>" <%= user.role  === role ? 'selected':''%>><%= role %></option>
           <% } %>
-
-  
         </select>
-        <div class="invalid-feedback">Choose your year level</div>
+        <div class="invalid-feedback">Choose account type</div>
       </div>
 
       <div class="mb-3">

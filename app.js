@@ -6,8 +6,11 @@ const ejsMate = require("ejs-mate");
 const ExpressError = require("./utils/ExpressError");
 const methodOverride = require("method-override");
 
+const Voter = require("./models/voters");
+
 // Import routes for campgrounds and reviews
 const userRoutes = require("./routes/users");
+const voterRoutes = require("./routes/voters");
 
 // MongoDB Connection:
 mongoose.connect("mongodb://127.0.0.1:27017/voting-app", {});
@@ -30,12 +33,16 @@ app.use(express.static("public"));
 // =====================================
 // Set up middleware for handling routes
 app.use("/users", userRoutes);
+app.use("/voters", voterRoutes);
 
 /// Main Page:
 // --------------------
 app.get("/", (req, res) => {
   res.render("home");
 });
+
+/// VOTERS ROUTES:
+// --------------------
 
 // Error Handling
 // --------------------

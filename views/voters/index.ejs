@@ -1,0 +1,182 @@
+<% layout('layouts/boilerplate') %>
+
+<div class="container">
+  <div class="row">
+    <h1 class="text-center mb-4">Manage voters</h1>
+    <div class="col-lg-10 offset-lg-1 mb-5">
+      <div class="row">
+        <div class="col-md-6 mb-5">
+          <div class="mb-3">
+            <label class="form-label" for="studentIdNumber"
+              >Student ID Number:
+            </label>
+            <input
+              class="form-control"
+              type="text"
+              id="studentIdNumber"
+              required
+              disabled
+            />
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label" for="fullName">Full name: </label>
+            <input
+              class="form-control"
+              type="text"
+              id="fullName"
+              required
+              disabled
+            />
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label" for="course">Course: </label>
+            <input
+              class="form-control"
+              type="course"
+              id="course"
+              required
+              disabled
+            />
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label" for="yearLevel">Year Level: </label>
+            <select
+              class="form-select"
+              aria-label="Default select example"
+              id="yearLevel"
+              disabled
+            >
+              <option value="0">Choose year level</option>
+              <option value="1st Year">1st Year</option>
+              <option value="2nd Year">2nd Year</option>
+              <option value="3rd Year">3rd Year</option>
+              <option value="4th Year">4th Year</option>
+              <option value="5th Year">5th Year</option>
+            </select>
+          </div>
+
+          <div class="mb-3">
+            <div class="row">
+              <div class="col mb-3 d-grid">
+                <button
+                  class="btn btn-warning"
+                  id="edit-button"
+                  type="button"
+                  disabled
+                >
+                  Edit
+                </button>
+              </div>
+              <div class="col mb-3">
+                <form class="d-grid delete-voter" method="POST">
+                  <button
+                    class="btn btn-danger"
+                    id="delete-button"
+                    type="button"
+                    disabled
+                  >
+                    Delete
+                  </button>
+                </form>
+              </div>
+            </div>
+
+            <hr />
+            <div class="row">
+              <a class="mb-3 text-center" href="/">Back to main page</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="card">
+            <h3 class="card-title text-center mb-3">Voters</h3>
+            <div class="card-body table-responsive p-0">
+              <table
+                id="voterTable"
+                class="table table-bordered table-striped table-dark"
+              >
+                <thead>
+                  <tr>
+                    <th>Id</th>
+                    <th>IdNumber</th>
+                    <th>fullName</th>
+                    <th>course</th>
+                    <th>yearLevel</th>
+                    <th hidden>voterId</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  <% let count = 1 %> <% voters.forEach(function(voter) { %>
+                  <tr>
+                    <td><%= count %></td>
+                    <td><%= voter.username %></td>
+                    <td><%= voter.fullName %></td>
+                    <td><%= voter.course %></td>
+                    <td><%= voter.yearLevel %></td>
+                    <td hidden><%= voter._id %></td>
+                  </tr>
+                  <% count++ %> <% }); %>
+                </tbody>
+              </table>
+              <div class="card-text"></div>
+            </div>
+          </div>
+
+          <a href="/voters/new" class="btn btn-primary d-grid mt-3"
+            >Create Voter</a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+
+  <script>
+    $(document).ready(function () {
+      let id = "";
+      $("#voterTable tbody").on("click", "tr", function () {
+        var rowData = $(this)
+          .children("td")
+          .map(function () {
+            return $(this).text();
+          })
+          .get();
+
+        $("#studentIdNumber").val(rowData[1]);
+        $("#fullName").val(rowData[2]);
+        $("#course").val(rowData[3]);
+        $("#yearLevel").val(rowData[4]);
+        id = rowData[5];
+
+        $("#edit-button").prop("disabled", false);
+        $("#delete-button").prop("disabled", false);
+      });
+
+      $("#edit-button").click(function (event) {
+        event.preventDefault();
+        window.location.href = `/voters/${id}/edit`;
+      });
+
+      $("#delete-button").on("click", function () {
+        const confirmation = confirm(
+          "Are you sure you want to delete this voter account?"
+        );
+
+        if (confirmation) {
+          $("form.delete-voter")
+            .attr("action", `/voters/${id}?_method=DELETE`)
+            .submit();
+          console.log("Voter confirmed deletion");
+        } else {
+          console.log("Deletion cancelled");
+        }
+      });
+    });
+  </script>
+</div>

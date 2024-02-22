@@ -9,10 +9,13 @@ const User = require("../models/users");
 const { roles } = require("../public/javascripts/tangentSelections");
 
 // User Index Page
-router.get("/", async (req, res) => {
-  const users = await User.find({});
-  res.render("users/index", { users });
-});
+router.get(
+  "/",
+  catchAsync(async (req, res) => {
+    const users = await User.find({});
+    res.render("users/index", { users });
+  })
+);
 
 // render New User Form
 router.get("/new", (req, res) => {
@@ -20,14 +23,18 @@ router.get("/new", (req, res) => {
 });
 
 // create User
-router.post("/", validateUser, async (req, res) => {
-  const { role, fullName, username, password } = req.body.user;
-  const user = new User({ role, fullName, username });
-  await User.register(user, password);
+router.post(
+  "/",
+  validateUser,
+  catchAsync(async (req, res) => {
+    const { role, fullName, username, password } = req.body.user;
+    const user = new User({ role, fullName, username });
+    await User.register(user, password);
 
-  // req.flash("success", "Successfully created a user");
-  res.redirect("/users");
-});
+    // req.flash("success", "Successfully created a user");
+    res.redirect("/users");
+  })
+);
 
 // update User Information
 router.patch(
@@ -68,7 +75,7 @@ router.get(
     const user = await User.findById(id);
 
     if (!user) {
-      req.flash("error", "Cannot find that user account");
+      // req.flash("error", "Cannot find that user account");
       return res.redirect("/users");
     }
 
