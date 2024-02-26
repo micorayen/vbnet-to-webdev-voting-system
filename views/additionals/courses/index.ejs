@@ -1,0 +1,183 @@
+<% layout('layouts/boilerplate') %>
+
+<div class="container">
+  <div class="row">
+    <h1 class="text-center mb-4">Existing courses</h1>
+    <div class="col-md-6 offset-md-3 mb-5">
+      <form novalidate class="validated-form">
+        <div class="mb-3">
+          <label class="form-label" for="Id">Id: </label>
+          <input class="form-control" type="text" id="Id" disabled />
+        </div>
+        <div class="mb-3">
+          <label class="form-label" for="course">Course name: </label>
+          <input
+            class="form-control"
+            type="text"
+            id="course"
+            name="course"
+            required
+          />
+          <div class="invalid-feedback">
+            Please provide your academic course
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col mb-3 d-grid">
+            <button class="btn btn-dark" id="add-button" type="button">
+              Add
+            </button>
+          </div>
+
+          <div class="col mb-3 d-grid">
+            <button
+              class="btn btn-dark"
+              id="edit-button"
+              type="button"
+              disabled
+            >
+              Edit
+            </button>
+          </div>
+
+          <div class="col mb-3 d-grid">
+            <button
+              class="btn btn-dark"
+              id="delete-button"
+              type="button"
+              disabled
+            >
+              Delete
+            </button>
+          </div>
+
+          <div class="col mb-3 d-grid">
+            <button
+              class="btn btn-dark"
+              id="update-button"
+              type="button"
+              disabled
+            >
+              Update
+            </button>
+          </div>
+        </div>
+
+        <div class="col d-grid">
+          <button id="clear-button" class="btn btn-dark d-grid mb-3">
+            Clear
+          </button>
+        </div>
+
+        <!-- Data Table -->
+        <div class="table-responsive p-0">
+          <table
+            id="userTable"
+            class="table table-bordered table-striped table-dark"
+          >
+            <thead>
+              <tr>
+                <th>courseId</th>
+                <th>courseName</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <% courses.forEach(function(course) { %>
+              <tr>
+                <td><%= course._id %></td>
+                <td><%= course.course %></td>
+              </tr>
+              <% }); %>
+            </tbody>
+          </table>
+        </div>
+
+        <hr />
+        <div class="row">
+          <a class="mb-3 text-center" href="/">Back to main page</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script>
+  $(document).ready(function () {
+    const updateBtn = document.querySelector("#update-button");
+    const addBtn = document.querySelector("#add-button");
+
+    $("#userTable tbody tr").on("click", function () {
+      const courseId = $(this).find("td:first").text();
+      const courseName = $(this).find("td:nth-child(2)").text();
+
+      $("#Id").val(courseId);
+      $("#course").val(courseName);
+
+      $("#add-button").prop("disabled", true);
+      $("#edit-button").prop("disabled", false);
+      $("#delete-button").prop("disabled", false);
+      $("#update-button").prop("disabled", true);
+      $("#course").prop("disabled", true);
+    });
+
+    $("#add-button").on("click", function () {
+      const courseName = $("#course").val();
+      $.ajax({
+        type: "POST",
+        url: "/courses",
+        data: { course: courseName },
+        success: function (response) {
+          window.location.reload();
+        },
+        error: function (error) {
+          console.error("Error adding course:", error);
+        },
+      });
+    });
+
+    $("#edit-button").on("click", function () {
+      $("#add-button").prop("disabled", true);
+      $("#edit-button").prop("disabled", true);
+      $("#delete-button").prop("disabled", true);
+      $("#course").prop("disabled", false);
+      $("#update-button").prop("disabled", false);
+    });
+
+    $("#delete-button").on("click", function () {
+      const courseId = $("#Id").val();
+      $.ajax({
+        type: "POST",
+        url: `/courses/${courseId}?_method=DELETE`,
+        success: function (response) {
+          window.location.reload();
+        },
+        error: function (error) {
+          console.error("Error deleting course:", error);
+        },
+      });
+    });
+
+    $("#update-button").on("click", function () {
+      const courseId = $("#Id").val();
+      const updatedCourseName = $("#course").val();
+      $.ajax({
+        type: "POST",
+        url: `/courses/${courseId}?_method=PATCH`,
+        data: { course: updatedCourseName },
+        success: function (response) {
+          window.location.reload();
+        },
+        error: function (error) {
+          console.error("Error updating course:", error);
+        },
+      });
+    });
+
+    $("#clear-button").on("click", function () {
+      window.location.reload();
+    });
+  });
+</script>

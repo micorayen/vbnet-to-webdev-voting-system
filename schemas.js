@@ -19,3 +19,11 @@ module.exports.voterSchema = Joi.object({
     password: Joi.string(),
   }).required(),
 });
+
+module.exports.partySchema = Joi.object({
+  party: Joi.string().required(),
+});
+
+module.exports.courseSchema = Joi.object({
+  course: Joi.string().required(),
+});

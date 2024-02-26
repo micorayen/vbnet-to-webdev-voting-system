@@ -91,10 +91,10 @@
           </div>
         </div>
 
-        <div class="col-md-6">
+        <div class="col-md-6 mb-3">
           <div class="card">
             <h3 class="card-title text-center mb-3">Voters</h3>
-            <div class="card-body table-responsive p-0">
+            <div class="card-body table-container table-responsive p-0">
               <table
                 id="voterTable"
                 class="table table-bordered table-striped table-dark"
@@ -127,56 +127,56 @@
             </div>
           </div>
 
-          <a href="/voters/new" class="btn btn-primary d-grid mt-3"
+          <a href="/voters/new" class="btn btn-primary d-grid mt-2"
             >Create Voter</a
           >
         </div>
       </div>
     </div>
   </div>
-
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-
-  <script>
-    $(document).ready(function () {
-      let id = "";
-      $("#voterTable tbody").on("click", "tr", function () {
-        var rowData = $(this)
-          .children("td")
-          .map(function () {
-            return $(this).text();
-          })
-          .get();
-
-        $("#studentIdNumber").val(rowData[1]);
-        $("#fullName").val(rowData[2]);
-        $("#course").val(rowData[3]);
-        $("#yearLevel").val(rowData[4]);
-        id = rowData[5];
-
-        $("#edit-button").prop("disabled", false);
-        $("#delete-button").prop("disabled", false);
-      });
-
-      $("#edit-button").click(function (event) {
-        event.preventDefault();
-        window.location.href = `/voters/${id}/edit`;
-      });
-
-      $("#delete-button").on("click", function () {
-        const confirmation = confirm(
-          "Are you sure you want to delete this voter account?"
-        );
-
-        if (confirmation) {
-          $("form.delete-voter")
-            .attr("action", `/voters/${id}?_method=DELETE`)
-            .submit();
-          console.log("Voter confirmed deletion");
-        } else {
-          console.log("Deletion cancelled");
-        }
-      });
-    });
-  </script>
 </div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+
+<script>
+  $(document).ready(function () {
+    let id = "";
+    $("#voterTable tbody").on("click", "tr", function () {
+      var rowData = $(this)
+        .children("td")
+        .map(function () {
+          return $(this).text();
+        })
+        .get();
+
+      $("#studentIdNumber").val(rowData[1]);
+      $("#fullName").val(rowData[2]);
+      $("#course").val(rowData[3]);
+      $("#yearLevel").val(rowData[4]);
+      id = rowData[5];
+
+      $("#edit-button").prop("disabled", false);
+      $("#delete-button").prop("disabled", false);
+    });
+
+    $("#edit-button").click(function (event) {
+      event.preventDefault();
+      window.location.href = `/voters/${id}/edit`;
+    });
+
+    $("#delete-button").on("click", function () {
+      const confirmation = confirm(
+        "Are you sure you want to delete this voter account?"
+      );
+
+      if (confirmation) {
+        $("form.delete-voter")
+          .attr("action", `/voters/${id}?_method=DELETE`)
+          .submit();
+        console.log("Voter confirmed deletion");
+      } else {
+        console.log("Deletion cancelled");
+      }
+    });
+  });
+</script>
