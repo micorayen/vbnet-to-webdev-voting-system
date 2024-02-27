@@ -5,12 +5,14 @@ const PartySchema = new Schema({
   party: {
     type: String,
     required: true,
+    unique: true,
   },
 });
 const CourseSchema = new Schema({
   course: {
     type: String,
     required: true,
+    unique: true,
   },
 });
 const TitleSchema = new Schema({

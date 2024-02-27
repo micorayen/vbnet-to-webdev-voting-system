@@ -1,0 +1,44 @@
+<% layout('layouts/boilerplate') %>
+<!-- ======================== -->
+
+<div class="container">
+  <div class="row">
+    <h1 class="text-center mb-4">Candidate Info:</h1>
+    <div class="col-md-6 offset-md-3 mb-5">
+      <div class="card mb-5">
+        <div class="card-body">
+          <h5 class="card-title">Name: <%= candidate.fullName %></h5>
+          <p class="card-text">Party: <%= candidate.party %></p>
+          <p class="card-text">Position: <%= candidate.position %></p>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">
+            Id number: <%= candidate.candidateIdNumber %>
+          </li>
+          <li class="list-group-item">Course: <%= candidate.course %></li>
+          <li class="list-group-item">
+            Year level: <%= candidate.yearLevel %>
+          </li>
+        </ul>
+        <div class="card-body">
+          <a
+            href="/candidates/<%= candidate._id %>/edit"
+            class="card-link btn btn-dark"
+            >Edit Candidate</a
+          >
+          <form
+            class="d-inline"
+            action="/candidates/<%= candidate._id %>?_method=DELETE"
+            method="POST"
+          >
+            <button class="btn btn-dark">Delete Candidate</button>
+          </form>
+        </div>
+
+        <div class="card-footer text-body-secondary d-flex justify-content-end">
+          <a href="/candidates">Back to existing candidates</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

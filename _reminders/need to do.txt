@@ -1,0 +1,13 @@
+** ALL
+- check trim(). 
+
+** Course and Parties
+- bootstrap validation on add and update, doesnt get triggered work.
+
+
+** Candidate New & update
+- add a image upload, for candidates images
+
+
+** Additional & Titles
+- Need Modal

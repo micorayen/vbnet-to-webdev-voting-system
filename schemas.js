@@ -27,3 +27,15 @@ module.exports.partySchema = Joi.object({
 module.exports.courseSchema = Joi.object({
   course: Joi.string().required(),
 });
+
+module.exports.candidateSchema = Joi.object({
+  candidate: Joi.object({
+    candidateIdNumber: Joi.string().required(),
+    party: Joi.string().required(),
+    position: Joi.string().required(),
+    fullName: Joi.string().required(),
+    course: Joi.string().required(),
+    yearLevel: Joi.string().required(),
+    voteCount: Joi.string(),
+  }).required(),
+});

@@ -2,30 +2,11 @@
 
 <div class="container">
   <div class="row">
-    <h1 class="text-center mb-4">Titles</h1>
     <div class="col-md-6 offset-md-3 mb-5">
-      <div class="mb-3">
-        <label class="form-label" for="Id">Current Title: </label>
-        <input class="form-control" type="text" id="Id" required disabled />
-      </div>
-      <div class="mb-3">
-        <label class="form-label" for="mainTitle">Update Title: </label>
-        <input class="form-control" type="text" id="mainTitle" required />
-        <div class="invalid-feedback">Please provide the application title</div>
-      </div>
 
-      <div class="row">
-        <div class="col mb-5 d-grid">
-          <button class="btn btn-primary" id="edit-button" type="button" >
-            Update Title
-          </button>
-        </div>
-      </div>
-
-      <!-- // Data Table -->
       <div class="card">
+        <h4 class="text-center py-1 bg-dark text-white">Additional</h4>
         <div class="card-body">
-          <h3 class="text-center ">Additionals</h3>
           <div class="row ">
             <div class="col my-3 d-grid">
               <button
@@ -48,6 +29,19 @@
             </div>
           </div>
 
+          <div class="row ">
+            <div class="col-6 my-3 d-grid">
+              <button
+              class="btn btn-dark"
+              id="parties-button"
+              type="button"
+            >
+              Update Title
+            </button>
+            </div>
+
+          </div>
+
         </div>
       </div>
 
@@ -55,7 +49,7 @@
       <div class="row">
         <a class="mb-3 text-center" href="/">Back to main page</a>
       </div>
-    </div>
+    </ddiv>
   </div>
 </div>
 
@@ -63,9 +57,6 @@
 
 <script>
   $(document).ready(function () {
-   
-
-
 
     $("#parties-button").click(function (event) {
       event.preventDefault();

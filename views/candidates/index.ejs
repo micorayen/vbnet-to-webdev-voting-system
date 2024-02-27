@@ -1,0 +1,183 @@
+<% layout('layouts/boilerplate') %>
+
+<div class="container">
+  <div class="row">
+    <h1 class="text-center mb-4">Manage candidates</h1>
+    <div class="col-lg-10 offset-lg-1 mb-5">
+      <div class="row">
+        <div class="col-md-4 mb-5">
+          <!-- Refresh Page -->
+          <div class="card mb-3">
+            <h4 class="text-center py-1 bg-dark text-white">Candidates</h4>
+            <div class="card-body">
+              <div class="mb-3">
+                <div class="row">
+                  <div class="col d-grid">
+                    <button
+                      class="btn btn-dark"
+                      id="refresh-button"
+                      type="button"
+                    >
+                      Refresh
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Show Selected Candidates -->
+          <div class="card">
+            <h4 class="text-center py-1 bg-dark text-white">Options</h4>
+            <div class="card-body">
+              <div class="mb-3">
+                <label class="form-label" for="selectedCandidateIdNumber"
+                  >Selected Candidate:
+                </label>
+                <input
+                  class="form-control"
+                  type="text"
+                  id="selectedCandidateIdNumber"
+                  disabled
+                />
+              </div>
+
+              <div class="mb-3">
+                <div class="row">
+                  <div class="col d-grid mb-3">
+                    <button
+                      class="btn btn-dark"
+                      id="view-button"
+                      type="button"
+                      disabled
+                    >
+                      View Info
+                    </button>
+                  </div>
+
+                  <hr />
+                  <div class="col d-grid">
+                    <button class="btn btn-dark" id="add-button" type="button">
+                      Add Candidate
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <hr />
+          <div class="row">
+            <a class="text-center" href="/">Back to main page</a>
+          </div>
+        </div>
+
+        <div class="col-md-8 mb-3">
+          <!-- Filter Existing Candidates -->
+          <div class="mb-3 px-3">
+            <label class="form-label" for="yearLevel">Party: </label>
+            <select
+              class="form-select"
+              aria-label="Default select example"
+              id="party"
+              name="party"
+            >
+              <option value="0"></option>
+              <% for(let party of parties) { %>
+              <option value="<%= party.party %>"><%= party.party %></option>
+              <% } %>
+            </select>
+          </div>
+
+          <div class="mb-3 px-3">
+            <label class="form-label" for="yearLevel">Position: </label>
+            <select
+              class="form-select"
+              aria-label="Default select example"
+              id="yearLevel"
+            >
+              <option value="0"></option>
+              <% for(let position of candidatePositions) { %>
+              <option value="<%= position %>"><%= position %></option>
+              <% } %>
+            </select>
+          </div>
+
+          <!-- DataTable for Candidates -->
+          <div class="card">
+            <div class="card-body table-container table-responsive p-0">
+              <table
+                id="candidateTable"
+                class="table table-bordered table-striped table-dark"
+              >
+                <thead>
+                  <tr>
+                    <th>Id</th>
+                    <th>IdNumber</th>
+                    <th>partyName</th>
+                    <th>position</th>
+                    <th>fullName</th>
+                    <th>course</th>
+                    <th>yearLevel</th>
+                    <th hidden>candidateId</th>
+                  </tr>
+                </thead>
+                <% let count = 1 %>
+                <tbody>
+                  <% candidates.forEach(function(candidate){ %>
+                  <tr>
+                    <td><%= count %></td>
+                    <td><%= candidate.candidateIdNumber %></td>
+                    <td><%= candidate.party %></td>
+                    <td><%= candidate.position %></td>
+                    <td><%= candidate.fullName %></td>
+                    <td><%= candidate.course %></td>
+                    <td><%= candidate.yearLevel %></td>
+                    <td hidden><%= candidate._id %></td>
+                  </tr>
+                  <% count++ %> <% }); %>
+                </tbody>
+              </table>
+              <div class="card-text"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+
+<script>
+  $(document).ready(function () {
+    let Id = "";
+    $("#candidateTable tbody").on("click", "tr", function () {
+      var rowData = $(this)
+        .children("td")
+        .map(function () {
+          return $(this).text();
+        })
+        .get();
+
+      $("#selectedCandidateIdNumber").val(rowData[1]);
+      id = rowData[7];
+
+      $("#view-button").prop("disabled", false);
+    });
+
+    $("#refresh-button").click(function (event) {
+      window.location.reload();
+    });
+
+    $("#view-button").click(function (event) {
+      event.preventDefault();
+      window.location.href = `/candidates/${id}`;
+    });
+
+    $("#add-button").click(function (event) {
+      event.preventDefault();
+      window.location.href = `/candidates/new`;
+    });
+  });
+</script>

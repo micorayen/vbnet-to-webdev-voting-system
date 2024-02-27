@@ -1,0 +1,10 @@
+// ** Use catchAsync:
+// Get: IndexForm, showpage, renderEditForm 
+// Post: create,
+// Put: update
+// Delete: delete
+// Except: renderNewForm
+
+// ** Validate ei. users, voters ...
+// Post: create
+// Put: update

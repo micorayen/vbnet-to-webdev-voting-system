@@ -6,13 +6,15 @@ const ejsMate = require("ejs-mate");
 const ExpressError = require("./utils/ExpressError");
 const methodOverride = require("method-override");
 
-const { Title } = require("./models/additionals");
+const { Party, Course, Title } = require("./models/additionals");
+const Candidate = require("./models/candidates");
 
 // Import routes for campgrounds and reviews
 const userRoutes = require("./routes/users");
 const voterRoutes = require("./routes/voters");
 const partyRoutes = require("./routes/parties");
 const courseRoutes = require("./routes/courses");
+const candidateRoutes = require("./routes/candidates");
 
 // MongoDB Connection:
 mongoose.connect("mongodb://127.0.0.1:27017/voting-app", {});
@@ -38,6 +40,7 @@ app.use("/users", userRoutes);
 app.use("/voters", voterRoutes);
 app.use("/parties", partyRoutes);
 app.use("/courses", courseRoutes);
+app.use("/candidates", candidateRoutes);
 
 /// Main Page:
 // --------------------
@@ -50,14 +53,13 @@ app.get("/", (req, res) => {
 app.get("/additionals", (req, res) => {
   res.render("additionals");
 });
+// app.post("/addditionals/titles", async (req, res) => {
+//   await new Title(req.body);
 
-app.post("/addditionals/titles", async (req, res) => {
-  await new Title(req.body);
+//   res.redirect("/addtionals");
+// });
+// app.put("/additionals/titles", async (req, res) => {});
 
-  res.redirect("/addtionals");
-});
-
-app.put("/additionals/titles", async (req, res) => {});
 // Error Handling
 // --------------------
 // Page Not Found Route

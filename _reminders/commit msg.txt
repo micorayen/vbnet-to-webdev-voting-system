@@ -1,0 +1,16 @@
+
+done: created model, crud-routes and validation for candidates, and organize routes
+
+1. **Model**:
+    - create a candidate model to the application, for schema structure.
+2. **Routes**:
+    - create a Index that uses data-table, for viewing existing candidates.
+    - create a Show route for viewing selected candidate's information.
+    - create a POST route for creating candidate.
+    - create a PATCH route for updating candidate's information.
+    - create a DELETE route for deleting specific candidates.
+3. **Validation**: 
+    - Update Joi, for validating candidateSchema.
+    - Added a new middleware function, `validateCandidate`, for validating candidate's data before submission.
+4. **Express Routing**: 
+    - Organize routes for voters with Express Router, for better readability.
