@@ -12,13 +12,44 @@ const {
 } = require("../public/javascripts/tangentSelections");
 // --------------------
 
+// Filter by party or position
+router.get(
+  "/party/:party",
+  catchAsync(async (req, res) => {
+    if (req.params.party === "0") {
+      const candidates = await Candidate.find();
+      res.json(candidates);
+    } else {
+      const filterByParty = await Candidate.find({ party: req.params.party });
+      res.json(filterByParty);
+    }
+  })
+);
+
+router.get(
+  "/position/:position",
+  catchAsync(async (req, res) => {
+    if (req.params.position === "0") {
+      const candidates = await Candidate.find();
+      res.json(candidates);
+    } else {
+      const filterByPosition = await Candidate.find({
+        position: req.params.position,
+      });
+      res.json(filterByPosition);
+    }
+  })
+);
+
+// --------------------
+
 // render Index Form
 router.get(
   "/",
   catchAsync(async (req, res) => {
     const parties = await Party.find();
     const candidates = await Candidate.find();
-    await res.render("candidates", { parties, candidatePositions, candidates });
+    res.render("candidates", { parties, candidatePositions, candidates });
   })
 );
 

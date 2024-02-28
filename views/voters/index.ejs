@@ -5,7 +5,7 @@
     <h1 class="text-center mb-4">Manage voters</h1>
     <div class="col-lg-10 offset-lg-1 mb-5">
       <div class="row">
-        <div class="col-md-6 mb-5">
+        <div class="col-md-6 mb-3">
           <div class="mb-3">
             <label class="form-label" for="studentIdNumber"
               >Student ID Number:
@@ -83,18 +83,14 @@
                 </form>
               </div>
             </div>
-
-            <hr />
-            <div class="row">
-              <a class="mb-3 text-center" href="/">Back to main page</a>
-            </div>
           </div>
+          <hr />
         </div>
 
         <div class="col-md-6 mb-3">
           <div class="card">
-            <h3 class="card-title text-center mb-3">Voters</h3>
-            <div class="card-body table-container table-responsive p-0">
+            <!-- <h3 class="card-title text-center mb-3">Voters</h3> -->
+            <div class="card-body voter-table-container table-responsive p-0">
               <table
                 id="voterTable"
                 class="table table-bordered table-striped table-dark"
@@ -123,7 +119,6 @@
                   <% count++ %> <% }); %>
                 </tbody>
               </table>
-              <div class="card-text"></div>
             </div>
           </div>
 

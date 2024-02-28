@@ -1,13 +1,59 @@
-** ALL
-- check trim(). 
+** TASK TO BE DONE **
 
-** Course and Parties
-- bootstrap validation on add and update, doesnt get triggered work.
+0. ALL
+- better layout and responsive on different screen sizes.
+- trim(), on all textboxes for "Post and Patch", and signin.
 
+1. Sign in
+- the checkboxes routing for system's user or voter.
 
-** Candidate New & update
-- add a image upload, for candidates images
+2. Home
+- flash logging in and signing out.
+- extract name loggedIn account, put on "Welcome, + 'Name'".
 
+3. Vote Form
+- flash logging in and signing out
+- extract name loggedIn Voter, put on "Welcome, + 'Name'".
+- after voting - put 'voteStatus' to "VOTED".
 
-** Additional & Titles
-- Need Modal
+4. Vote Standing
+- Generate Reports both "Votes Tally and Print Winners".
+
+5. Manage Voters
+- flash messages, for successfully creation and deletion.
+
+6. Admin/Facilitator
+- flash messages, for successfully creation and deletion.
+
+7. Candidates
+- flash messages, for successfully creation and deletion.
+- Candidate New & update, add a image upload, for candidates images, and delete image after updating it w/ new image.
+
+8. Additionals
+- flash messages, for successfully updating title, and also redirect home-page.
+- parties flash messages, for successfully creation and deletion.
+- courses flash messages, for successfully creation and deletion.
+- parties and courses, bootstrap validation on add and update, doesnt get triggered work.
+
+9. READ ON BETTER PROJECT STRUCTURE (perhap MVC)
+- How to structure the project (some basic structuring).
+- Better Name for Directories/Folders.
+
+10. LIMITATIONS (Demonstration Purposes)
+- Read Below 
+- create flash messages for limitations.
+---------------
+LIMITATION for Demonstration purposes
+* PARTIES
+- ABC's and A2Z Partylist, cant be edit or delete for demonstration purposes
+
+* CANDIDATES
+- ABC's and A2Z Partylist candidates, cant be edit or delete for demonstration purposes
+
+* VOTER
+- (Username: demo-voter,  Password: voter-password), cant be edit or delete demonstration purposes.
+- (Username: demo-voter-username,  Password: voter-password), won't change vote-status to "Voted" even after voting demonstration purposes.
+
+* SYSTEM's USER
+- (Username: demo-facilitator,  Password: facilitator-password), cant be edit or delete demonstration purposes.
+- (Username: demo-facilitator,  Password: facilitator-password), only have access to vote standing, voters and candidates except limitations stated above.

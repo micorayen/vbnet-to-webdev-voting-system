@@ -10,6 +10,7 @@ const CandidateSchema = new Schema({
   candidateIdNumber: {
     type: String,
     required: true,
+    unique: true,
   },
   party: {
     type: String,

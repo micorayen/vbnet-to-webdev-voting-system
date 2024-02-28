@@ -1,37 +1,34 @@
 <% layout('layouts/boilerplate') %>
+<div class="container">
+  <h3 class="text-center mb-4">Welcome, Mico Rayen</h3>
 
-<div class="row">
-  <h1 class="text-center mb-4">Create your account</h1>
-  <div class="col-md-6 offset-md-3 mb-5">
-
-
-      <div class="row mb-3">
-        <a class="mx-1 d-grid col btn btn-primary" href="#"
-          >VOTE STANDING</a
-        >
-        <a class="mx-1 d-grid col btn btn-danger" href="#"
-          >MASTER RESET</a
-        >
-      </div>
-
-      <div class="row mb-3">
-        <a class="mx-1 d-grid col btn btn-success" href="/voters"
-          >MANAGE VOTERS</a
-        >
-        <a class="mx-1 d-grid col btn btn-primary" href="/users"
-          >ADMIN / FACILITOR</a
-        >
-      </div>
-
-      <div class="row mb-3">
-        <a class="mx-1 d-grid col btn btn-dark" href="/candidates"
-          >CANDIDATES</a
-        >
-        <a class="mx-1 d-grid col btn btn-warning" href="/additionals"
-          >SETTING</a
-        >
-      </div>
-
+  <div class="row mb-3 text-center offset-md-1">
+    <div id="vote-standing-button" class="col-md-5 themed-grid-col d-grid">
+      <a id="home" class="btn" href="/standing">VOTE STANDING</a>
+    </div>
+    <div id="master-reset-button" class="col-md-5 themed-grid-col d-grid">
+      <a id="home" class="btn" href="/vote-candidate">MASTER RESET</a>
+    </div>
+    <div id="voter-button" class="col-md-5 themed-grid-col d-grid">
+      <a id="home" class="btn" href="/voters">MANAGE VOTERS</a>
+    </div>
+    <div id="user-button" class="col-md-5 themed-grid-col d-grid">
+      <a id="home" class="btn" href="/users">ADMIN / FACILITOR</a>
+    </div>
+    <div id="candidate-button" class="col-md-5 themed-grid-col d-grid">
+      <a id="home" class="btn" href="/candidates">CANDIDATES</a>
+    </div>
+    <div id="additonal-button" class="col-md-5 themed-grid-col d-grid">
+      <a
+        id="home"
+        class="btn"
+        href=""
+        data-bs-target="#additional"
+        data-bs-toggle="modal"
+        >ADDITIONALS</a
+      >
     </div>
   </div>
 </div>
+
+<%- include('./partials/additionalsModal') %>

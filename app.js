@@ -48,17 +48,42 @@ app.get("/", (req, res) => {
   res.render("home");
 });
 
+/// VOTE FORM:
+// --------------------
+app.get("/vote-candidate", (req, res) => {
+  res.render("votes/vote");
+});
+
 /// COURSES ROUTES:
 // --------------------
-app.get("/additionals", (req, res) => {
-  res.render("additionals");
-});
-// app.post("/addditionals/titles", async (req, res) => {
-//   await new Title(req.body);
 
-//   res.redirect("/addtionals");
-// });
-// app.put("/additionals/titles", async (req, res) => {});
+/// VOTE STANDING:
+const {
+  candidatePositions,
+} = require("./public/javascripts/tangentSelections");
+// --------------------
+// render Index Form
+app.get("/standing", async (req, res) => {
+  const candidates = await Candidate.find();
+  res.render("voteStanding", { candidatePositions, candidates });
+});
+
+// Filter by party or position
+app.get("/standing/position/:position", async (req, res) => {
+  if (req.params.position === "0") {
+    const candidates = await Candidate.find();
+    res.json(candidates);
+  } else {
+    const filterByPosition = await Candidate.find({
+      position: req.params.position,
+    });
+    res.json(filterByPosition);
+  }
+});
+
+app.get("/login", (req, res) => {
+  res.render("login");
+});
 
 // Error Handling
 // --------------------

@@ -1,5 +1,69 @@
-.table-container {
-  max-height: 300px; /* Set the maximum height of the container */
-  min-height: 300px; /* Set the maximum height of the container */
-  overflow-y: auto; /* Enable vertical scrolling when content exceeds the container height */
+/* Main Page */
+.themed-grid-col {
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  margin: 0.1rem;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+#home {
+  font-size: large;
+  font-weight: 500;
+  color: whitesmoke;
+}
+
+#vote-standing-button {
+  background-color: rgba(128, 200, 241, 0.9);
+}
+#vote-standing-button:hover {
+  background-color: rgba(128, 200, 241, 1);
+}
+#master-reset-button {
+  background-color: rgba(90, 193, 169, 0.9);
+}
+#master-reset-button:hover {
+  background-color: rgba(90, 193, 169, 1);
+}
+#voter-button {
+  background-color: rgba(191, 101, 213, 0.9);
+}
+#voter-button:hover {
+  background-color: rgba(191, 101, 213, 1);
+}
+#user-button {
+  background-color: rgba(173, 196, 220, 0.9);
+}
+#user-button:hover {
+  background-color: rgba(173, 196, 220, 1);
+}
+#candidate-button {
+  background-color: rgba(191, 191, 191, 0.9);
+}
+#candidate-button:hover {
+  background-color: rgba(191, 191, 191, 1);
+}
+#additonal-button {
+  background-color: rgba(230, 217, 0, 0.9);
+}
+#additonal-button:hover {
+  background-color: rgba(230, 217, 0, 1);
+}
+
+/* Data Tables */
+.voter-table-container {
+  max-height: 335px;
+  min-height: 335px;
+  overflow-y: auto;
+}
+
+.user-table-container {
+  max-height: 250px;
+  min-height: 250px;
+  overflow-y: auto;
+}
+
+.candidate-table-container {
+  max-height: 300px;
+  min-height: 300px;
+  overflow-y: auto;
 }

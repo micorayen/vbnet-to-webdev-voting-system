@@ -1,0 +1,103 @@
+
+<!-- // ADDITONALS MODAL -->
+<div class="modal fade" id="additional" aria-hidden="true" aria-labelledby="additionalLabel" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5 text-body-secondary" id="additionalLabel">ADDITIONAL</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body ">
+          <div class="row ">
+            <div class="col my-3 d-grid">
+              <button
+              class="btn btn-secondary"
+              id="parties-button"
+              type="button"
+            >
+              Parties
+            </button>
+            </div>
+  
+            <div class="col my-3 d-grid"">
+              <button
+              class="btn btn-secondary"
+              id="courses-button"
+              type="button"
+            >
+              Courses
+            </button>
+            </div>
+          </div>
+  
+          <div class="row ">
+            <div class="col-6 my-3  d-grid ">
+              <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-toggle="modal" data-bs-target="#updateTitle"  
+              id="title-button"
+            >
+              Update Title
+            </button>
+            </div>
+  
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal">CANCEL</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="modal fade" id="updateTitle" tabindex="-1" aria-labelledby="updateTitleLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header ">
+          <h1 class="modal-title fs-5 " id="updateTitleLabel">Application's Title</h1>
+          <button type="button" class="btn-close" data-bs-toggle="modal" data-bs-target="#additional" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="mb-3">
+              <label class="form-label">Current title: </label>
+              <input class="form-control" type="text" disabled />
+            </div>
+      
+            <div class="mb-3">
+              <label class="form-label" for="title">Update title: </label>
+              <input class="form-control" type="text" name="title" id="title" placeholder="eg. Automated Voting System" required />
+              <div class="invalid-feedback">Please provide your application title</div>
+            </div>
+      
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#additional" >Close</button>
+          <button type="button" class="btn btn-primary" id="update-button">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  
+  <script>
+    $(document).ready(function () {
+  
+      $("#parties-button").click(function (event) {
+        event.preventDefault();
+        window.location.href = `/parties`;
+      });
+  
+      $("#courses-button").click(function (event) {
+        event.preventDefault();
+        window.location.href = `/courses`;
+      });
+  
+  
+  
+    });
+  </script>
+  

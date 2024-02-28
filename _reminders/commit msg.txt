@@ -1,16 +1,32 @@
 
-done: created model, crud-routes and validation for candidates, and organize routes
+done: created interfaces and modals, and routes.
 
-1. **Model**:
-    - create a candidate model to the application, for schema structure.
+1. **Interface**:
+    - Add Navbar and Footer
+    - created modals for additionals (party, course and title), for better interface.
+    - created modals for updating application's title, for changing application's title.
+    - created interface for voting standing, for viewing current votes standing  by position. 
+    - create modal for Current Winner as of (Date), to view current leading candidate per position.
+    - create vote form for selecting candidates to vote, for casting votes.
+    - create modal for voting instructions, to help voters.
 2. **Routes**:
-    - create a Index that uses data-table, for viewing existing candidates.
-    - create a Show route for viewing selected candidate's information.
-    - create a POST route for creating candidate.
-    - create a PATCH route for updating candidate's information.
-    - create a DELETE route for deleting specific candidates.
-3. **Validation**: 
-    - Update Joi, for validating candidateSchema.
-    - Added a new middleware function, `validateCandidate`, for validating candidate's data before submission.
-4. **Express Routing**: 
-    - Organize routes for voters with Express Router, for better readability.
+    - create a Index route for vote form, for selecting candidates to vote.
+    - create a Index route for vote standing and uses data-table with filter by position, for viewing current standing by position.
+
+
+
+- create vote standing index.
+- create form vote layout
+- Login for voter form
+- Login for account/user form
+- create update for Title
+
+
+- modal - for additionals and tittle update
+- votingStanding Index and modal - Official Winner As Of (Date)
+- Add Navbar and Footer
+- create index vote-form for selecting candidates to vote - and modal for instruction for votingStanding
+- Create route and UI for signing in system-user and voters.
+- create flash signing in user, voters, candidates
+- create flash limitations
+

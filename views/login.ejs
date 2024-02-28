@@ -1,0 +1,63 @@
+<% layout('layouts/boilerplate') %>
+
+<link rel="stylesheet" href="/stylesheets/sign-in.css" />
+
+<!-- ======================================== -->
+<div class="d-flex align-items-center py-4">
+  <main class="form-signin w-100 m-auto">
+    <form>
+      <img src="/img/logo.png" alt="" width="115" height="65" />
+      <h3 class="mb-3 fw-bold ms-3">Please sign in</h3>
+      <!-- Check Boxes -->
+      <div class="form-check mt-3">
+        <input class="form-check-input" type="radio" value="user" id="user" />
+        <label class="form-check-label" for="user">
+          Account - for system management
+        </label>
+      </div>
+      <div class="form-check mb-4">
+        <input class="form-check-input" type="radio" value="voter" id="voter" />
+        <label class="form-check-label" for="voter">
+          Voter - for casting your votes
+        </label>
+      </div>
+      <!-- Sign In -->
+      <div class="mb-2">
+        <label class="form-label" for="username">Username </label>
+        <input type="text" id="username" class="form-control" name="username" />
+      </div>
+      <div class="mb-2">
+        <label class="form-label" for="password">Password </label>
+        <input
+          type="password"
+          id="password"
+          class="form-control"
+          name="password"
+        />
+      </div>
+
+      <!-- <div class="form-floating">
+        <input
+          type="email"
+          class="form-control"
+          id="floatingUsername"
+          placeholder="name@example.com"
+        />
+        <label for="floatingUsername">Username / Id Number</label>
+      </div>
+      <div class="form-floating">
+        <input
+          type="password"
+          class="form-control"
+          id="floatingPassword"
+          placeholder="Password"
+        />
+        <label for="floatingPassword">Password</label>
+      </div> -->
+
+      <button class="btn btn-primary w-100 py-2" type="submit">Sign in</button>
+    </form>
+  </main>
+
+  <script src="/javascripts/bootstrap.bundle.min.js"></script>
+</div>
