@@ -1,15 +1,19 @@
-** TASK TO BE DONE **
+** TASK TO BE DONE - since 5th update **
 
 0. ALL
 - better layout and responsive on different screen sizes.
 - trim(), on all textboxes for "Post and Patch", and signin.
+- flash messages, should be "modal like" informing the users, w/ only close-button.
+[DONE 6th]- safeguard most routes, with 'isLoggedIn' validations, to check if youre logged in.
 
 1. Sign in
 - the checkboxes routing for system's user or voter.
+[DONE 6th]- Sign in as system's user(accounts).
+- Sign in as voter, to vote.
 
-2. Home
-- flash logging in and signing out.
-- extract name loggedIn account, put on "Welcome, + 'Name'".
+[DONE 6th]2. Home
+[DONE 6th]- flash logging in and signing out.
+[DONE 6th]- extract name loggedIn account, put on "Welcome, + 'Name'".
 
 3. Vote Form
 - flash logging in and signing out
@@ -20,19 +24,32 @@
 - Generate Reports both "Votes Tally and Print Winners".
 
 5. Manage Voters
-- flash messages, for successfully creation and deletion.
+- turned "username(passportJS)" as "IdNumber"
+- New route - put additional validation for fullName and username (make sure it wont duplicate)
+- Update route - put additional validation for fullName and username (make sure it wont duplicate)
+[DONE 6th]- update index-form, new-form and edit-form voter's course from textbox to comboboxes(extracted course's collections data)
+[DONE 6th]- flash messages, for successfully creation, update and deletion, and rendering edit-form.
 
-6. Admin/Facilitator
-- flash messages, for successfully creation and deletion.
+6. Admin/Facilitator (Accounts)
+- New route - put additional validation for fullName and username (make sure it wont duplicate)
+- Update route - put additional validation for fullName and username (make sure it wont duplicate)
+[DONE 6th]- flash messages, for successfully creation, update and deletion, and rendering edit-form.
+[DONE 6th]- redo all from 'users' to 'accounts', (model, crud routes, index-form, new-form, edit-form, and validations ).
 
 7. Candidates
-- flash messages, for successfully creation and deletion.
+- New route - put additional validation for candidate IdNumber and fullName (make sure it wont duplicate)
+- Update route - put additional validation for candidate IdNumber and fullName (make sure it wont duplicate)
+[DONE 6th] - flash messages, for successfully creation, update and deletion, and rendering edit-form.
 - Candidate New & update, add a image upload, for candidates images, and delete image after updating it w/ new image.
 
 8. Additionals
+- Flash messages - parties - add, update, and delete (Not Working - Need Fixing)
+- Flash messages - courses - add, update, and delete (Not Working - Need Fixing)
+- New route - put additional validation for candidate partylist (make sure it wont duplicate)
+- Update route - put additional validation for candidate partylist (make sure it wont duplicate)
+- New route - put additional validation for candidate academic course's name (make sure it wont duplicate)
+- Update route - put additional validation for candidate academic course's name (make sure it wont duplicate)
 - flash messages, for successfully updating title, and also redirect home-page.
-- parties flash messages, for successfully creation and deletion.
-- courses flash messages, for successfully creation and deletion.
 - parties and courses, bootstrap validation on add and update, doesnt get triggered work.
 
 9. READ ON BETTER PROJECT STRUCTURE (perhap MVC)
@@ -41,7 +58,7 @@
 
 10. LIMITATIONS (Demonstration Purposes)
 - Read Below 
-- create flash messages for limitations.
+- create flash messages for limitations (use warning - orange).
 ---------------
 LIMITATION for Demonstration purposes
 * PARTIES
@@ -54,6 +71,6 @@ LIMITATION for Demonstration purposes
 - (Username: demo-voter,  Password: voter-password), cant be edit or delete demonstration purposes.
 - (Username: demo-voter-username,  Password: voter-password), won't change vote-status to "Voted" even after voting demonstration purposes.
 
-* SYSTEM's USER
+* SYSTEM's USER (ACCOUNT)
 - (Username: demo-facilitator,  Password: facilitator-password), cant be edit or delete demonstration purposes.
 - (Username: demo-facilitator,  Password: facilitator-password), only have access to vote standing, voters and candidates except limitations stated above.

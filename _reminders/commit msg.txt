@@ -1,32 +1,23 @@
 
-done: created interfaces and modals, and routes.
+Refactor navbar links, implement authentication middleware, introduce login form with radio button selection, and integrate PassportJS for user authentication, and flash message for better user experience.
 
-1. **Interface**:
-    - Add Navbar and Footer
-    - created modals for additionals (party, course and title), for better interface.
-    - created modals for updating application's title, for changing application's title.
-    - created interface for voting standing, for viewing current votes standing  by position. 
-    - create modal for Current Winner as of (Date), to view current leading candidate per position.
-    - create vote form for selecting candidates to vote, for casting votes.
-    - create modal for voting instructions, to help voters.
-2. **Routes**:
-    - create a Index route for vote form, for selecting candidates to vote.
-    - create a Index route for vote standing and uses data-table with filter by position, for viewing current standing by position.
-
-
-
-- create vote standing index.
-- create form vote layout
-- Login for voter form
-- Login for account/user form
-- create update for Title
-
-
-- modal - for additionals and tittle update
-- votingStanding Index and modal - Official Winner As Of (Date)
-- Add Navbar and Footer
-- create index vote-form for selecting candidates to vote - and modal for instruction for votingStanding
-- Create route and UI for signing in system-user and voters.
-- create flash signing in user, voters, candidates
-- create flash limitations
-
+1. **Login**:
+    - Introduced a login form with radio buttons for selecting between account and voter login options.
+    - Implemented form validation to ensure at least one option is selected before submission.
+    - Dynamically updated the username label based on the selected login type using jQuery for improved user experience.
+2. **Navbar**:
+    - Updated navbar links to conditionally display the "X" or "Close" link based on user authentication and current page URL to enhance user experience.
+3. **Middleware**:
+    - Added isLoggedIn middleware to restrict routes to authenticated users only.
+    - Implemented isVoterLoggedIn middleware to restrict access to voter-exclusive URLs/pages. 
+    - Incorporated isAccountLoggedIn middleware to safeguard access to account-exclusive URLs/pages. 
+4. **PassportJS Integration**:
+    - Integrated PassportJS for user authentication.
+    - Utilized LocalStrategy for account and voter authentication.
+    - Implemented serialization and deserialization functions to manage user sessions effectively.
+5. **Flash Message**:
+    - Displays an error flash message and redirects to the home page if the logged-in user is not identified as a voter.
+    - Displays an error flash message and redirects to the votes page if the logged-in user is not recognized as an account.
+    - Implemented success and error flash messages with a 2-second display limit for CRUD routes handling accounts, candidates, courses, parties, and voters.
+6. **Express Routing**:
+    - Organized routes for vote-standing using Express Router for better structure and readability.

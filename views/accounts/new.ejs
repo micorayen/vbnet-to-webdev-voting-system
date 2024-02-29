@@ -3,7 +3,7 @@
 <div class="row">
   <h1 class="text-center mb-4">Create your account</h1>
   <div class="col-md-6 offset-md-3 mb-5">
-    <form action="/users" method="POST" novalidate class="validated-form">
+    <form action="/accounts" method="POST" novalidate class="validated-form">
       <div class="mb-3">
         <label class="form-label" for="yearLevel" for="roles"
           >Account type:
@@ -11,7 +11,7 @@
         <select
           class="form-select"
           id="roles"
-          name="user[role]"
+          name="account[role]"
           aria-label="Default select example"
         >
           <!-- <option selected>Choose account type</option> -->
@@ -28,7 +28,7 @@
         <input
           class="form-control"
           type="text"
-          name="user[fullName]"
+          name="account[fullName]"
           id="fullName"
           placeholder="eg. John Doe"
           required
@@ -41,7 +41,7 @@
         <input
           class="form-control"
           type="text"
-          name="user[username]"
+          name="account[username]"
           id="username"
           placeholder="Create a username"
           required
@@ -55,7 +55,7 @@
         <input
           class="form-control"
           type="password"
-          name="user[password]"
+          name="account[password]"
           id="password"
           placeholder="Create a password"
           required
@@ -67,7 +67,7 @@
         <input
           class="form-control"
           type="password"
-          name="user[lastName]"
+          name="account[lastName]"
           id="lastName"
           placeholder="Must match the password"
           required
@@ -81,7 +81,7 @@
     </form>
     <hr />
     <div class="row">
-      <a class="mb-3 text-center" href="/users">Back to all accounts</a>
+      <a class="mb-3 text-center" href="/accounts">Back to all accounts</a>
     </div>
   </div>
 </div>

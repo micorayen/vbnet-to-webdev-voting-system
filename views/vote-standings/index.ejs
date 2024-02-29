@@ -7,7 +7,9 @@
       <div class="row">
         <div class="col-md-10 offset-md-1 mb-3">
           <div class="card m-3">
-            <div class="card-body table-container table-responsive p-0">
+            <div
+              class="card-body vote-standing-table-container table-responsive p-0"
+            >
               <table
                 id="candidateTable"
                 class="table table-bordered table-striped table-dark"
@@ -95,7 +97,7 @@
       const selectedPosition = $(this).val();
       // Send an AJAX request to fetch candidates corresponding to the selected position
       $.ajax({
-        url: `/standing/position/${selectedPosition}`,
+        url: `/vote-standings/position/${selectedPosition}`,
         type: "GET",
         success: function (data) {
           // Clear previous table rows
@@ -134,115 +136,4 @@
   });
 </script>
 
-<!-- Vertically centered scrollable modal -->
-<div
-  class="modal fade"
-  id="result"
-  aria-hidden="true"
-  aria-labelledby="resultLabel"
-  tabindex="-1"
-  data-bs-backdrop="static"
-  data-bs-keyboard="false"
->
-  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-    <div class="modal-content">
-      <div class="modal-header text-center">
-        <h1 class="modal-title fs-5 text-body-secondary" id="resultLabel">
-          OFFICIAL WINNER
-          <!-- AS OF -->
-        </h1>
-        <!-- <h1 class="modal-title fs-5 text-body-secondary" id="resultLabel">
-          Date Hour
-        </h1> -->
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="modal"
-          aria-label="Close"
-        ></button>
-      </div>
-      <div class="modal-body">
-        <div class="card">
-          <div class="card-body">
-            <div class="card-title row">
-              <h5 class="col text-primary">Postions:</h5>
-              <h5 class="col text-primary text-center">Names:</h5>
-              <h5 class="col text-primary text-center">Votes:</h5>
-            </div>
-
-            <div class="card-text row">
-              <p class="col card-title">President</p>
-              <p class="col text-center">-</p>
-              <p class="col text-center">0</p>
-            </div>
-            <hr />
-            <div class="card-text row">
-              <h6 class="col text-danger mb-1">Vice Presidents:</h6>
-            </div>
-            <div class="card-text row">
-              <p class="col mb-1">Internal</p>
-              <p class="col text-center mb-1">-</p>
-              <p class="col text-center mb-1">0</p>
-            </div>
-            <div class="card-text row">
-              <p class="col">External</p>
-              <p class="col text-center">-</p>
-              <p class="col text-center">0</p>
-            </div>
-            <hr />
-            <div class="card-text row">
-              <p class="col mb-1">Auditor</p>
-              <p class="col text-center mb-1">-</p>
-              <p class="col text-center mb-1">0</p>
-            </div>
-            <div class="card-text row">
-              <p class="col mb-1">Treasurer</p>
-              <p class="col text-center mb-1">-</p>
-              <p class="col text-center mb-1">0</p>
-            </div>
-            <div class="card-text row">
-              <p class="col mb-1">Secretary</p>
-              <p class="col text-center mb-1">-</p>
-              <p class="col text-center mb-1">0</p>
-            </div>
-            <div class="card-text row">
-              <p class="col">PRO</p>
-              <p class="col text-center">-</p>
-              <p class="col text-center">0</p>
-            </div>
-
-            <hr />
-
-            <div class="card-text row">
-              <h6 class="col text-danger mb-1">Representatives:</h6>
-            </div>
-            <div class="card-text row">
-              <p class="col mb-1">1st Year</p>
-              <p class="col text-center mb-1">-</p>
-              <p class="col text-center mb-1">0</p>
-            </div>
-            <div class="card-text row">
-              <p class="col mb-1">2nd Year</p>
-              <p class="col text-center mb-1">-</p>
-              <p class="col text-center mb-1">0</p>
-            </div>
-            <div class="card-text row">
-              <p class="col mb-1">3rd Year</p>
-              <p class="col text-center mb-1">-</p>
-              <p class="col text-center mb-1">0</p>
-            </div>
-            <div class="card-text row">
-              <p class="col mb-1">4th Year</p>
-              <p class="col text-center mb-1">-</p>
-              <p class="col text-center mb-1">0</p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary">Votes Tally</button>
-        <button type="button" class="btn btn-secondary">Print Winners</button>
-      </div>
-    </div>
-  </div>
-</div>
+<%- include('./view_result_modal') %>

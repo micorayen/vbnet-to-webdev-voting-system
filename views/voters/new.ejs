@@ -37,17 +37,17 @@
       <div class="row">
         <div class="mb-3 col">
           <label class="form-label" for="course">Course: </label>
-          <input
-            class="form-control"
-            type="text"
+          <select
+            class="form-select"
+            aria-label="Default select example"
             name="voter[course]"
             id="course"
-            placeholder="Provide your course"
-            required
-          />
-          <div class="invalid-feedback">Please provide your course</div>
+          >
+            <% for(let course of courses) { %>
+            <option value="<%= course.course %>"><%= course.course %></option>
+            <% } %>
+          </select>
         </div>
-
         <div class="mb-3 col">
           <label class="form-label" for="yearLevel">Year Level: </label>
           <select

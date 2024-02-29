@@ -1,86 +1,77 @@
 const express = require("express");
-const router = express.Router();
+const router = express.Router({ mergeParams: true });
 const catchAsync = require("../utils/catchAsync");
-const { validateUser } = require("../middleware");
+const ExpressError = require("../utils/ExpressError");
 
-// Require the user model
-const User = require("../models/users");
+const passport = require("passport");
+const { storeReturnTo, isLoggedIn } = require("../middleware");
 
-const { roles } = require("../public/javascripts/tangentSelections");
+const Account = require("../models/accounts");
 
-// User Index Page
-router.get(
-  "/",
-  catchAsync(async (req, res) => {
-    const users = await User.find({});
-    res.render("users/index", { users });
-  })
-);
-
-// render New User Form
-router.get("/new", (req, res) => {
-  res.render("users/new", { roles });
+// renderLogin
+router.get("/login", (req, res) => {
+  res.render("users/login");
 });
 
-// create User
-router.post(
-  "/",
-  validateUser,
-  catchAsync(async (req, res) => {
-    const { role, fullName, username, password } = req.body.user;
-    const user = new User({ role, fullName, username });
-    await User.register(user, password);
+// Login route
+router.post("/login", function (req, res, next) {
+  const loginType = req.body.loginType;
+  let strategyName;
 
-    // req.flash("success", "Successfully created a user");
-    res.redirect("/users");
-  })
-);
+  if (loginType === "account") {
+    strategyName = "account-local";
+  } else if (loginType === "voter") {
+    strategyName = "voter-local";
+  } else {
+    // Handle invalid login type
+    return res.redirect("/login");
+  }
 
-// update User Information
-router.patch(
-  "/:id",
-  validateUser,
-  catchAsync(async (req, res) => {
-    const { id } = req.params;
+  passport.authenticate(strategyName, {
+    failureFlash: true,
+    failureRedirect: "/login",
+  })(req, res, () => {
+    const redirectUrl =
+      res.locals.returnTo || (loginType === "voter" ? "/votes" : "/");
+    delete req.session.returnTo; // Remove returnTo from session
+    res.redirect(redirectUrl);
+  });
+});
 
-    const user = await User.findByIdAndUpdate(
-      id,
-      { ...req.body.user },
-      {
-        runValidators: true,
-        new: true,
-      }
-    );
-    await user.save();
-
-    // req.flash("success", "Successfully updated user");
-    res.redirect(`/users`);
-  })
-);
-
-router.delete(
-  "/:id",
-  catchAsync(async (req, res) => {
-    const { id } = req.params;
-    await User.findByIdAndDelete(id);
-    res.redirect("/users");
-  })
-);
-
-// Render Edit Form
-router.get(
-  "/:id/edit",
-  catchAsync(async (req, res) => {
-    const { id } = req.params;
-    const user = await User.findById(id);
-
-    if (!user) {
-      // req.flash("error", "Cannot find that user account");
-      return res.redirect("/users");
+router.get("/logout", (req, res) => {
+  req.logout(function (err) {
+    if (err) {
+      return next(err);
     }
-
-    res.render("users/edit", { user, roles });
-  })
-);
+    req.flash("success", "Goodbye!");
+    res.redirect("/login");
+  });
+});
 
 module.exports = router;
+
+// Old Code =
+// router.post("/login", function (req, res, next) {
+//   const loginType = req.body.loginType;
+
+//   if (loginType === "user") {
+//     passport.authenticate("local", {
+//       failureFlash: true,
+//       failureRedirect: "/login",
+//     })(req, res, () => {
+//       const redirectUrl = res.locals.returnTo || "/";
+//       delete req.session.returnTo;
+//       res.redirect(redirectUrl);
+//     });
+//   } else if (loginType === "voter") {
+//     passport.authenticate("local", {
+//       failureFlash: true,
+//       failureRedirect: "/login",
+//     })(req, res, () => {
+//       res.redirect("/votes");
+//     });
+//   } else {
+//     // Handle invalid login type
+//     res.redirect("/login");
+//   }
+// });

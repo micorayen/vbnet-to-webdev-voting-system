@@ -4,7 +4,7 @@
   <h1 class="text-center mb-4">Update your account</h1>
   <div class="col-md-6 offset-md-3 mb-5">
     <form
-    action="/users/<%= user._id %>?_method=PATCH"
+    action="/accounts/<%= account._id %>?_method=PATCH"
     method="POST"
     novalidate
     class="validated-form"
@@ -16,12 +16,12 @@
         <select
           class="form-select"
           id="roles"
-          name="user[role]"
+          name="account[role]"
           aria-label="Default select example"
         >
           <% for(let role of roles) { %>
 
-          <option value="<%= role %>" <%= user.role  === role ? 'selected':''%>><%= role %></option>
+          <option value="<%= role %>" <%= account.role  === role ? 'selected':''%>><%= role %></option>
           <% } %>
         </select>
         <div class="invalid-feedback">Choose account type</div>
@@ -32,10 +32,10 @@
         <input
           class="form-control"
           type="text"
-          name="user[fullName]"
+          name="account[fullName]"
           id="fullName"
           placeholder="eg. John Doe"
-          value="<%= user.fullName %>"
+          value="<%= account.fullName %>"
           required
         />
         <div class="invalid-feedback">Please provide your full name</div>
@@ -46,10 +46,10 @@
         <input
           class="form-control"
           type="text"
-          name="user[username]"
+          name="account[username]"
           id="username"
           placeholder="Create a username"
-          value="<%= user.username%>"
+          value="<%= account.username%>"
           required
         />
         <div class="invalid-feedback">Please provide your username</div>
@@ -62,7 +62,7 @@
     </form>
     <hr />
     <div class="row">
-      <a class="mb-3 text-center" href="/users">Back to all accounts</a>
+      <a class="mb-3 text-center" href="/accounts">Back to all accounts</a>
     </div>
   </div>
 </div>

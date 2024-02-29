@@ -16,7 +16,6 @@
             <option value="Administrator">Administrator</option>
             <option value="Facilitator">Facilitator</option>
           </select>
-          <div class="invalid-feedback">Choose your year level</div>
         </div>
 
         <div class="mb-3">
@@ -28,7 +27,6 @@
             required
             disabled
           />
-          <div class="invalid-feedback">Please provide your full name</div>
         </div>
 
         <div class="mb-3">
@@ -40,7 +38,6 @@
             required
             disabled
           />
-          <div class="invalid-feedback">Please provide your username</div>
         </div>
 
         <div class="row">
@@ -55,7 +52,7 @@
             </button>
           </div>
           <div class="col mb-3">
-            <form class="d-grid delete-user" method="POST">
+            <form class="d-grid delete-account" method="POST">
               <button
                 class="btn btn-dark"
                 id="delete-button"
@@ -74,9 +71,9 @@
       <div class="col-md-6 mb-3">
         <div class="card">
           <!-- <h3 class="card-title text-center mb-3">Accounts</h3> -->
-          <div class="card-body table-responsive user-table-container p-0">
+          <div class="card-body table-responsive account-table-container p-0">
             <table
-              id="userTable"
+              id="accountTable"
               class="table table-bordered table-striped table-dark"
             >
               <thead>
@@ -90,13 +87,13 @@
               </thead>
 
               <tbody>
-                <% let count = 1 %> <% users.forEach(function(user) { %>
+                <% let count = 1 %> <% accounts.forEach(function(account) { %>
                 <tr>
                   <td><%= count %></td>
-                  <td><%= user.role %></td>
-                  <td><%= user.fullName %></td>
-                  <td><%= user.username %></td>
-                  <td hidden><%= user._id %></td>
+                  <td><%= account.role %></td>
+                  <td><%= account.fullName %></td>
+                  <td><%= account.username %></td>
+                  <td hidden><%= account._id %></td>
                 </tr>
                 <% count++ %> <% }); %>
               </tbody>
@@ -105,7 +102,9 @@
           </div>
         </div>
 
-        <a href="/users/new" class="btn btn-dark d-grid mt-2">Create Account</a>
+        <a href="/accounts/new" class="btn btn-dark d-grid mt-2"
+          >Create Account</a
+        >
       </div>
     </div>
   </div>
@@ -116,7 +115,7 @@
 <script>
   $(document).ready(function () {
     let id = "";
-    $("#userTable tbody").on("click", "tr", function () {
+    $("#accountTable tbody").on("click", "tr", function () {
       var rowData = $(this)
         .children("td")
         .map(function () {
@@ -135,19 +134,19 @@
 
     $("#edit-button").click(function (event) {
       event.preventDefault();
-      window.location.href = `/users/${id}/edit`;
+      window.location.href = `/accounts/${id}/edit`;
     });
 
     $("#delete-button").on("click", function () {
       const confirmation = confirm(
-        "Are you sure you want to delete this user?"
+        "Are you sure you want to delete this account?"
       );
 
       if (confirmation) {
-        $("form.delete-user")
-          .attr("action", `/users/${id}?_method=DELETE`)
+        $("form.delete-account")
+          .attr("action", `/accounts/${id}?_method=DELETE`)
           .submit();
-        console.log("User confirmed deletion");
+        console.log("Account confirmed deletion");
       } else {
         console.log("Deletion cancelled");
       }

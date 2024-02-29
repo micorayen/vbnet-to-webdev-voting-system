@@ -6,7 +6,7 @@
   border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
-#home {
+#main {
   font-size: large;
   font-weight: 500;
   color: whitesmoke;
@@ -50,13 +50,19 @@
 }
 
 /* Data Tables */
+.vote-standing-table-container {
+  max-height: 300px;
+  min-height: 300px;
+  overflow-y: auto;
+}
+
 .voter-table-container {
   max-height: 335px;
   min-height: 335px;
   overflow-y: auto;
 }
 
-.user-table-container {
+.account-table-container {
   max-height: 250px;
   min-height: 250px;
   overflow-y: auto;

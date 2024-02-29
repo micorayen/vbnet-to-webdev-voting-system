@@ -3,6 +3,8 @@ const router = express.Router();
 const catchAsync = require("../utils/catchAsync");
 const { validateCandidate } = require("../middleware");
 
+const { isLoggedIn, isAccountLoggedIn } = require("../middleware");
+
 const { Party, Course } = require("../models/additionals");
 const Candidate = require("../models/candidates");
 
@@ -41,11 +43,11 @@ router.get(
   })
 );
 
-// --------------------
-
 // render Index Form
 router.get(
   "/",
+  isLoggedIn,
+  isAccountLoggedIn,
   catchAsync(async (req, res) => {
     const parties = await Party.find();
     const candidates = await Candidate.find();
@@ -56,6 +58,8 @@ router.get(
 // render New Form
 router.get(
   "/new",
+  isLoggedIn,
+  isAccountLoggedIn,
   catchAsync(async (req, res) => {
     const parties = await Party.find();
     const courses = await Course.find();
@@ -66,10 +70,14 @@ router.get(
 // create Candidate
 router.post(
   "/",
+  isLoggedIn,
+  isAccountLoggedIn,
   validateCandidate,
   catchAsync(async (req, res) => {
     const candidate = new Candidate(req.body.candidate);
     await candidate.save();
+
+    req.flash("success", "Successfully added new candidate");
     res.redirect("/candidates");
   })
 );
@@ -77,11 +85,13 @@ router.post(
 // render Show Form
 router.get(
   "/:id",
+  isLoggedIn,
+  isAccountLoggedIn,
   catchAsync(async (req, res) => {
     const candidate = await Candidate.findById(req.params.id);
 
     if (!candidate) {
-      // req.flash("error", "Cannot find that Candidate");
+      req.flash("error", "Cannot find candidate's information");
       console.log("Cannot find that candidate");
       return res.redirect("/candidates");
     }
@@ -92,6 +102,8 @@ router.get(
 // update Candidate
 router.patch(
   "/:id",
+  isLoggedIn,
+  isAccountLoggedIn,
   validateCandidate,
   catchAsync(async (req, res) => {
     const candidate = await Candidate.findByIdAndUpdate(
@@ -101,6 +113,7 @@ router.patch(
     );
     await candidate.save();
 
+    req.flash("success", "Successfully updated candidate's information");
     res.redirect("/candidates");
   })
 );
@@ -108,9 +121,12 @@ router.patch(
 // delete Candidate
 router.delete(
   "/:id",
+  isLoggedIn,
+  isAccountLoggedIn,
   catchAsync(async (req, res) => {
     await Candidate.findByIdAndDelete(req.params.id);
 
+    req.flash("success", "Successfully removed candidate");
     res.redirect("/candidates");
   })
 );
@@ -118,11 +134,19 @@ router.delete(
 // render Edit Form
 router.get(
   "/:id/edit",
+  isLoggedIn,
+  isAccountLoggedIn,
   catchAsync(async (req, res) => {
     const parties = await Party.find();
     const courses = await Course.find();
 
     const candidate = await Candidate.findById(req.params.id);
+
+    if (!candidate) {
+      req.flash("error", "Cannot find candidate's information");
+      return res.redirect("/candidates");
+    }
+
     res.render("candidates/edit", {
       candidate,
       parties,

@@ -23,6 +23,7 @@ const CandidateSchema = new Schema({
   fullName: {
     type: String,
     required: true,
+    unique: true,
   },
   course: {
     type: String,

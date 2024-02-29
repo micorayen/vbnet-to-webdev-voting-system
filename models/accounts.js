@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const passportLocalMongoose = require("passport-local-mongoose");
 
-const UserSchema = new Schema({
+const AccountSchema = new Schema({
   role: {
     type: String,
     enum: ["Administrator", "Facilitator"],
@@ -23,6 +23,6 @@ const UserSchema = new Schema({
 //   PRIMARY KEY (`id`)
 // ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
 
-UserSchema.plugin(passportLocalMongoose);
+AccountSchema.plugin(passportLocalMongoose);
 
-module.exports = mongoose.model("User", UserSchema);
+module.exports = mongoose.model("Account", AccountSchema);

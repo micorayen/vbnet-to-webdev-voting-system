@@ -1,26 +1,26 @@
 <% layout('layouts/boilerplate') %>
 <div class="container">
-  <h3 class="text-center mb-4">Welcome, Mico Rayen</h3>
+  <h3 class="text-center mb-4">Welcome, <%= loggedInAccount.fullName %></h3>
 
   <div class="row mb-3 text-center offset-md-1">
     <div id="vote-standing-button" class="col-md-5 themed-grid-col d-grid">
-      <a id="home" class="btn" href="/standing">VOTE STANDING</a>
+      <a id="main" class="btn" href="/vote-standings">VOTE STANDING</a>
     </div>
     <div id="master-reset-button" class="col-md-5 themed-grid-col d-grid">
-      <a id="home" class="btn" href="/vote-candidate">MASTER RESET</a>
+      <a id="main" class="btn" href="/votes">MASTER RESET</a>
     </div>
     <div id="voter-button" class="col-md-5 themed-grid-col d-grid">
-      <a id="home" class="btn" href="/voters">MANAGE VOTERS</a>
+      <a id="main" class="btn" href="/voters">MANAGE VOTERS</a>
     </div>
     <div id="user-button" class="col-md-5 themed-grid-col d-grid">
-      <a id="home" class="btn" href="/users">ADMIN / FACILITOR</a>
+      <a id="main" class="btn" href="/accounts">ADMIN / FACILITOR</a>
     </div>
     <div id="candidate-button" class="col-md-5 themed-grid-col d-grid">
-      <a id="home" class="btn" href="/candidates">CANDIDATES</a>
+      <a id="main" class="btn" href="/candidates">CANDIDATES</a>
     </div>
     <div id="additonal-button" class="col-md-5 themed-grid-col d-grid">
       <a
-        id="home"
+        id="main"
         class="btn"
         href=""
         data-bs-target="#additional"
@@ -31,4 +31,4 @@
   </div>
 </div>
 
-<%- include('./partials/additionalsModal') %>
+<%- include('./additional_modal') %>
