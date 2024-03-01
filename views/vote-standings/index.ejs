@@ -2,18 +2,14 @@
 
 <div class="container">
   <div class="row">
-    <h1 class="text-center mb-4">VOTES RATE</h1>
+    <%=  %>
+    <h1 class="text-center mb-4">VOTES RATE </h1>
     <div class="col-lg-10 offset-lg-1 mb-5">
       <div class="row">
         <div class="col-md-10 offset-md-1 mb-3">
           <div class="card m-3">
-            <div
-              class="card-body vote-standing-table-container table-responsive p-0"
-            >
-              <table
-                id="candidateTable"
-                class="table table-bordered table-striped table-dark"
-              >
+            <div class="card-body vote-standing-table-container table-responsive p-0">
+              <table id="candidateTable" class="table table-bordered table-striped table-dark">
                 <thead>
                   <tr>
                     <th>IdNumber</th>
@@ -50,12 +46,7 @@
           <div class="d-flex row px-3">
             <div class="col mb-3 gap-2 d-flex justify-content-start">
               <h5 class="form-label mt-1" for="position">Position:</h5>
-              <select
-                class="form-select"
-                aria-label="Default select example"
-                id="position"
-                name="position"
-              >
+              <select class="form-select" aria-label="Default select example" id="position" name="position">
                 <option value="0"></option>
                 <% for(let position of candidatePositions) { %>
                 <option value="<%= position %>"><%= position %></option>
@@ -63,20 +54,10 @@
               </select>
             </div>
             <div class="col mb-3 d-grid gap-2 d-flex justify-content-end">
-              <button
-                class="btn btn-dark me-2 btn-sm"
-                type="button"
-                id="refresh-button"
-              >
+              <button class="btn btn-dark me-2 btn-sm" type="button" id="refresh-button">
                 Refresh
               </button>
-              <button
-                class="btn btn-dark btn-sm"
-                type="button"
-                id="result-button"
-                data-bs-target="#result"
-                data-bs-toggle="modal"
-              >
+              <button class="btn btn-dark btn-sm" type="button" id="result-button" data-bs-target="#result" data-bs-toggle="modal">
                 View Result
               </button>
             </div>
@@ -88,23 +69,25 @@
   </div>
 </div>
 
+<%- include('./view_result_modal') %>
+
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
 <script>
-  $(document).ready(function () {
+  $(document).ready(function() {
     // Filter Candidate by position
-    $("#position").change(function () {
+    $("#position").change(function() {
       const selectedPosition = $(this).val();
       // Send an AJAX request to fetch candidates corresponding to the selected position
       $.ajax({
         url: `/vote-standings/position/${selectedPosition}`,
         type: "GET",
-        success: function (data) {
+        success: function(data) {
           // Clear previous table rows
           $("#candidateTable tbody").empty();
 
           // Update table rows with new data
-          data.forEach(function (candidate) {
+          data.forEach(function(candidate) {
             $("#candidateTable tbody").append(`
           <tr>
             <td>${candidate.candidateIdNumber}</td>
@@ -119,13 +102,13 @@
         `);
           });
         },
-        error: function (xhr, status, error) {
+        error: function(xhr, status, error) {
           console.error("Error:", error);
         },
       });
     });
 
-    $("#refresh-button").click(function (event) {
+    $("#refresh-button").click(function(event) {
       window.location.reload();
     });
 
@@ -135,5 +118,3 @@
     // });
   });
 </script>
-
-<%- include('./view_result_modal') %>

@@ -5,6 +5,7 @@ const catchAsync = require("../utils/catchAsync");
 const { isLoggedIn, isAccountLoggedIn } = require("../middleware");
 
 const Candidate = require("../models/candidates");
+const { getVoteStandings } = require("../services/leading-candidates");
 
 const {
   candidatePositions,
@@ -17,7 +18,36 @@ router.get(
   isAccountLoggedIn,
   catchAsync(async (req, res) => {
     const candidates = await Candidate.find();
-    res.render("vote-standings", { candidatePositions, candidates });
+
+    const {
+      president,
+      vpInternal,
+      vpExternal,
+      auditor,
+      treasurer,
+      secretary,
+      pro,
+      firstYearRep,
+      secondYearRep,
+      thirdYearRep,
+      fourthYearRep,
+    } = await getVoteStandings();
+
+    res.render("vote-standings", {
+      candidatePositions,
+      candidates,
+      president,
+      vpInternal,
+      vpExternal,
+      auditor,
+      treasurer,
+      secretary,
+      pro,
+      firstYearRep,
+      secondYearRep,
+      thirdYearRep,
+      fourthYearRep,
+    });
   })
 );
 
@@ -36,5 +66,7 @@ router.get(
     }
   })
 );
+
+// VoteStandingsController.js
 
 module.exports = router;

@@ -1,12 +1,5 @@
-<div
-  class="modal fade"
-  id="result"
-  aria-hidden="true"
-  aria-labelledby="resultLabel"
-  tabindex="-1"
-  data-bs-backdrop="static"
-  data-bs-keyboard="false"
->
+<!-- MODAL -->
+<div class="modal fade" id="result" aria-hidden="true" aria-labelledby="resultLabel" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false">
   <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header text-center">
@@ -17,61 +10,56 @@
         <!-- <h1 class="modal-title fs-5 text-body-secondary" id="resultLabel">
           Date Hour
         </h1> -->
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="modal"
-          aria-label="Close"
-        ></button>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <div class="card">
           <div class="card-body">
             <div class="card-title row">
-              <h5 class="col text-primary">Postions:</h5>
-              <h5 class="col text-primary text-center">Names:</h5>
-              <h5 class="col text-primary text-center">Votes:</h5>
+              <h5 class="col-3 text-primary">Postions:</h5>
+              <h5 class="col-6 text-primary text-center">Names:</h5>
+              <h5 class="col-3 text-primary text-center">Votes:</h5>
             </div>
 
             <div class="card-text row">
-              <p class="col card-title">President</p>
-              <p class="col text-center">-</p>
-              <p class="col text-center">0</p>
+              <p class="col-3 card-title">President</p>
+              <p class="col-6 text-center"><%= president[0].fullName %></p>
+              <p class="col-3 text-center"><%= president[0].voteCount %></p>
             </div>
             <hr />
             <div class="card-text row">
               <h6 class="col text-danger mb-1">Vice Presidents:</h6>
             </div>
             <div class="card-text row">
-              <p class="col mb-1">Internal</p>
-              <p class="col text-center mb-1">-</p>
-              <p class="col text-center mb-1">0</p>
+              <p class="col-3 mb-1">Internal</p>
+              <p class="col-6 text-center"><%= vpInternal[0].fullName %></p>
+              <p class="col-3 text-center"><%= vpInternal[0].voteCount %></p>
             </div>
             <div class="card-text row">
-              <p class="col">External</p>
-              <p class="col text-center">-</p>
-              <p class="col text-center">0</p>
+              <p class="col-3">External</p>
+              <p class="col-6 text-center"><%= vpExternal[0].fullName %></p>
+              <p class="col-3 text-center"><%= vpExternal[0].voteCount %></p>
             </div>
             <hr />
             <div class="card-text row">
-              <p class="col mb-1">Auditor</p>
-              <p class="col text-center mb-1">-</p>
-              <p class="col text-center mb-1">0</p>
+              <p class="col-3 mb-1">Auditor</p>
+              <p class="col-6 text-center mb-1"><%= auditor[0].fullName %></p>
+              <p class="col-3 text-center mb-1"><%= auditor[0].voteCount %></p>
             </div>
             <div class="card-text row">
-              <p class="col mb-1">Treasurer</p>
-              <p class="col text-center mb-1">-</p>
-              <p class="col text-center mb-1">0</p>
+              <p class="col-3 mb-1">Treasurer</p>
+              <p class="col-6 text-center mb-1"><%= treasurer[0].fullName %></p>
+              <p class="col-3 text-center mb-1"><%= treasurer[0].voteCount %></p>
             </div>
             <div class="card-text row">
-              <p class="col mb-1">Secretary</p>
-              <p class="col text-center mb-1">-</p>
-              <p class="col text-center mb-1">0</p>
+              <p class="col-3 mb-1">Secretary</p>
+              <p class="col-6 text-center mb-1"><%= secretary[0].fullName %></p>
+              <p class="col-3 text-center mb-1"><%= secretary[0].voteCount %></p>
             </div>
             <div class="card-text row">
-              <p class="col">PRO</p>
-              <p class="col text-center">-</p>
-              <p class="col text-center">0</p>
+              <p class="col-3">PRO</p>
+              <p class="col-6 text-center"><%= pro[0].fullName %></p>
+              <p class="col-3 text-center"><%= pro[0].voteCount %></p>
             </div>
 
             <hr />
@@ -80,24 +68,24 @@
               <h6 class="col text-danger mb-1">Representatives:</h6>
             </div>
             <div class="card-text row">
-              <p class="col mb-1">1st Year</p>
-              <p class="col text-center mb-1">-</p>
-              <p class="col text-center mb-1">0</p>
+              <p class="col-3 mb-1">1st Year</p>
+              <p class="col-6 text-center mb-1"><%= firstYearRep[0].fullName %></p>
+              <p class="col-3 text-center mb-1"><%= firstYearRep[0].voteCount %></p>
             </div>
             <div class="card-text row">
-              <p class="col mb-1">2nd Year</p>
-              <p class="col text-center mb-1">-</p>
-              <p class="col text-center mb-1">0</p>
+              <p class="col-3 mb-1">2nd Year</p>
+              <p class="col-6 text-center mb-1"><%= secondYearRep[0].fullName %></p>
+              <p class="col-3 text-center mb-1"><%= secondYearRep[0].voteCount %></p>
             </div>
             <div class="card-text row">
-              <p class="col mb-1">3rd Year</p>
-              <p class="col text-center mb-1">-</p>
-              <p class="col text-center mb-1">0</p>
+              <p class="col-3 mb-1">3rd Year</p>
+              <p class="col-6 text-center mb-1"><%= thirdYearRep[0].fullName %></p>
+              <p class="col-3 text-center mb-1"><%= thirdYearRep[0].voteCount %></p>
             </div>
             <div class="card-text row">
-              <p class="col mb-1">4th Year</p>
-              <p class="col text-center mb-1">-</p>
-              <p class="col text-center mb-1">0</p>
+              <p class="col-3 mb-1">4th Year</p>
+              <p class="col-6 text-center mb-1"><%= fourthYearRep[0].fullName %></p>
+              <p class="col-3 text-center mb-1"><%= fourthYearRep[0].voteCount %></p>
             </div>
           </div>
         </div>
@@ -109,3 +97,4 @@
     </div>
   </div>
 </div>
+<!-- MODAL -->

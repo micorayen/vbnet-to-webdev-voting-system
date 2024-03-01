@@ -1,76 +1,97 @@
 ** TASK TO BE DONE - since 5th update **
 
 0. ALL
-- better layout and responsive on different screen sizes.
-- trim(), on all textboxes for "Post and Patch", and signin.
-- flash messages, should be "modal like" informing the users, w/ only close-button.
-[DONE 6th]- safeguard most routes, with 'isLoggedIn' validations, to check if youre logged in.
+    - better layout and responsive on different screen sizes.
+    - trim(), on all textboxes for "Post and Patch", and signin.
+    - flash messages, should be "modal like" informing the users, w/ only close-button.
+    [DONE 6th]- safeguard most routes, with 'isLoggedIn' validations, to check if youre logged in.
 
-1. Sign in
-- the checkboxes routing for system's user or voter.
-[DONE 6th]- Sign in as system's user(accounts).
-- Sign in as voter, to vote.
+1. Seeds
+    [DONE 7th]- seeds 2 candidates per position, under two different partylist
+    [DONE 7th]- seeds courses
+    [DONE 7th]- seeds parties
 
-[DONE 6th]2. Home
-[DONE 6th]- flash logging in and signing out.
-[DONE 6th]- extract name loggedIn account, put on "Welcome, + 'Name'".
+2. Sign in
+    [DONE 6th]- the checkboxes routing for system's user or voter.
+    [DONE 6th]- Sign in as system's user(accounts).
+    [DONE 6th]- Sign in as voter, to vote.
+    [DONE 6th]- Sign in as accont, to use app as admin or facilitator.
 
-3. Vote Form
-- flash logging in and signing out
-- extract name loggedIn Voter, put on "Welcome, + 'Name'".
-- after voting - put 'voteStatus' to "VOTED".
+3. Home
+    [DONE 6th]- flash logging in and signing out.
+    [DONE 6th]- extract name loggedIn account, put on "Welcome, + 'Name'".
 
-4. Vote Standing
+4. Vote Form
+    [DONE 6th]- flash logging in and signing out
+    [DONE 6th]- extract name loggedIn Voter, put on "Welcome, + 'Name'".
+    - make the combo boxes per position works
+    - created modal for confirm votes,to double check selected candidates per position
+    - makes confirm votes works
+    - successfully casts votes per positions
+    - makes adding +1 votes per selected candidates per positions
+    - makes voter's status from "Not Voted" to "Voted"
+    - makes voter's unable to login anymore, after casting votes
+    - flash message, for voter's thats unable to login anymore, after casting votes
+
+5. Vote Standing
+- make modal to display the "leading candidates" per position by votes 
 - Generate Reports both "Votes Tally and Print Winners".
 
-5. Manage Voters
-- turned "username(passportJS)" as "IdNumber"
-- New route - put additional validation for fullName and username (make sure it wont duplicate)
-- Update route - put additional validation for fullName and username (make sure it wont duplicate)
-[DONE 6th]- update index-form, new-form and edit-form voter's course from textbox to comboboxes(extracted course's collections data)
-[DONE 6th]- flash messages, for successfully creation, update and deletion, and rendering edit-form.
 
-6. Admin/Facilitator (Accounts)
-- New route - put additional validation for fullName and username (make sure it wont duplicate)
-- Update route - put additional validation for fullName and username (make sure it wont duplicate)
-[DONE 6th]- flash messages, for successfully creation, update and deletion, and rendering edit-form.
-[DONE 6th]- redo all from 'users' to 'accounts', (model, crud routes, index-form, new-form, edit-form, and validations ).
+6. Manage Voters
+    - turned "username(passportJS)" as "IdNumber"
+    - New route - put additional validation for fullName and username (make sure it wont duplicate)
+    - Update route - put additional validation for fullName and username (make sure it wont duplicate)
+    [DONE 6th]- update index-form, new-form and edit-form voter's course from textbox to comboboxes(extracted course's collections data)
+    [DONE 6th]- flash messages, for successfully creation, update and deletion, and rendering edit-form.
 
-7. Candidates
-- New route - put additional validation for candidate IdNumber and fullName (make sure it wont duplicate)
-- Update route - put additional validation for candidate IdNumber and fullName (make sure it wont duplicate)
-[DONE 6th] - flash messages, for successfully creation, update and deletion, and rendering edit-form.
-- Candidate New & update, add a image upload, for candidates images, and delete image after updating it w/ new image.
+7. Admin/Facilitator (Accounts)
+    - New route - put additional validation for fullName and username (make sure it wont duplicate)
+    - Update route - put additional validation for fullName and username (make sure it wont duplicate)
+    [DONE 6th]- flash messages, for successfully creation, update and deletion, and rendering edit-form.
+    [DONE 6th]- redo all from 'users' to 'accounts', (model, crud routes, index-form, new-form, edit-form, and validations ).
 
-8. Additionals
-- Flash messages - parties - add, update, and delete (Not Working - Need Fixing)
-- Flash messages - courses - add, update, and delete (Not Working - Need Fixing)
-- New route - put additional validation for candidate partylist (make sure it wont duplicate)
-- Update route - put additional validation for candidate partylist (make sure it wont duplicate)
-- New route - put additional validation for candidate academic course's name (make sure it wont duplicate)
-- Update route - put additional validation for candidate academic course's name (make sure it wont duplicate)
-- flash messages, for successfully updating title, and also redirect home-page.
-- parties and courses, bootstrap validation on add and update, doesnt get triggered work.
+8. Candidates
+    - New route - put additional validation for candidate IdNumber and fullName (make sure it wont duplicate)
+    - Update route - put additional validation for candidate IdNumber and fullName (make sure it wont duplicate)
+    [DONE 6th] - flash messages, for successfully creation, update and deletion, and rendering edit-form.
+    - Candidate New & update, add a image upload, for candidates images, and delete image after updating it w/ new image.
 
-9. READ ON BETTER PROJECT STRUCTURE (perhap MVC)
-- How to structure the project (some basic structuring).
-- Better Name for Directories/Folders.
+9. Additionals
+    - Flash messages _ parties _ add, update, and delete (Not Working _ Need Fixing)
+    - Flash messages _ courses _ add, update, and delete (Not Working _ Need Fixing)
+    - New route _ put additional validation for candidate partylist (make sure it wont duplicate)
+    - Update route _ put additional validation for candidate partylist (make sure it wont duplicate)
+    - New route _ put additional validation for candidate academic course's name (make sure it wont duplicate)
+    - Update route _ put additional validation for candidate academic course's name (make sure it wont duplicate)
+    - parties and courses, bootstrap validation on add and update, doesnt get triggered work.
+Additionals > Update Title
+    - extract current application's title, and display on 1st textbox
+    - makes an update route, for updating title
+    - extract updated application's title, and display on 1st textbox
+    - empty 2nd textbox
+    - flash messages, for successfully updating title, and also redirect home-page.
 
-10. LIMITATIONS (Demonstration Purposes)
-- Read Below 
-- create flash messages for limitations (use warning - orange).
+
+10. READ ON BETTER PROJECT STRUCTURE (perhap MVC)
+    - How to structure the project (some basic structuring).
+    - Better Name for Directories/Folders.
+
+11. LIMITATIONS (Demonstration Purposes)
+    - Read Below 
+    - create flash messages for limitations (use warning - orange).
 ---------------
 LIMITATION for Demonstration purposes
 * PARTIES
-- ABC's and A2Z Partylist, cant be edit or delete for demonstration purposes
+    - ABC's and A2Z Partylist, cant be edit or delete for demonstration purposes
 
 * CANDIDATES
-- ABC's and A2Z Partylist candidates, cant be edit or delete for demonstration purposes
+    - ABC's and A2Z Partylist candidates, cant be edit or delete for demonstration purposes
 
 * VOTER
-- (Username: demo-voter,  Password: voter-password), cant be edit or delete demonstration purposes.
-- (Username: demo-voter-username,  Password: voter-password), won't change vote-status to "Voted" even after voting demonstration purposes.
+    - (Username: voter1,  Password: password1), cant be edit or delete demonstration purposes.
+    - (Username: voter1,  Password: password1), won't change vote-status to "Voted" even after voting demonstration purposes.
 
 * SYSTEM's USER (ACCOUNT)
-- (Username: demo-facilitator,  Password: facilitator-password), cant be edit or delete demonstration purposes.
-- (Username: demo-facilitator,  Password: facilitator-password), only have access to vote standing, voters and candidates except limitations stated above.
+    - (Username: account1,  Password: password1), cant be edit or delete demonstration purposes.
+    - (Username: account1,  Password: password1), only have access to vote standing, voters and candidates except limitations stated above.

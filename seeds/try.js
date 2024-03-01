@@ -1,6 +1,4 @@
-module.exports.roles = ["Administrator", "Facilitator"];
-
-module.exports.candidatePositions = [
+const positions = [
   "President",
   "VP-Internal",
   "VP-External",
@@ -14,4 +12,9 @@ module.exports.candidatePositions = [
   "4th year representative",
 ];
 
-// Now the results for each position are saved in separate variables
+for (const position of positions) {
+  console.log("+ ", position);
+}
+for (let i = 0; i < positions.length; i++) {
+  console.log(`Position ${i + 1}: ${positions[i]}`);
+}

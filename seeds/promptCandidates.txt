@@ -1,0 +1,76 @@
+give me random fullname (first + last names) in the philippines, and use "DATA" and "Model" as reference, to provide a sets of random candidates per position, per party, i need to seed in mongoose inot my mongo db, Note: i already have my model on different folder: 
+
+DATA:
+mongoose.connect("mongodb://127.0.0.1:27017/voting-app", {});
+const db = mongoose.connection;
+db.on("error", console.error.bind(console, "connection error"));
+db.once("open", () => {
+  console.log("Database connected.");
+});
+
+function generateStudentID() {
+  const prefix = "11";
+  const randomDigits = Math.floor(Math.random() * 1000000); // Generates random 6-digit number
+  const paddedRandomDigits = String(randomDigits).padStart(6, "0"); // Ensures 6 digits with leading zeros if necessary
+  return prefix + "-" + paddedRandomDigits;
+}
+
+// Example usage:
+const candidateIdNumber = generateStudentID();
+
+Party:
+    "Digital Innovators Coalition",
+    "Tech Savvy Society"
+Positions:
+    "President",
+    "VP-Internal",
+    "VP-External",
+    "Auditor",
+    "Treasurer",
+    "Secretary",
+    "PRO",
+    "1st year representative",
+    "2nd year representative",
+    "3rd year representative",
+    "4th year representative"
+Courses:
+    "BS-Computer Science"
+    "BS-Information Technology"
+    "BS-Information Systems"
+    "BS-Computer Engineering"
+    "BS-Software Engineering"
+YearLevel:
+    "1st Year"
+    "2nd Year"
+    "3rd Year"
+    "4th Year"
+
+MODEL:
+const CandidateSchema = new Schema({
+  candidateIdNumber: {
+    type: String,
+    required: true,
+    unique: true,
+  },
+  party: {
+    type: String,
+    required: true,
+  },
+  position: {
+    type: String,
+    required: true,
+  },
+  fullName: {
+    type: String,
+    required: true,
+    unique: true,
+  },
+  course: {
+    type: String,
+    required: true,
+  },
+  yearLevel: {
+    type: String,
+    required: true,
+  },
+});

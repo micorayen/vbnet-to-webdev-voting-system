@@ -1,23 +1,16 @@
+- Implemented candidate retrieval service, route update, added EJS for voting; PUT route, front-end script for app title; leading candidates retrieval service, route, vote standings modal.
 
-Refactor navbar links, implement authentication middleware, introduce login form with radio button selection, and integrate PassportJS for user authentication, and flash message for better user experience.
-
-1. **Login**:
-    - Introduced a login form with radio buttons for selecting between account and voter login options.
-    - Implemented form validation to ensure at least one option is selected before submission.
-    - Dynamically updated the username label based on the selected login type using jQuery for improved user experience.
-2. **Navbar**:
-    - Updated navbar links to conditionally display the "X" or "Close" link based on user authentication and current page URL to enhance user experience.
-3. **Middleware**:
-    - Added isLoggedIn middleware to restrict routes to authenticated users only.
-    - Implemented isVoterLoggedIn middleware to restrict access to voter-exclusive URLs/pages. 
-    - Incorporated isAccountLoggedIn middleware to safeguard access to account-exclusive URLs/pages. 
-4. **PassportJS Integration**:
-    - Integrated PassportJS for user authentication.
-    - Utilized LocalStrategy for account and voter authentication.
-    - Implemented serialization and deserialization functions to manage user sessions effectively.
-5. **Flash Message**:
-    - Displays an error flash message and redirects to the home page if the logged-in user is not identified as a voter.
-    - Displays an error flash message and redirects to the votes page if the logged-in user is not recognized as an account.
-    - Implemented success and error flash messages with a 2-second display limit for CRUD routes handling accounts, candidates, courses, parties, and voters.
-6. **Express Routing**:
-    - Organized routes for vote-standing using Express Router for better structure and readability.
+1. **Vote Page**:
+    - Created service functions to retrieve candidates for each position.
+    - Implemented service function into vote-route, to fetch candidates for rendering on the voting page.
+    - Update EJS template for the voting page, displaying candidates for each position in select menus.
+2. **Title Form**:
+    - Added PUT route, to handle updates to the application's title.
+    - Implemented AJAX update process with title length validation (10-30 characters) and confirmation dialog.
+    - Upon successful update, the page is reloaded to reflect the changes.
+3. **Navbar**:
+    - Implemented dynamic rendering of application title in navbar for consistent branding.
+4. **Vote Standing**:
+    - Updated voting standings modal, to display leading candidates for each position.
+    - Created service function to fetch leading candidates by position from the database.
+    - Implemented service function into route handling, to dynamically populate the modal with the latest voting standings.

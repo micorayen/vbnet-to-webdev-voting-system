@@ -27,6 +27,7 @@ const partyRoutes = require("./routes/parties");
 const courseRoutes = require("./routes/courses");
 const candidateRoutes = require("./routes/candidates");
 const voteStandingRoutes = require("./routes/vote-standings");
+const voteRoutes = require("./routes/votes");
 
 // MongoDB Connection:
 mongoose.connect("mongodb://127.0.0.1:27017/voting-app", {});
@@ -109,7 +110,8 @@ passport.deserializeUser(function (obj, done) {
 });
 
 // Locals - have access for all templates
-app.use((req, res, next) => {
+app.use(async (req, res, next) => {
+  res.locals.appTitle = await Title.findOne();
   res.locals.currentUser = req.user;
   res.locals.currentURL = req;
   res.locals.success = req.flash("success");
@@ -125,26 +127,32 @@ app.use("/parties", partyRoutes);
 app.use("/courses", courseRoutes);
 app.use("/candidates", candidateRoutes);
 app.use("/vote-standings", voteStandingRoutes);
+app.use("/votes", voteRoutes);
 
-const {
-  isLoggedIn,
-  isAccountLoggedIn,
-  isVoterLoggedIn,
-} = require("./middleware");
+const { isLoggedIn, isAccountLoggedIn } = require("./middleware");
+
+// =================================================
 
 // Route accessible only to users logged in as "account"
-app.get("/", isLoggedIn, isAccountLoggedIn, (req, res) => {
+app.get("/", isLoggedIn, isAccountLoggedIn, async (req, res) => {
   const loggedInAccount = req.user;
-  res.render("main/main", { loggedInAccount });
+  const title = await Title.findOne();
+
+  res.render("main", { loggedInAccount, title });
 });
 
-// Route accessible only to users logged in as "voter"
-app.get("/votes", isLoggedIn, isVoterLoggedIn, (req, res) => {
-  const loggedInVoter = req.user;
-  res.render("votes/vote", { loggedInVoter });
+app.put("/", async (req, res) => {
+  await Title.findOneAndUpdate(
+    {},
+    { title: req.body.title }, // Update the title
+    { runValidators: true, new: true }
+  );
+
+  req.flash("success", "Successfully updated application's title");
+  res.redirect("/");
 });
 
-/// COURSES ROUTES:
+/// ADDITIONAL ROUTES:
 // --------------------
 
 // Error Handling

@@ -16,9 +16,11 @@ const CourseSchema = new Schema({
   },
 });
 const TitleSchema = new Schema({
-  mainTitle: {
+  title: {
     type: String,
     required: true,
+    minlength: 10,
+    maxlength: 30,
   },
   // subTitle: {
   //   type: String,

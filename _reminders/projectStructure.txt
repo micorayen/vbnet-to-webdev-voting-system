@@ -1,0 +1,77 @@
+Models
+    - accounts.js
+    - additionals.js
+    - candidates.js
+    - voters.js
+Public
+    - img
+    - javascripts
+    - stylesheets
+Routes
+    - accounts.js
+    - candidates.js
+    - courses.js
+    - parties.js
+    - users.js
+    - vote-standings.js
+    - voters.js
+Utils
+    - catchAsync.js
+    - ExpressError.js
+Views
+    - accounts
+        - edit.ejs
+        - index.ejs
+        - new.ejs
+    - additionals
+        - courses
+            - index.ejs
+        - parties
+            - index.ejs
+        - title.ejs
+    - candidates
+        - edit.ejs
+        - index.ejs
+        - new.ejs
+        - show.ejs
+    - layouts
+        - boilerplate.ejs
+    - main
+        - additional_modal.ejs
+        - main.ejs
+    - partials
+        - flash.ejs
+        - footer.ejs
+        - navbar.ejs
+    - users
+        - login.ejs
+    - vote-standings
+        - index.ejs
+        - view_result_modal.ejs
+    - voters
+        - edit.ejs
+        - index.ejs
+        - new.ejs
+    - votes
+        - vote.ejs
+    - error.js
+app.js
+middleware.js
+package-lock.json
+package.json
+schemas.js
+
+
+project/
+│
+├── controllers/
+│   └── VoteStandingsController.js
+│
+├── models/
+│   └── Candidate.js
+│
+├── services/
+│   └── CandidateService.js
+│
+└── views/
+    └── voteStandings.ejs
