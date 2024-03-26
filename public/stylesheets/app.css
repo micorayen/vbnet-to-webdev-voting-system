@@ -73,3 +73,10 @@
   min-height: 300px;
   overflow-y: auto;
 }
+
+/* Vote Form */
+.form-control[readonly] {
+  border: none;
+  background-color: transparent;
+  pointer-events: none;
+}

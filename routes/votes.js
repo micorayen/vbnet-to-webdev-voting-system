@@ -1,8 +1,15 @@
 const express = require("express");
-const router = express.Router();
+const router = express.Router({ mergeParams: true });
 const catchAsync = require("../utils/catchAsync");
 
-const { isLoggedIn, isVoterLoggedIn } = require("../middleware");
+const {
+  isLoggedIn,
+  isVoterLoggedIn,
+  checkVoteStatus,
+} = require("../middleware");
+const Candidate = require("../models/candidates");
+const Voter = require("../models/voters");
+
 const {
   getCandidatesByPosition,
 } = require("../services/candidates-by-position");
@@ -12,6 +19,7 @@ router.get(
   "/",
   isLoggedIn,
   isVoterLoggedIn,
+  checkVoteStatus,
   catchAsync(async (req, res) => {
     const loggedInVoter = req.user;
     const {
@@ -28,8 +36,6 @@ router.get(
       fourthYearReps,
     } = await getCandidatesByPosition();
 
-    console.log(presidents);
-
     res.render("votes", {
       loggedInVoter,
       presidents,
@@ -44,6 +50,25 @@ router.get(
       thirdYearReps,
       fourthYearReps,
     });
+  })
+);
+
+router.patch(
+  "/update-vote-count",
+  catchAsync(async (req, res) => {
+    await Candidate.updateMany(
+      { fullName: { $in: Object.values(req.body) } },
+      { $inc: { voteCount: 1 } }
+    );
+
+    // console.log(req.user.fullName);
+    await Voter.findOneAndUpdate(
+      { fullName: req.user.fullName },
+      { $set: { voteStatus: "Voted" } },
+      { new: true }
+    );
+
+    res.redirect("/logout");
   })
 );
 

@@ -35,7 +35,7 @@ const CandidateSchema = new Schema({
   },
   voteCount: {
     type: Number,
-    default: 2,
+    default: 0,
   },
 });
 

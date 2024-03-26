@@ -1,16 +1,16 @@
-- Implemented candidate retrieval service, route update, added EJS for voting; PUT route, front-end script for app title; leading candidates retrieval service, route, vote standings modal.
+feat: Implemented features to improve user experience, created the voting confirmation modal, added a vote count update route, and implemented middleware to check vote status.
 
-1. **Vote Page**:
-    - Created service functions to retrieve candidates for each position.
-    - Implemented service function into vote-route, to fetch candidates for rendering on the voting page.
-    - Update EJS template for the voting page, displaying candidates for each position in select menus.
-2. **Title Form**:
-    - Added PUT route, to handle updates to the application's title.
-    - Implemented AJAX update process with title length validation (10-30 characters) and confirmation dialog.
-    - Upon successful update, the page is reloaded to reflect the changes.
-3. **Navbar**:
-    - Implemented dynamic rendering of application title in navbar for consistent branding.
-4. **Vote Standing**:
-    - Updated voting standings modal, to display leading candidates for each position.
-    - Created service function to fetch leading candidates by position from the database.
-    - Implemented service function into route handling, to dynamically populate the modal with the latest voting standings.
+**VOTE FORM**:
+
+1. **Confirm Votes**:
+    - Implemented logic validation to ensures selection of candidates for all positions before submission. 
+    - Displays an alert message for unselected positions to ensure all positions are filled before submission.
+    - Populates input fields with chosen candidate names to provide users with a summary of their selections.
+    - Create and prompts a confirmation modal for users to review their selections before final submission, enhancing user confidence in their choices.
+2. **Update Route**:
+    - Update the database with the incremented vote count for each selected candidate. to record the votes cast by voter during the voting process
+    - Update the vote status for the current user to "Voted", to prevents multiple votes from the same user.
+    - Upon successful vote submission, the user is redirected to the logout page.
+3. **MIDDLEWARE**:
+    - Implemented middleware to check the vote status of the current user, if the user has already voted, 
+    - it flashes an error message "youre already voted" and redirects to the login page. Otherwise, it allows the request to proceed.

@@ -12,8 +12,8 @@
           <text x="50%" y="50%" fill="#dee2e6" dy=".3em"></text>
         </svg>
         <div class="card-body p-0">
-          <select class="form-select" aria-label="Default select example" id="accountType">
-            <option value="0">Select Candidate</option>
+          <select class="form-select" aria-label="Default select example" id="president">
+            <option value="index">Select Candidate</option>
             <% for(let president of presidents) { %>
             <option value="<%= president.fullName %>"><%= president.fullName %></option>
             <% } %>
@@ -32,8 +32,8 @@
         </svg>
 
         <div class="card-body p-0">
-          <select class="form-select" aria-label="Default select example" id="accountType">
-            <option selected value="0">Select Candidate</option>
+          <select class="form-select" aria-label="Default select example" id="vpInternal">
+            <option value="index">Select Candidate</option>
             <% for(let vpInternal of vpInternals) { %>
             <option value="<%= vpInternal.fullName %>"><%= vpInternal.fullName %></option>
             <% } %>
@@ -50,8 +50,8 @@
           <text x="50%" y="50%" fill="#dee2e6" dy=".3em"></text>
         </svg>
         <div class="card-body p-0">
-          <select class="form-select" aria-label="Default select example" id="accountType">
-            <option value="0">Select Candidate</option>
+          <select class="form-select" aria-label="Default select example" id="vpExternal">
+            <option value="index">Select Candidate</option>
             <% for(let vpExternal of vpExternals) { %>
             <option value="<%= vpExternal.fullName %>"><%= vpExternal.fullName %></option>
             <% } %>
@@ -69,8 +69,8 @@
           <text x="50%" y="50%" fill="#dee2e6" dy=".3em"></text>
         </svg>
         <div class="card-body p-0">
-          <select class="form-select" aria-label="Default select example" id="accountType">
-            <option value="0">Select Candidate</option>
+          <select class="form-select" aria-label="Default select example" id="auditor">
+            <option value="index">Select Candidate</option>
             <% for(let auditor of auditors) { %>
             <option value="<%= auditor.fullName %>"><%= auditor.fullName %></option>
             <% } %>
@@ -88,8 +88,8 @@
           <text x="50%" y="50%" fill="#dee2e6" dy=".3em"></text>
         </svg>
         <div class="card-body p-0">
-          <select class="form-select" aria-label="Default select example" id="accountType">
-            <option value="0">Select Candidate</option>
+          <select class="form-select" aria-label="Default select example" id="treasurer">
+            <option value="index">Select Candidate</option>
             <% for(let treasurer of treasurers) { %>
             <option value="<%= treasurer.fullName %>"><%= treasurer.fullName %></option>
             <% } %>
@@ -107,8 +107,8 @@
           <text x="50%" y="50%" fill="#dee2e6" dy=".3em"></text>
         </svg>
         <div class="card-body p-0">
-          <select class="form-select" aria-label="Default select example" id="accountType">
-            <option value="0">Select Candidate</option>
+          <select class="form-select" aria-label="Default select example" id="secretary">
+            <option value="index">Select Candidate</option>
             <% for(let secretary of secretaries) { %>
             <option value="<%= secretary.fullName %>"><%= secretary.fullName %></option>
             <% } %>
@@ -126,8 +126,8 @@
           <text x="50%" y="50%" fill="#dee2e6" dy=".3em"></text>
         </svg>
         <div class="card-body p-0">
-          <select class="form-select" aria-label="Default select example" id="accountType">
-            <option value="0">Select Candidate</option>
+          <select class="form-select" aria-label="Default select example" id="pro">
+            <option value="index">Select Candidate</option>
             <% for(let pro of pros) { %>
             <option value="<%= pro.fullName %>"><%= pro.fullName %></option>
             <% } %>
@@ -147,8 +147,8 @@
           <text x="50%" y="50%" fill="#dee2e6" dy=".3em"></text>
         </svg>
         <div class="card-body p-0">
-          <select class="form-select" aria-label="Default select example" id="accountType">
-            <option value="0">Select Candidate</option>
+          <select class="form-select" aria-label="Default select example" id="firstYearRep">
+            <option value="index">Select Candidate</option>
             <% for(let firstYearRep of firstYearReps) { %>
             <option value="<%= firstYearRep.fullName %>"><%= firstYearRep.fullName %></option>
             <% } %>
@@ -168,8 +168,8 @@
           <text x="50%" y="50%" fill="#dee2e6" dy=".3em"></text>
         </svg>
         <div class="card-body p-0">
-          <select class="form-select" aria-label="Default select example" id="accountType">
-            <option value="0">Select Candidate</option>
+          <select class="form-select" aria-label="Default select example" id="secondYearRep">
+            <option value="index">Select Candidate</option>
             <% for(let secondYearRep of secondYearReps) { %>
             <option value="<%= secondYearRep.fullName %>"><%= secondYearRep.fullName %></option>
             <% } %>
@@ -189,8 +189,8 @@
           <text x="50%" y="50%" fill="#dee2e6" dy=".3em"></text>
         </svg>
         <div class="card-body p-0">
-          <select class="form-select" aria-label="Default select example" id="accountType">
-            <option value="0">Select Candidate</option>
+          <select class="form-select" aria-label="Default select example" id="thirdYearRep">
+            <option value="index">Select Candidate</option>
             <% for(let thirdYearRep of thirdYearReps) { %>
             <option value="<%= thirdYearRep.fullName %>"><%= thirdYearRep.fullName %></option>
             <% } %>
@@ -210,8 +210,8 @@
           <text x="50%" y="50%" fill="#dee2e6" dy=".3em"></text>
         </svg>
         <div class="card-body p-0">
-          <select class="form-select" aria-label="Default select example" id="accountType">
-            <option value="0">Select Candidate</option>
+          <select class="form-select" aria-label="Default select example" id="fourthYearRep">
+            <option value="index">Select Candidate</option>
             <% for(let fourthYearRep of fourthYearReps) { %>
             <option value="<%= fourthYearRep.fullName %>"><%= fourthYearRep.fullName %></option>
             <% } %>
@@ -238,76 +238,91 @@
       </div>
     </div>
   </div>
+
+  <%- include('./confirm_votes_modal') %>
+
+  <%- include('./help_modal') %>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+  <script>
+    $(document).ready(function() {
+
+      $("#vote-button").click(function(event) {
+        const selectedIds = [
+          "president", "vpInternal", "vpExternal", "auditor", "treasurer",
+          "secretary", "pro", "firstYearRep", "secondYearRep", "thirdYearRep",
+          "fourthYearRep"
+        ];
+
+        let hasUnselected = false;
+        let firstUnselectedId = "";
+
+        // president = $("#president").val();
+        // vpInternal = $("#vpInternal").val();
+        // vpExternal = $("#vpExternal").val();
+        // auditor = $("#auditor").val();
+        // treasurer = $("#treasurer").val();
+        // secretary = $("#secretary").val();
+        // pro = $("#pro").val();
+        // firstYearRep = $("#firstYearRep").val();
+        // secondYearRep = $("#secondYearRep").val();
+        // thirdYearRep = $("#thirdYearRep").val();
+        // fourthYearRep = $("#fourthYearRep").val();
+
+        // Object to store selected values
+        let selectedValues = {};
+
+        for (let i = 0; i < selectedIds.length; i++) {
+          const selectId = selectedIds[i];
+          const selectedValue = $("#" + selectId).val();
+
+          if (selectedValue === "index") {
+            hasUnselected = true;
+            firstUnselectedId = selectId;
+            break;
+          }
+
+          // Store selected value in the object
+          selectedValues[selectId] = selectedValue;
+        }
+
+        if (hasUnselected) {
+          alert("Please select a candidate for all positions");
+          $("#" + firstUnselectedId).focus();
+        } else {
+
+          // $("#presidentName").text(president);
+          // $("#vpInternalName").text(vpInternal);
+          // $("#vpExternalName").text(vpExternal);
+          // $("#auditorName").text(auditor);
+          // $("#treasurerName").text(treasurer);
+          // $("#secretaryName").text(secretary);
+          // $("#proName").text(pro);
+          // $("#firstYearRepName").text(firstYearRep);
+          // $("#secondYearRepName").text(secondYearRep);
+          // $("#thirdYearRepName").text(thirdYearRep);
+          // $("#fourthYearRepName").text(fourthYearRep);
+
+          for (const [id, value] of Object.entries(selectedValues)) {
+            $("#" + id + "Name").val(value);
+          }
+
+          $("#confirm").modal("show");
+        }
+      });
+
+
+      $("#reset-button").click(function(event) {
+        window.location.reload();
+      });
+
+      $("#help-button").click(function(event) {
+        event.preventDefault();
+        // Modal for help
+      });
+    });
+  </script>
+
+
 </div>
-
-<!-- Vertically centered scrollable modal -->
-<div class="modal fade" id="help" aria-hidden="true" aria-labelledby="helpLabel" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false">
-  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-    <div class="modal-content">
-      <div class="modal-header text-center">
-        <h1 class="modal-title fs-5 text-body-secondary" id="helpLabel">
-          HELP
-        </h1>
-
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title text-center text-primary">INSTRUCTIONS</h5>
-            <hr />
-            <div class="card-text row">
-              <p class="col-2">Step 1:</p>
-              <p class="col">
-                Enter your Username and Password given by your Facilitator then
-                click "PROCEED".
-              </p>
-            </div>
-            <hr />
-            <div class="card-text row">
-              <p class="col-2">Step 2:</p>
-              <p class="col">
-                Select your prefered candidates by clicking the "Select
-                Candidate", choose them from Left to Right, please choose wisely
-                then click "CAST MY VOTE".
-              </p>
-            </div>
-            <hr />
-            <div class="card-text row">
-              <p class="col-2">Step 3:</p>
-              <p class="col">
-                You'll be shown your choosen candidates, please review your
-                candidates first before clicking "CONFIRM VOTE". if your done
-                click "CONFIRM VOTE".
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close">
-          Close
-        </button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-
-<script>
-  $(document).ready(function() {
-    $("#vote-button").click(function(event) {
-      // Modal for confirm votes
-    });
-
-    $("#reset-button").click(function(event) {
-      window.location.reload();
-    });
-
-    $("#help-button").click(function(event) {
-      event.preventDefault();
-      // Modal for help
-    });
-  });
-</script>

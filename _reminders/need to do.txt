@@ -24,19 +24,21 @@
 4. Vote Form
     [DONE 6th]- flash logging in and signing out
     [DONE 6th]- extract name loggedIn Voter, put on "Welcome, + 'Name'".
-    - make the combo boxes per position works
-    - created modal for confirm votes,to double check selected candidates per position
-    - makes confirm votes works
-    - successfully casts votes per positions
-    - makes adding +1 votes per selected candidates per positions
-    - makes voter's status from "Not Voted" to "Voted"
-    - makes voter's unable to login anymore, after casting votes
-    - flash message, for voter's thats unable to login anymore, after casting votes
+    [DONE 7th]- make the combo boxes per position works, display extracted data of candidates per positions
+    [DONE 8th]- check each comboboxes if its value="index", before confirm votes.
+    [DONE 8th]- created modal for confirm votes,to double check selected candidates per position
+    [DONE 8th]- makes confirm votes works
+    [DONE 8th]- successfully casts votes per positions
+    [DONE 8th]- makes adding +1 votes per selected candidates per positions
+    [DONE 8th]- makes voter's status from "Not Voted" to "Voted"
+    [DONE 8th]- makes voter's unable to login anymore, after casting votes
+    [DONE 8th]- flash message, for voter's thats unable to login anymore, after casting votes
+
 
 5. Vote Standing
-- make modal to display the "leading candidates" per position by votes 
-- Generate Reports both "Votes Tally and Print Winners".
-
+    [DONE 7th]- extract leading candidates by votes per position
+    [DONE 7th]- make modal to display the "leading candidates" per position by votes 
+    - Generate Reports both "Votes Tally and Print Winners"
 
 6. Manage Voters
     - turned "username(passportJS)" as "IdNumber"
@@ -66,12 +68,12 @@
     - Update route _ put additional validation for candidate academic course's name (make sure it wont duplicate)
     - parties and courses, bootstrap validation on add and update, doesnt get triggered work.
 Additionals > Update Title
-    - extract current application's title, and display on 1st textbox
-    - makes an update route, for updating title
-    - extract updated application's title, and display on 1st textbox
-    - empty 2nd textbox
-    - flash messages, for successfully updating title, and also redirect home-page.
-
+    [DONE 7th]- extract current application's title, and display on 1st textbox
+    [DONE 7th]- makes an update route, for updating title
+    [DONE 7th]- successfully refresh page, to display the new updated app's titleAdditionals > Update Title
+    [DONE 7th]- extract current application's title, and display on 1st textbox
+    [DONE 7th]- makes an update route, for updating title
+    [DONE 7th]- successfully refresh page, to display the new updated app's title
 
 10. READ ON BETTER PROJECT STRUCTURE (perhap MVC)
     - How to structure the project (some basic structuring).

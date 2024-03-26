@@ -1,0 +1,112 @@
+<!-- MODAL: CAST MY VOTE -->
+<div>
+  <form action="/votes/update-vote-count?_method=PATCH" method="POST">
+    <div class="modal fade" id="confirm" aria-hidden="true" aria-labelledby="confirmLabel" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false">
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header text-center">
+            <h1 class="modal-title fs-5 text-body-secondary" id="confirmLabel">
+              SELECTED CANDIDATES
+            </h1>
+
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="card">
+              <div class="card-body">
+                <div class="card-title row">
+                  <h5 class="col-4 text-primary">Postions:</h5>
+                  <h5 class="col-8 text-primary text-center">Names:</h5>
+                </div>
+
+                <div class="card-text row">
+                  <p class="col-4 card-title">President</p>
+                  <div class="col-8">
+                    <input class="form-control text-center" type="text" id="presidentName" name="president" readonly>
+                  </div>
+                </div>
+                <hr />
+                <div class="card-text row">
+                  <h6 class="col text-danger mb-1">Vice Presidents:</h6>
+                </div>
+                <div class="card-text row">
+                  <p class="col-4 mb-1">Internal</p>
+                  <div class="col-8">
+                    <input id="vpInternalName" name="vpInternal" class="form-control  text-center" type="text" readonly value="Mico Aniga Rayen">
+                  </div>
+                </div>
+                <div class="card-text row">
+                  <p class="col-4">External</p>
+                  <div class="col-8">
+                    <input id="vpExternalName" name="vpExternal" class="form-control  text-center" type="text" readonly value="Mico Aniga Rayen">
+                  </div>
+                </div>
+                <hr />
+                <div class="card-text row">
+                  <p class="col-4 mb-1">Auditor</p>
+                  <div class="col-8">
+                    <input id="auditorName" name="auditor" class="form-control  text-center" type="text" readonly value="Mico Aniga Rayen">
+                  </div>
+                </div>
+                <div class="card-text row">
+                  <p class="col-4 mb-1">Treasurer</p>
+                  <div class="col-8">
+                    <input id="treasurerName" name="treasurer" class="form-control  text-center" type="text" readonly value="Mico Aniga Rayen">
+                  </div>
+                </div>
+                <div class="card-text row">
+                  <p class="col-4 mb-1">Secretary</p>
+                  <div class="col-8">
+                    <input id="secretaryName" name="secretary" class="form-control  text-center" type="text" readonly value="Mico Aniga Rayen">
+                  </div>
+                </div>
+                <div class="card-text row">
+                  <p class="col-4">PRO</p>
+                  <div class="col-8">
+                    <input id="proName" name="pro" class="form-control  text-center" type="text" readonly value="Mico Aniga Rayen">
+                  </div>
+                </div>
+
+                <hr />
+
+                <div class="card-text row">
+                  <h6 class="col text-danger mb-1">Representatives:</h6>
+                </div>
+                <div class="card-text row">
+                  <p class="col-4 mb-1">1st Year</p>
+                  <div class="col-8">
+                    <input id="firstYearRepName" name="firstYearRep" class="form-control  text-center" type="text" readonly value="Mico Aniga Rayen">
+                  </div>
+                </div>
+                <div class="card-text row">
+                  <p class="col-4 mb-1">2nd Year</p>
+                  <div class="col-8">
+                    <input id="secondYearRepName" name="secondYearRep" class="form-control  text-center" type="text" readonly value="Mico Aniga Rayen">
+                  </div>
+                </div>
+                <div class="card-text row">
+                  <p class="col-4 mb-1">3rd Year</p>
+                  <div class="col-8">
+                    <input id="thirdYearRepName" name="thirdYearRep" class="form-control  text-center" type="text" readonly value="Mico Aniga Rayen">
+                  </div>
+                </div>
+                <div class="card-text row">
+                  <p class="col-4 mb-1">4th Year</p>
+                  <div class="col-8">
+                    <input id="fourthYearRepName" name="fourthYearRep" class="form-control  text-center" type="text" readonly value="Mico Aniga Rayen">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+            <button id="confirm-vote-button" type="submit" class="btn btn-primary">Confirn Vote</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+<!-- END OF MODAL: CAST MY VOTE -->

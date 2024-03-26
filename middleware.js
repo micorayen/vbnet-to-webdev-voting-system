@@ -81,6 +81,15 @@ module.exports.isVoterLoggedIn = (req, res, next) => {
   next();
 };
 
+module.exports.checkVoteStatus = (req, res, next) => {
+  if (req.user.voteStatus === "Voted") {
+    req.flash("error", "You Already Voted!");
+    return res.redirect("/login");
+  }
+
+  next();
+};
+
 module.exports.isAccountLoggedIn = (req, res, next) => {
   if (req.user.constructor.modelName !== "Account") {
     req.flash(

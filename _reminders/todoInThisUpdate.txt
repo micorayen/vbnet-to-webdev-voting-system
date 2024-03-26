@@ -1,23 +1,11 @@
 //note: if you make commit message, you must always include the reason why its added:
-Seeds
-D    - seeds 2 candidates per position, under two different partylist
-D    - seeds courses
-D    - seeds parties
-Vote Standings
-D    - make modal to display the "leading candidates" per position by votes 
-D    - extract leading candidates by votes per position
 
-Additionals > Update Title
-D    - extract current application's title, and display on 1st textbox
-D    - makes an update route, for updating title
-D    - successfully refresh page, to display the new updated app's title
 Vote Form
-D    - make the combo boxes per position works, display extracted data of candidates per positions
-
-    - created modal for confirm votes,to double check selected candidates per position
-    - makes confirm votes works
-    - successfully casts votes per positions
-    - makes adding +1 votes per selected candidates per positions
-    - makes voter's status from "Not Voted" to "Voted"
-    - makes voter's unable to login anymore, after casting votes
-    - flash message, for voter's thats unable to login anymore, after casting votes
+D    - check each comboboxes if its value="index", before confirm votes.
+D    - created modal for confirm votes,to double check selected candidates per position
+D    - makes confirm votes works
+D    - successfully casts votes per positions
+D    - makes adding +1 votes per selected candidates per positions
+D    - makes voter's status from "Not Voted" to "Voted"
+D    - makes voter's unable to login anymore, after casting votes
+D    - flash message, for voter's thats unable to login anymore, after casting votes
