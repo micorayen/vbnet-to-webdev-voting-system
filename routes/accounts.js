@@ -34,11 +34,27 @@ router.post(
   validateAccount,
   catchAsync(async (req, res) => {
     const { role, fullName, username, password } = req.body.account;
-    const account = new Account({ role, fullName, username });
-    await Account.register(account, password);
 
-    req.flash("success", "Successfully added new account");
-    res.redirect("/accounts");
+    const existingAccount = await Account.findOne({
+      $or: [{ fullName: fullName }, { username: username }],
+    });
+
+    if (existingAccount) {
+      if (existingAccount.fullName === fullName) {
+        res
+          .status(400)
+          .json({ error: "Fullname already taken. Please choose another" });
+      } else if (existingAccount.username === username) {
+        res
+          .status(400)
+          .json({ error: "Username already taken. Please choose another" });
+      }
+    } else {
+      const account = new Account({ role, fullName, username });
+      await Account.register(account, password);
+
+      res.json({ success: "Successfully added new account" });
+    }
   })
 );
 
@@ -49,20 +65,37 @@ router.patch(
   isAccountLoggedIn,
   validateAccount,
   catchAsync(async (req, res) => {
+    const { fullName, username } = req.body.account;
     const { id } = req.params;
 
-    const account = await Account.findByIdAndUpdate(
-      id,
-      { ...req.body.account },
-      {
-        runValidators: true,
-        new: true,
-      }
-    );
-    await account.save();
+    const existingAccount = await Account.findOne({
+      $or: [{ fullName: fullName }, { username: username }],
+      _id: { $ne: id },
+    });
 
-    req.flash("success", "Successfully updated account's information");
-    res.redirect(`/accounts`);
+    if (existingAccount) {
+      if (existingAccount.fullName === fullName) {
+        res
+          .status(400)
+          .json({ error: "Fullname already taken. Please choose another" });
+      } else if (existingAccount.username === username) {
+        res
+          .status(400)
+          .json({ error: "Username already taken. Please choose another" });
+      }
+    } else {
+      const account = await Account.findByIdAndUpdate(
+        id,
+        { ...req.body.account },
+        {
+          runValidators: true,
+          new: true,
+        }
+      );
+      await account.save();
+
+      res.json({ success: "Successfully updated account's information" });
+    }
   })
 );
 

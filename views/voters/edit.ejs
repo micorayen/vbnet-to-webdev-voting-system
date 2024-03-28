@@ -71,17 +71,15 @@
           $("#successMessagePlaceholder").text(response.success);
           $('#success-modal').modal('show');
 
-          setTimeout(function() {
+          $('#success-modal').on('hidden.bs.modal', function(e) {
             window.location.href = "/voters";
-          }, 1000);
-
+          });
         },
         error: function(xhr) {
           const errorMessage = xhr.responseJSON.error;
 
           $("#errorMessagePlaceholder").text(errorMessage);
           $('#error-modal').modal('show');
-          // $("#username").focus();
         }
       });
     });

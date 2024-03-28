@@ -93,9 +93,9 @@
           $("#successMessagePlaceholder").text(response.success);
           $('#success-modal').modal('show');
 
-          setTimeout(function() {
+          $('#success-modal').on('hidden.bs.modal', function(e) {
             window.location.href = "/candidates/<%= candidate._id %>";
-          }, 1000);
+          });
 
         },
         error: function(xhr) {

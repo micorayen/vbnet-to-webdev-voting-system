@@ -91,10 +91,9 @@
           $('#success-modal').modal('show');
           // $('form')[0].reset();
 
-          setTimeout(function() {
+          $('#success-modal').on('hidden.bs.modal', function(e) {
             window.location.reload();
-          }, 1000);
-
+          });
 
           // document.getElementById('yourFormId').reset();
         },

@@ -3,7 +3,7 @@
 0. ALL
     - better layout and responsive on different screen sizes.
     - trim(), on all textboxes for "Post and Patch", and signin.
-    - flash messages, should be "modal like" informing the users, w/ only close-button.
+    [DONE 9th]- flash messages, should be "modal like" informing the users, w/ only close-button.
     [DONE 6th]- safeguard most routes, with 'isLoggedIn' validations, to check if youre logged in.
 
 1. Seeds
@@ -34,6 +34,7 @@
     [DONE 8th]- makes voter's unable to login anymore, after casting votes
     [DONE 8th]- flash message, for voter's thats unable to login anymore, after casting votes
 
+
 5. Vote Standing
     [DONE 7th]- extract leading candidates by votes per position
     [DONE 7th]- make modal to display the "leading candidates" per position by votes 
@@ -41,31 +42,45 @@
 
 6. Manage Voters
     - turned "username(passportJS)" as "IdNumber"
-    - New route - put additional validation for fullName and username (make sure it wont duplicate)
-    - Update route - put additional validation for fullName and username (make sure it wont duplicate)
+    [DONE 10th]- Created a service function voterService with `trimVoterData` to trim whitespace from voter data before updating, improving data integrity and consistency.
+    [DONE 10th]- new and update route, use of "trim" to eliminate white-space
+    [DONE 9th]- New route - put additional validation for fullName and username (make sure it wont duplicate)
+    [DONE 9th]- Update route - put additional validation for fullName and username (make sure it wont duplicate)
     [DONE 6th]- update index-form, new-form and edit-form voter's course from textbox to comboboxes(extracted course's collections data)
     [DONE 6th]- flash messages, for successfully creation, update and deletion, and rendering edit-form.
 
 7. Admin/Facilitator (Accounts)
-    - New route - put additional validation for fullName and username (make sure it wont duplicate)
-    - Update route - put additional validation for fullName and username (make sure it wont duplicate)
+    [DONE 10th]- display messages for add, update, and delete.
+    [DONE 10th]- new and update route, use of "trim" to eliminate white-space
+    [DONE 10th]- New route - put additional validation for fullName and username (make sure it wont duplicate)
+    [DONE 10th]- Update route - put additional validation for fullName and username (make sure it wont duplicate)
     [DONE 6th]- flash messages, for successfully creation, update and deletion, and rendering edit-form.
     [DONE 6th]- redo all from 'users' to 'accounts', (model, crud routes, index-form, new-form, edit-form, and validations ).
 
 8. Candidates
-    - New route - put additional validation for candidate IdNumber and fullName (make sure it wont duplicate)
-    - Update route - put additional validation for candidate IdNumber and fullName (make sure it wont duplicate)
+    [DONE 10th]- Created a service function candidateService with `trimCandidateData` to trim whitespace from candidate data before updating, improving data integrity and consistency.
+    [DONE 10th]- new and update route, use of "trim" to eliminate white-space
+    [DONE 9th]- New route - put additional validation for candidate IdNumber and fullName (make sure it wont duplicate)
+    [DONE 9th]- Update route - put additional validation for candidate IdNumber and fullName (make sure it wont duplicate)
+    [DONE 9th]- Validate if certain position already taken, at the same partylist
     [DONE 6th] - flash messages, for successfully creation, update and deletion, and rendering edit-form.
     - Candidate New & update, add a image upload, for candidates images, and delete image after updating it w/ new image.
 
+8. Candidates
+
 9. Additionals
-    - Flash messages _ parties _ add, update, and delete (Not Working _ Need Fixing)
-    - Flash messages _ courses _ add, update, and delete (Not Working _ Need Fixing)
-    - New route _ put additional validation for candidate partylist (make sure it wont duplicate)
-    - Update route _ put additional validation for candidate partylist (make sure it wont duplicate)
-    - New route _ put additional validation for candidate academic course's name (make sure it wont duplicate)
-    - Update route _ put additional validation for candidate academic course's name (make sure it wont duplicate)
-    - parties and courses, bootstrap validation on add and update, doesnt get triggered work.
+Additionals > Courses
+    [DONE 10th]- display messages _ courses _ add, update, and delete (Not Working _ Need Fixing)
+    [DONE 10th]- New route _ put additional validation for candidate academic course's name (make sure it wont duplicate)
+    [DONE 10th]- Update route _ put additional validation for candidate academic course's name (make sure it wont duplicate)
+    [DONE 10th]- new and update route, use of "trim" to eliminate white-space
+    - courses, bootstrap validation on add and update, doesnt get triggered work.
+Additionals > Parties
+    [DONE 10th]- display messages _ parties _ add, update, and delete (Not Working _ Need Fixing)
+    [DONE 10th]- New route _ put additional validation for candidate partylist (make sure it wont duplicate)
+    [DONE 10th]- Update route _ put additional validation for candidate partylist (make sure it wont duplicate)
+    [DONE 10th]- new and update route, use of "trim" to eliminate white-space
+    - parties, bootstrap validation on add and update, doesnt get triggered work.
 Additionals > Update Title
     [DONE 7th]- extract current application's title, and display on 1st textbox
     [DONE 7th]- makes an update route, for updating title

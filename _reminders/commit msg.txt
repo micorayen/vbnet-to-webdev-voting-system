@@ -1,26 +1,74 @@
+done: Implement messages, update routes, and remove whitespaces.
 
-done: Implement messages, routes, and modals
-
-**MESSAGE**:
-    - created a modal with success and error, for displaying feedback to the user.   
-
-**VOTER**:
-1. **New Route**:
-    - This route ensures that the provided username and full name are unique among existing voters. 
-    - If a duplicate is found, it returns a message to users to choose another username or full name. 
-    - Otherwise, it proceeds to the registration process and returns a success message.
-2. **Update Route**:
-    - This route ensures that the provided username and full name are unique among other voters. 
-    - If a duplicate is found, it returns a message to users to choose another username or full name. 
-    - Otherwise, it updates the voter's information and returns a success message.
+**MANAGE VOTER**:
+1. **Service Function & White Space**:
+    - Created a service function voterService with `trimVoterData` to trim whitespace from voter data before updating, improving data integrity and consistency.
 
 **CANDIDATE**:
+1. **Service Function & White Space**:
+    - Created a service function candidateService with `trimCandidateData` to trim whitespace from candidate data before updating, improving data integrity and consistency.
+
+**ACCOUNT**:
 1. **New Route**:
-    - This route ensures that the provided username, full name and (party and position) are unique among existing candidates. 
-    - If a duplicate is found, it returns a message to users to choose another username or full name or (position in the party are taken). 
+    - This route ensures that the provided username and full name are unique among existing accounts. 
+    - If a duplicate is found, it returns a message to users to choose another username or full name. 
     - Otherwise, it proceeds to the registration process and returns a success message.
 2. **Update Route**:
-    - This route ensures that the provided username, full name and (party and position) are unique among existing candidates. 
-    - If a duplicate is found, it returns a message to users to choose another username or full name or (position in the party are taken). 
-    - Otherwise, it updates the candidate's information and returns a success message.
+    - This route ensures that the provided username and full name are unique among other accounts. 
+    - If a duplicate is found, it returns a message to users to choose another username or full name. 
+    - Otherwise, it updates the account's information and returns a success message.
+3. **Delete Route**:
+    - It delete the account entry and returns a success message.
 
+**COURSE**:
+1. **New Route**:
+    - This route ensures that the provided academic's course are unique among existing courses. 
+    - If a duplicate is found, it returns a message to users to choose another course's name are taken. 
+    - Otherwise, it proceeds to the creation of the academic's course and returns a success message.
+2. **Update Route**:
+    - This route ensures that the provided academic's course are unique among existing candidates. 
+    - If a duplicate is found, it returns a message to users to choose another course's name are taken. 
+    - Otherwise, it updates the course's information and returns a success message.
+3. **Delete Route**:
+    - It delete the academic's course entry and returns a success message.
+4. **White Space**:
+    - Trim whitespace from academic course's data before updating, improving data integrity and consistency.
+
+**PARTYLIST**:
+1. **New Route**:
+    - This route ensures that the provided party's name are unique among existing courses. 
+    - If a duplicate is found, it returns a message to users to choose another party's name are taken. 
+    - Otherwise, it proceeds to the creation of the partylist and returns a success message.
+2. **Update Route**:
+    - This route ensures that the provided party's name are unique among existing candidates. 
+    - If a duplicate is found, it returns a message to users to choose another party's name are taken. 
+    - Otherwise, it updates the party's information and returns a success message.
+3. **Delete Route**:
+    - It delete the partylist entry and returns a success message.
+4. **White Space**:
+    - Trim whitespace from party's data before updating, improving data integrity and consistency.
+
+===========================================
+Implemented custom username field for Voter model in Passport.js authentication.
+
+- Added `studentIdNumber` field as the username field in the Voter schema to provide a more relevant identifier for authentication.
+- Modified Passport.js configuration to use `studentIdNumber` as the username field for authentication, ensuring consistency with the schema change.
+- Created a service function `trimVoterData` to trim whitespace from voter data before updating, 
+improving data integrity and consistency.
+- Updated the route handler for updating voter information to use the trimmed voter data and handle username uniqueness validation, enhancing the robustness and security of the application.
+
+=======================================
+
+=======================================
+
+=======================================
+
+=======================================
+
+=======================================
+
+=======================================
+
+=======================================
+
+=======================================

@@ -8,6 +8,8 @@ const { isLoggedIn, isAccountLoggedIn } = require("../middleware");
 const { Party, Course } = require("../models/additionals");
 const Candidate = require("../models/candidates");
 
+const { trimCandidateData } = require("../services/candidateService");
+
 /// CANDIDATES ROUTES:
 const {
   candidatePositions,
@@ -74,7 +76,12 @@ router.post(
   isAccountLoggedIn,
   validateCandidate,
   catchAsync(async (req, res) => {
-    const { candidateIdNumber, party, position, fullName } = req.body.candidate;
+    // =====================================
+    const candidateData = req.body.candidate;
+    const trimmedCandidateData = trimCandidateData(candidateData);
+    const { candidateIdNumber, party, position, fullName } =
+      trimmedCandidateData;
+    // =====================================
 
     const existingCandidate = await Candidate.findOne({
       $or: [
@@ -86,27 +93,26 @@ router.post(
 
     if (existingCandidate) {
       if (existingCandidate.candidateIdNumber === candidateIdNumber) {
-        res
+        return res
           .status(400)
           .json({ error: "ID Number already taken. Please choose another" });
       } else if (
         existingCandidate.party === party &&
         existingCandidate.position === position
       ) {
-        res.status(400).json({
-          error: `${existingCandidate.position} position for party: ${existingCandidate.party} have already been taken`,
+        return res.status(400).json({
+          error: `${existingCandidate.position} position for party - ${existingCandidate.party} have already been taken`,
         });
       } else if (existingCandidate.fullName === fullName) {
-        res
+        return res
           .status(400)
           .json({ error: "Fullname already taken. Please choose another" });
       }
-    } else {
-      const candidate = new Candidate(req.body.candidate);
-      await candidate.save();
-
-      res.json({ success: "Successfully added new candidate" });
     }
+
+    await new Candidate(trimmedCandidateData).save();
+
+    res.json({ success: "Successfully added new candidate" });
   })
 );
 
@@ -134,8 +140,10 @@ router.patch(
   isAccountLoggedIn,
   validateCandidate,
   catchAsync(async (req, res) => {
-    const { candidateIdNumber, party, position, fullName } = req.body.candidate;
-    const { id } = req.params;
+    const candidateData = req.body.candidate;
+    const trimmedCandidateData = trimCandidateData(candidateData);
+    const { candidateIdNumber, party, position, fullName } =
+      trimmedCandidateData;
 
     const existingCandidate = await Candidate.findOne({
       $or: [
@@ -143,7 +151,7 @@ router.patch(
         { $and: [{ party: party }, { position: position }] },
         { fullName: fullName },
       ],
-      _id: { $ne: id },
+      _id: { $ne: req.params.id },
     });
 
     if (existingCandidate) {
@@ -163,16 +171,15 @@ router.patch(
           .status(400)
           .json({ error: "Fullname already taken. Please choose another" });
       }
-    } else {
-      const candidate = await Candidate.findByIdAndUpdate(
-        req.params.id,
-        { ...req.body.candidate },
-        { runValidators: true, new: true }
-      );
-      await candidate.save();
-
-      res.json({ success: "Successfully updated candidate's information" });
     }
+
+    await Candidate.findByIdAndUpdate(
+      req.params.id,
+      { ...trimmedCandidateData },
+      { runValidators: true, new: true }
+    );
+
+    res.json({ success: "Successfully updated candidate's information" });
   })
 );
 

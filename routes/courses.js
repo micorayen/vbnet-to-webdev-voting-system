@@ -24,11 +24,17 @@ router.post(
   isAccountLoggedIn,
   validateCourse,
   catchAsync(async (req, res) => {
-    const course = await new Course(req.body);
-    await course.save();
+    let { course } = req.body;
+    course = course.trim();
 
-    req.flash("success", "Successfully added new academic course");
-    res.redirect("/courses");
+    const existingCourse = await Course.findOne({ course: course });
+    if (existingCourse) {
+      res.status(400).json({ error: "academic's course already exist" });
+    } else {
+      await new Course({ course: course }).save();
+
+      res.json({ success: "Successfully added new academic course" });
+    }
   })
 );
 
@@ -38,13 +44,27 @@ router.patch(
   isAccountLoggedIn,
   validateCourse,
   catchAsync(async (req, res) => {
-    const course = await Course.findByIdAndUpdate(req.params.id, req.body, {
-      runValidators: true,
-      new: true,
-    });
+    let { course } = req.body;
+    course = course.trim();
 
-    req.flash("success", "Successfully updated academic course's name ");
-    res.redirect("/courses");
+    const existingCourse = await Course.findOne({
+      course,
+      _id: { $ne: req.params.id },
+    });
+    if (existingCourse) {
+      res.status(400).json({ error: "academic's course already exist" });
+    } else {
+      await Course.findByIdAndUpdate(
+        req.params.id,
+        { course: course },
+        {
+          runValidators: true,
+          new: true,
+        }
+      );
+
+      res.json({ success: "Successfully updated academic course's name" });
+    }
   })
 );
 
@@ -55,8 +75,7 @@ router.delete(
   catchAsync(async (req, res) => {
     await Course.findByIdAndDelete(req.params.id);
 
-    req.flash("success", "Successfully removed academic course");
-    res.redirect("/courses");
+    res.json({ success: "Successfully removed academic course" });
   })
 );
 

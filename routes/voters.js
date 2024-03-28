@@ -9,6 +9,8 @@ const { isLoggedIn, isAccountLoggedIn } = require("../middleware");
 const { Course } = require("../models/additionals");
 const Voter = require("../models/voters");
 
+const { trimVoterData } = require("../services/voterService");
+
 // index Voters
 router.get(
   "/",
@@ -39,7 +41,10 @@ router.post(
   isAccountLoggedIn,
   validateVoter,
   catchAsync(async (req, res) => {
-    const { username, fullName, course, yearLevel, password } = req.body.voter;
+    const voterData = req.body.voter;
+    const trimmedVoterData = trimVoterData(voterData);
+    const { username, fullName, course, yearLevel, password } =
+      trimmedVoterData;
 
     const existingVoter = await Voter.findOne({
       $or: [{ username: username }, { fullName: fullName }],
@@ -47,20 +52,20 @@ router.post(
 
     if (existingVoter) {
       if (existingVoter.username === username) {
-        res
+        return res
           .status(400)
           .json({ error: "ID Number already taken. Please choose another" });
       } else if (existingVoter.fullName === fullName) {
-        res
+        return res
           .status(400)
           .json({ error: "Fullname already taken. Please choose another" });
       }
-    } else {
-      const voter = new Voter({ username, fullName, course, yearLevel });
-      await Voter.register(voter, password);
-
-      res.json({ success: "Successfully added new voter" });
     }
+
+    const voter = new Voter({ username, fullName, course, yearLevel });
+    await Voter.register(voter, password);
+
+    res.json({ success: "Successfully added new voter" });
   })
 );
 
@@ -71,34 +76,34 @@ router.patch(
   isAccountLoggedIn,
   validateVoter,
   catchAsync(async (req, res) => {
-    const { username, fullName } = req.body.voter;
-    const { id } = req.params;
+    const voterData = req.body.voter;
+    const trimmedVoterData = trimVoterData(voterData);
+    const { username, fullName } = trimmedVoterData;
 
     const existingUser = await Voter.findOne({
       $or: [{ username }, { fullName }],
-      _id: { $ne: id },
+      _id: { $ne: req.params.id },
     });
 
     if (existingUser) {
       if (existingUser.username === username) {
-        res
+        return res
           .status(400)
           .json({ error: "ID Number already taken. Please choose another" });
       } else if (existingUser.fullName === fullName) {
-        res
+        return res
           .status(400)
           .json({ error: "Fullname already taken. Please choose another" });
       }
-    } else {
-      const voter = await Voter.findByIdAndUpdate(
-        id,
-        { ...req.body.voter },
-        { runValidators: true, new: true }
-      );
-      await voter.save();
-
-      res.json({ success: "Successfully updated voter's information" });
     }
+
+    await Voter.findByIdAndUpdate(
+      req.params.id,
+      { ...trimmedVoterData },
+      { runValidators: true, new: true }
+    );
+
+    res.json({ success: "Successfully updated voter's information" });
   })
 );
 

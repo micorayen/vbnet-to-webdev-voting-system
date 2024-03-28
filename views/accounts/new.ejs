@@ -3,17 +3,11 @@
 <div class="row">
   <h1 class="text-center mb-4">Create your account</h1>
   <div class="col-md-6 offset-md-3 mb-5">
-    <form action="/accounts" method="POST" novalidate class="validated-form">
+    <form method="POST" novalidate class="validated-form">
       <div class="mb-3">
-        <label class="form-label" for="yearLevel" for="roles"
-          >Account type:
+        <label class="form-label" for="yearLevel" for="roles">Account type:
         </label>
-        <select
-          class="form-select"
-          id="roles"
-          name="account[role]"
-          aria-label="Default select example"
-        >
+        <select class="form-select" id="roles" name="account[role]" aria-label="Default select example">
           <!-- <option selected>Choose account type</option> -->
 
           <% for(let role of roles) { %>
@@ -25,41 +19,20 @@
 
       <div class="mb-3">
         <label class="form-label" for="fullName">Full name: </label>
-        <input
-          class="form-control"
-          type="text"
-          name="account[fullName]"
-          id="fullName"
-          placeholder="eg. John Doe"
-          required
-        />
+        <input class="form-control" type="text" name="account[fullName]" id="fullName" placeholder="eg. John Doe" required />
         <div class="invalid-feedback">Please provide your full name</div>
       </div>
 
       <div class="mb-3">
         <label class="form-label" for="username">Username: </label>
-        <input
-          class="form-control"
-          type="text"
-          name="account[username]"
-          id="username"
-          placeholder="Create a username"
-          required
-        />
+        <input class="form-control" type="text" name="account[username]" id="username" placeholder="Create a username" required />
         <div class="invalid-feedback">Please provide your username</div>
       </div>
 
       <!-- PASSWORD : -->
       <div class="mb-3">
         <label class="form-label" for="password">Password: </label>
-        <input
-          class="form-control"
-          type="password"
-          name="account[password]"
-          id="password"
-          placeholder="Create a password"
-          required
-        />
+        <input class="form-control" type="password" name="account[password]" id="password" placeholder="Create a password" required />
         <div class="invalid-feedback">Please provide a valid password</div>
       </div>
       <!-- <div class="mb-3">
@@ -76,7 +49,7 @@
       </div> -->
 
       <div class="mb-3 d-grid">
-        <button class="btn btn-dark">Create Account</button>
+        <button type="submit" class="btn btn-dark">Create Account</button>
       </div>
     </form>
     <hr />
@@ -85,3 +58,40 @@
     </div>
   </div>
 </div>
+
+<%- include('../partials/message_modal') %>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script>
+  $(document).ready(function() {
+
+    $(".validated-form").on("submit", function(event) {
+      event.preventDefault();
+
+      const formData = $(this).serialize();
+
+      $.ajax({
+        type: "POST",
+        url: "/accounts",
+        data: formData,
+        success: function(response) {
+          $("#successMessagePlaceholder").text(response.success);
+          $('#success-modal').modal('show');
+
+          $('#success-modal').on('hidden.bs.modal', function(e) {
+            window.location.href = "/accounts";
+          });
+
+        },
+        error: function(xhr) {
+          const errorMessage = xhr.responseJSON.error;
+
+          $("#errorMessagePlaceholder").text(errorMessage);
+          $('#error-modal').modal('show');
+        }
+      });
+    });
+
+  });
+</script>

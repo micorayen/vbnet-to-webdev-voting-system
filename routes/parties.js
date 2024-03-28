@@ -26,11 +26,17 @@ router.post(
   isAccountLoggedIn,
   validateParty,
   catchAsync(async (req, res) => {
-    const party = new Party(req.body);
-    await party.save();
+    let { party } = req.body;
+    party = party.trim();
 
-    req.flash("success", "Successfully added new partylist");
-    res.redirect("/parties");
+    const existingParty = await Party.findOne({ party: party });
+    if (existingParty) {
+      res.status(400).json({ error: "party's name already taken" });
+    } else {
+      await new Party({ party: party }).save();
+
+      res.json({ success: "Successfully added new partylist" });
+    }
   })
 );
 
@@ -40,19 +46,28 @@ router.patch(
   isAccountLoggedIn,
   validateParty,
   catchAsync(async (req, res) => {
-    const { id } = req.params;
-    await Party.findByIdAndUpdate(
-      // const party = Party.findByIdAndUpdate(
-      id,
-      { ...req.body },
-      {
-        runValidators: true,
-        new: true,
-      }
-    );
+    let { party } = req.body;
+    party = party.trim();
 
-    req.flash("success", "Successfully updated partylist's name ");
-    res.redirect("/parties");
+    const existingParty = await Party.findOne({
+      party,
+      _id: { $ne: req.params.id },
+    });
+
+    if (existingParty) {
+      res.status(400).json({ error: "party's name already taken" });
+    } else {
+      await Party.findByIdAndUpdate(
+        req.params.id,
+        { party: party },
+        {
+          runValidators: true,
+          new: true,
+        }
+      );
+
+      res.json({ success: "Successfully updated partylist's name" });
+    }
   })
 );
 
@@ -62,11 +77,9 @@ router.delete(
   isLoggedIn,
   isAccountLoggedIn,
   catchAsync(async (req, res) => {
-    const { id } = req.params;
-    await Party.findByIdAndDelete(id);
+    await Party.findByIdAndDelete(req.params.id);
 
-    req.flash("success", "Successfully removed partylist");
-    res.redirect("/parties");
+    res.json({ success: "Successfully removed partylist" });
   })
 );
 
