@@ -1,16 +1,26 @@
-feat: Implemented features to improve user experience, created the voting confirmation modal, added a vote count update route, and implemented middleware to check vote status.
 
-**VOTE FORM**:
+done: Implement messages, routes, and modals
 
-1. **Confirm Votes**:
-    - Implemented logic validation to ensures selection of candidates for all positions before submission. 
-    - Displays an alert message for unselected positions to ensure all positions are filled before submission.
-    - Populates input fields with chosen candidate names to provide users with a summary of their selections.
-    - Create and prompts a confirmation modal for users to review their selections before final submission, enhancing user confidence in their choices.
+**MESSAGE**:
+    - created a modal with success and error, for displaying feedback to the user.   
+
+**VOTER**:
+1. **New Route**:
+    - This route ensures that the provided username and full name are unique among existing voters. 
+    - If a duplicate is found, it returns a message to users to choose another username or full name. 
+    - Otherwise, it proceeds to the registration process and returns a success message.
 2. **Update Route**:
-    - Update the database with the incremented vote count for each selected candidate. to record the votes cast by voter during the voting process
-    - Update the vote status for the current user to "Voted", to prevents multiple votes from the same user.
-    - Upon successful vote submission, the user is redirected to the logout page.
-3. **MIDDLEWARE**:
-    - Implemented middleware to check the vote status of the current user, if the user has already voted, 
-    - it flashes an error message "youre already voted" and redirects to the login page. Otherwise, it allows the request to proceed.
+    - This route ensures that the provided username and full name are unique among other voters. 
+    - If a duplicate is found, it returns a message to users to choose another username or full name. 
+    - Otherwise, it updates the voter's information and returns a success message.
+
+**CANDIDATE**:
+1. **New Route**:
+    - This route ensures that the provided username, full name and (party and position) are unique among existing candidates. 
+    - If a duplicate is found, it returns a message to users to choose another username or full name or (position in the party are taken). 
+    - Otherwise, it proceeds to the registration process and returns a success message.
+2. **Update Route**:
+    - This route ensures that the provided username, full name and (party and position) are unique among existing candidates. 
+    - If a duplicate is found, it returns a message to users to choose another username or full name or (position in the party are taken). 
+    - Otherwise, it updates the candidate's information and returns a success message.
+

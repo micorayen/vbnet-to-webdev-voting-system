@@ -3,19 +3,11 @@
 <div class="row">
   <!-- <h1 class="text-center mb-4">Create your account</h1> -->
   <div class="col-md-6 offset-md-3 mb-5">
-    <form action="/candidates" method="POST" novalidate class="validated-form">
+    <form method="POST" novalidate class="validated-form">
       <div class="mb-3">
-        <label class="form-label" for="candidateIdNumber"
-          >Candidate Id Number:
+        <label class="form-label" for="candidateIdNumber">Candidate Id Number:
         </label>
-        <input
-          class="form-control"
-          type="text"
-          name="candidate[candidateIdNumber]"
-          id="candidateIdNumber"
-          placeholder="Provide your student number"
-          required
-        />
+        <input class="form-control" type="text" name="candidate[candidateIdNumber]" id="candidateIdNumber" placeholder="Provide your student number" required />
         <div class="invalid-feedback">
           Please provide your candidate id number
         </div>
@@ -23,12 +15,7 @@
 
       <div class="mb-3">
         <label class="form-label" for="party">Party: </label>
-        <select
-          class="form-select"
-          aria-label="Default select example"
-          name="candidate[party]"
-          id="party"
-        >
+        <select class="form-select" aria-label="Default select example" name="candidate[party]" id="party">
           <% for(let party of parties) { %>
           <option value="<%= party.party %>"><%= party.party %></option>
           <% } %>
@@ -37,12 +24,7 @@
 
       <div class="mb-3">
         <label class="form-label" for="position">Position: </label>
-        <select
-          class="form-select"
-          aria-label="Default select example"
-          name="candidate[position]"
-          id="position"
-        >
+        <select class="form-select" aria-label="Default select example" name="candidate[position]" id="position">
           <% for(let position of candidatePositions) { %>
           <option value="<%= position %>"><%= position %></option>
           <% } %>
@@ -51,26 +33,14 @@
 
       <div class="mb-3">
         <label class="form-label" for="fullName">Full name: </label>
-        <input
-          class="form-control"
-          type="text"
-          name="candidate[fullName]"
-          id="fullName"
-          placeholder="eg. John Doe"
-          required
-        />
+        <input class="form-control" type="text" name="candidate[fullName]" id="fullName" placeholder="eg. John Doe" required />
         <div class="invalid-feedback">Please provide your full name</div>
       </div>
 
       <div class="row">
         <div class="mb-3 col">
           <label class="form-label" for="course">Course: </label>
-          <select
-            class="form-select"
-            aria-label="Default select example"
-            name="candidate[course]"
-            id="course"
-          >
+          <select class="form-select" aria-label="Default select example" name="candidate[course]" id="course">
             <% for(let course of courses) { %>
             <option value="<%= course.course %>"><%= course.course %></option>
             <% } %>
@@ -79,12 +49,7 @@
 
         <div class="mb-3 col">
           <label class="form-label" for="yearLevel">Year Level: </label>
-          <select
-            class="form-select"
-            aria-label="Default select example"
-            name="candidate[yearLevel]"
-            id="yearLevel"
-          >
+          <select class="form-select" aria-label="Default select example" name="candidate[yearLevel]" id="yearLevel">
             <option value="1st Year">1st Year</option>
             <option value="2nd Year">2nd Year</option>
             <option value="3rd Year">3rd Year</option>
@@ -96,14 +61,51 @@
       </div>
 
       <div class="mb-3 d-grid">
-        <button class="btn btn-dark">Add Candidate</button>
+        <button class="btn btn-dark" type="submit">Add Candidate</button>
       </div>
     </form>
     <hr />
     <div class="row">
-      <a class="mb-3 text-center" href="/candidates"
-        >Back to existing candidates</a
-      >
+      <a class="mb-3 text-center" href="/candidates">Back to existing candidates</a>
     </div>
   </div>
 </div>
+
+<%- include('../partials/message_modal') %>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script>
+  $(document).ready(function() {
+    $(".validated-form").on("submit", function(event) {
+      event.preventDefault();
+
+      const formData = $(this).serialize();
+
+      $.ajax({
+        type: "POST",
+        url: "/candidates",
+        data: formData,
+        success: function(response) {
+          $("#successMessagePlaceholder").text(response.success);
+          $('#success-modal').modal('show');
+          // $('form')[0].reset();
+
+          setTimeout(function() {
+            window.location.reload();
+          }, 1000);
+
+
+          // document.getElementById('yourFormId').reset();
+        },
+        error: function(xhr) {
+          const errorMessage = xhr.responseJSON.error;
+
+          $("#errorMessagePlaceholder").text(errorMessage);
+          $('#error-modal').modal('show');
+        }
+      });
+    });
+
+  });
+</script>

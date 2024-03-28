@@ -34,7 +34,6 @@
     [DONE 8th]- makes voter's unable to login anymore, after casting votes
     [DONE 8th]- flash message, for voter's thats unable to login anymore, after casting votes
 
-
 5. Vote Standing
     [DONE 7th]- extract leading candidates by votes per position
     [DONE 7th]- make modal to display the "leading candidates" per position by votes 
@@ -74,6 +73,7 @@ Additionals > Update Title
     [DONE 7th]- extract current application's title, and display on 1st textbox
     [DONE 7th]- makes an update route, for updating title
     [DONE 7th]- successfully refresh page, to display the new updated app's title
+
 
 10. READ ON BETTER PROJECT STRUCTURE (perhap MVC)
     - How to structure the project (some basic structuring).

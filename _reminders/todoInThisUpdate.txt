@@ -1,11 +1,15 @@
 //note: if you make commit message, you must always include the reason why its added:
 
-Vote Form
-D    - check each comboboxes if its value="index", before confirm votes.
-D    - created modal for confirm votes,to double check selected candidates per position
-D    - makes confirm votes works
-D    - successfully casts votes per positions
-D    - makes adding +1 votes per selected candidates per positions
-D    - makes voter's status from "Not Voted" to "Voted"
-D    - makes voter's unable to login anymore, after casting votes
-D    - flash message, for voter's thats unable to login anymore, after casting votes
+
+6. Manage Voters
+    - turned "username(passportJS)" as "IdNumber"
+D    - New route - put additional validation for fullName and username (make sure it wont duplicate)
+D    - Update route - put additional validation for fullName and username (make sure it wont duplicate)
+7. Admin/Facilitator (Accounts)
+    - New route - put additional validation for fullName and username (make sure it wont duplicate)
+D   - Update route - put additional validation for fullName and username (make sure it wont duplicate)
+8. Candidates
+D    - New route - put additional validation for candidate IdNumber and fullName (make sure it wont duplicate)
+D    - Update route - put additional validation for candidate IdNumber and fullName (make sure it wont duplicate)
+D    - Validate if certain position already taken, at the same partylist
+

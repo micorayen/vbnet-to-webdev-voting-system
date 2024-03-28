@@ -5,8 +5,11 @@ const {
   courseSchema,
   candidateSchema,
 } = require("./schemas");
+
+const Voter = require("./models/voters");
 const ExpressError = require("./utils/ExpressError");
 
+// VALIDATION MIDDLEWARE
 module.exports.validateAccount = (req, res, next) => {
   const { error } = accountSchema.validate(req.body);
   if (error) {
@@ -57,7 +60,7 @@ module.exports.validateCandidate = (req, res, next) => {
   }
 };
 
-// LOGIN
+// LOGIN AND USER MIDDLEWARE
 module.exports.isLoggedIn = (req, res, next) => {
   // console.log("user is:", req.user.fullName);
 
@@ -105,5 +108,43 @@ module.exports.storeReturnTo = (req, res, next) => {
   if (req.session.returnTo) {
     res.locals.returnTo = req.session.returnTo;
   }
+  next();
+};
+
+// VOTER's MIDDLEWARE
+module.exports.checkDuplicateForNewVoter = async (req, res, next) => {
+  const { username, fullName } = req.body.voter;
+  // console.log(username, fullName);
+  const existingUsername = await Voter.findOne({ username });
+  if (existingUsername) {
+    req.flash("error", "Username already exists");
+    // return res.redirect("/signup");
+  }
+
+  const existingFullName = await Voter.findOne({ fullName });
+  if (existingFullName) {
+    req.flash("error", "Full name already exists");
+    // return res.redirect("/signup");
+  }
+
+  next();
+};
+
+module.exports.checkDuplicateForUpdateVoter = async (req, res, next) => {
+  const { username, fullName } = req.body.voter;
+  const { id } = req.params;
+
+  const existingUsername = await Voter.findOne({ username, _id: { $ne: id } });
+  if (existingUsername) {
+    req.flash("error", "Username already exists");
+    // return res.redirect("/signup");
+  }
+
+  const existingFullName = await Voter.findOne({ fullName, _id: { $ne: id } });
+  if (existingFullName) {
+    req.flash("error", "Full name already exists");
+    // return res.redirect("/signup");
+  }
+
   next();
 };

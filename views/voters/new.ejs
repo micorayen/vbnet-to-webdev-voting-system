@@ -3,18 +3,11 @@
 <div class="row">
   <h1 class="text-center mb-4">Create voter account</h1>
   <div class="col-md-6 offset-md-3 mb-5">
-    <form action="/voters" method="POST" novalidate class="validated-form">
+    <form method="POST" novalidate class="validated-form">
+
       <div class="mb-3">
         <label class="form-label" for="username">Student ID Number: </label>
-        <input
-          class="form-control"
-          type="text"
-          name="voter[username]"
-          id="username"
-          placeholder="eg. 18-556487"
-          required
-          autofocus
-        />
+        <input class="form-control" type="text" name="voter[username]" id="username" placeholder="eg. 18-556487" required autofocus />
         <div class="invalid-feedback">
           Please enter a valid student id-number
         </div>
@@ -22,14 +15,7 @@
 
       <div class="mb-3">
         <label class="form-label" for="fullName">Full name: </label>
-        <input
-          class="form-control"
-          type="text"
-          name="voter[fullName]"
-          id="fullName"
-          placeholder="eg. John Doe"
-          required
-        />
+        <input class="form-control" type="text" name="voter[fullName]" id="fullName" placeholder="eg. John Doe" required />
         <div class="invalid-feedback">Please provide your full name</div>
       </div>
 
@@ -37,12 +23,7 @@
       <div class="row">
         <div class="mb-3 col">
           <label class="form-label" for="course">Course: </label>
-          <select
-            class="form-select"
-            aria-label="Default select example"
-            name="voter[course]"
-            id="course"
-          >
+          <select class="form-select" aria-label="Default select example" name="voter[course]" id="course">
             <% for(let course of courses) { %>
             <option value="<%= course.course %>"><%= course.course %></option>
             <% } %>
@@ -50,12 +31,7 @@
         </div>
         <div class="mb-3 col">
           <label class="form-label" for="yearLevel">Year Level: </label>
-          <select
-            class="form-select"
-            aria-label="Default select example"
-            name="voter[yearLevel]"
-            id="yearLevel"
-          >
+          <select class="form-select" aria-label="Default select example" name="voter[yearLevel]" id="yearLevel">
             <option value="1st Year">1st Year</option>
             <option value="2nd Year">2nd Year</option>
             <option value="3rd Year">3rd Year</option>
@@ -69,14 +45,7 @@
       <!-- PASSWORD : -->
       <div class="mb-3">
         <label class="form-label" for="password">Password: </label>
-        <input
-          class="form-control"
-          type="password"
-          name="voter[password]"
-          id="password"
-          placeholder="Create a password"
-          required
-        />
+        <input class="form-control" type="password" name="voter[password]" id="password" placeholder="Create a password" required />
         <div class="invalid-feedback">Please provide a valid password</div>
       </div>
       <!-- <div class="mb-3">
@@ -93,16 +62,55 @@
       </div> -->
       <div class="row">
         <div class="mb-3 d-grid col">
-          <button class="btn btn-dark">Create Voter</button>
+          <button class="btn btn-dark" id="submitBtn" type="submit">Create Voter</button>
         </div>
-        <!-- <div class="mb-3 d-grid col">
-          <button class="btn btn-dark" disabled>Clear</button>
-        </div> -->
+
       </div>
     </form>
+
     <hr />
     <div class="row">
       <a class="mb-3 text-center" href="/voters">Back to All Voters</a>
     </div>
   </div>
 </div>
+
+<%- include('../partials/message_modal') %>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script>
+  $(document).ready(function() {
+
+    $(".validated-form").on("submit", function(event) {
+      event.preventDefault();
+
+      const formData = $(this).serialize();
+
+      $.ajax({
+        type: "POST",
+        url: "/voters",
+        data: formData,
+        success: function(response) {
+          $("#successMessagePlaceholder").text(response.success);
+          $('#success-modal').modal('show');
+          // setTimeout(function() {
+          //   window.location.reload();
+          // }, 1000);
+
+          $('form')[0].reset();
+
+          // document.getElementById('yourFormId').reset();
+        },
+        error: function(xhr) {
+          const errorMessage = xhr.responseJSON.error;
+
+          $("#errorMessagePlaceholder").text(errorMessage);
+          $('#error-modal').modal('show');
+          $("#username").focus();
+        }
+      });
+    });
+
+  });
+</script>

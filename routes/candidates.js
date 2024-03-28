@@ -74,11 +74,39 @@ router.post(
   isAccountLoggedIn,
   validateCandidate,
   catchAsync(async (req, res) => {
-    const candidate = new Candidate(req.body.candidate);
-    await candidate.save();
+    const { candidateIdNumber, party, position, fullName } = req.body.candidate;
 
-    req.flash("success", "Successfully added new candidate");
-    res.redirect("/candidates");
+    const existingCandidate = await Candidate.findOne({
+      $or: [
+        { candidateIdNumber: candidateIdNumber },
+        { $and: [{ party: party }, { position: position }] },
+        { fullName: fullName },
+      ],
+    });
+
+    if (existingCandidate) {
+      if (existingCandidate.candidateIdNumber === candidateIdNumber) {
+        res
+          .status(400)
+          .json({ error: "ID Number already taken. Please choose another" });
+      } else if (
+        existingCandidate.party === party &&
+        existingCandidate.position === position
+      ) {
+        res.status(400).json({
+          error: `${existingCandidate.position} position for party: ${existingCandidate.party} have already been taken`,
+        });
+      } else if (existingCandidate.fullName === fullName) {
+        res
+          .status(400)
+          .json({ error: "Fullname already taken. Please choose another" });
+      }
+    } else {
+      const candidate = new Candidate(req.body.candidate);
+      await candidate.save();
+
+      res.json({ success: "Successfully added new candidate" });
+    }
   })
 );
 
@@ -106,15 +134,45 @@ router.patch(
   isAccountLoggedIn,
   validateCandidate,
   catchAsync(async (req, res) => {
-    const candidate = await Candidate.findByIdAndUpdate(
-      req.params.id,
-      { ...req.body.candidate },
-      { runValidators: true, new: true }
-    );
-    await candidate.save();
+    const { candidateIdNumber, party, position, fullName } = req.body.candidate;
+    const { id } = req.params;
 
-    req.flash("success", "Successfully updated candidate's information");
-    res.redirect("/candidates");
+    const existingCandidate = await Candidate.findOne({
+      $or: [
+        { candidateIdNumber: candidateIdNumber },
+        { $and: [{ party: party }, { position: position }] },
+        { fullName: fullName },
+      ],
+      _id: { $ne: id },
+    });
+
+    if (existingCandidate) {
+      if (existingCandidate.candidateIdNumber === candidateIdNumber) {
+        res
+          .status(400)
+          .json({ error: "ID Number already taken. Please choose another" });
+      } else if (
+        existingCandidate.party === party &&
+        existingCandidate.position === position
+      ) {
+        res.status(400).json({
+          error: `${existingCandidate.position} position for party: ${existingCandidate.party} have already been taken`,
+        });
+      } else if (existingCandidate.fullName === fullName) {
+        res
+          .status(400)
+          .json({ error: "Fullname already taken. Please choose another" });
+      }
+    } else {
+      const candidate = await Candidate.findByIdAndUpdate(
+        req.params.id,
+        { ...req.body.candidate },
+        { runValidators: true, new: true }
+      );
+      await candidate.save();
+
+      res.json({ success: "Successfully updated candidate's information" });
+    }
   })
 );
 

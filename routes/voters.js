@@ -40,11 +40,27 @@ router.post(
   validateVoter,
   catchAsync(async (req, res) => {
     const { username, fullName, course, yearLevel, password } = req.body.voter;
-    const voter = new Voter({ username, fullName, course, yearLevel });
-    await Voter.register(voter, password);
 
-    req.flash("success", "Successfully added new voter");
-    res.redirect("/voters");
+    const existingVoter = await Voter.findOne({
+      $or: [{ username: username }, { fullName: fullName }],
+    });
+
+    if (existingVoter) {
+      if (existingVoter.username === username) {
+        res
+          .status(400)
+          .json({ error: "ID Number already taken. Please choose another" });
+      } else if (existingVoter.fullName === fullName) {
+        res
+          .status(400)
+          .json({ error: "Fullname already taken. Please choose another" });
+      }
+    } else {
+      const voter = new Voter({ username, fullName, course, yearLevel });
+      await Voter.register(voter, password);
+
+      res.json({ success: "Successfully added new voter" });
+    }
   })
 );
 
@@ -55,17 +71,34 @@ router.patch(
   isAccountLoggedIn,
   validateVoter,
   catchAsync(async (req, res) => {
+    const { username, fullName } = req.body.voter;
     const { id } = req.params;
 
-    const voter = await Voter.findByIdAndUpdate(
-      id,
-      { ...req.body.voter },
-      { runValidators: true, new: true }
-    );
-    await voter.save();
+    const existingUser = await Voter.findOne({
+      $or: [{ username }, { fullName }],
+      _id: { $ne: id },
+    });
 
-    req.flash("success", "Successfully updated voter's information");
-    res.redirect("/voters");
+    if (existingUser) {
+      if (existingUser.username === username) {
+        res
+          .status(400)
+          .json({ error: "ID Number already taken. Please choose another" });
+      } else if (existingUser.fullName === fullName) {
+        res
+          .status(400)
+          .json({ error: "Fullname already taken. Please choose another" });
+      }
+    } else {
+      const voter = await Voter.findByIdAndUpdate(
+        id,
+        { ...req.body.voter },
+        { runValidators: true, new: true }
+      );
+      await voter.save();
+
+      res.json({ success: "Successfully updated voter's information" });
+    }
   })
 );
 

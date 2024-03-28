@@ -3,24 +3,10 @@
 <div class="row">
   <h1 class="text-center mb-4">Update voter account</h1>
   <div class="col-md-6 offset-md-3 mb-5">
-    <form
-      action="/voters/<%= voter._id %>?_method=PATCH"
-      method="POST"
-      novalidate
-      class="validated-form"
-    >
+    <form method="POST" novalidate class="validated-form">
       <div class="mb-3">
         <label class="form-label" for="username">Student ID Number: </label>
-        <input
-          class="form-control"
-          type="text"
-          name="voter[username]"
-          id="username"
-          placeholder="eg. 18-556487"
-          value="<%= voter.username %>"
-          required
-          autofocus
-        />
+        <input class="form-control" type="text" name="voter[username]" id="username" placeholder="eg. 18-556487" value="<%= voter.username %>" required autofocus />
         <div class="invalid-feedback">
           Please enter a valid student id-number
         </div>
@@ -28,26 +14,14 @@
 
       <div class="mb-3">
         <label class="form-label" for="fullName">Full name: </label>
-        <input
-          class="form-control"
-          type="text"
-          name="voter[fullName]"
-          id="fullName"
-          placeholder="eg. John Doe"
-          value="<%= voter.fullName %>"
-          required
-        />      <div class="invalid-feedback">Please provide your full name</div>
+        <input class="form-control" type="text" name="voter[fullName]" id="fullName" placeholder="eg. John Doe" value="<%= voter.fullName %>" required />
+        <div class="invalid-feedback">Please provide your full name</div>
       </div>
 
       <div class="mb-3">
         <label class="form-label" for="course">Course: </label>
-        <select
-          class="form-select"
-          aria-label="Default select example"
-          name="voter[course]"
-          id="course"
-        >
-        <% for(let course of courses) { %>
+        <select class="form-select" aria-label="Default select example" name="voter[course]" id="course">
+          <% for(let course of courses) { %>
           <option value="<%= course.course %>" <%= voter.course  === course.course ? 'selected':''%>><%= course.course %></option>
           <% } %>
         </select>
@@ -56,12 +30,7 @@
 
       <div class="mb-3">
         <label class="form-label" for="yearLevel">Year Level: </label>
-        <select
-          class="form-select"
-          aria-label="Default select example"
-          name="voter[yearLevel]"
-          id="yearLevel"
-        >
+        <select class="form-select" aria-label="Default select example" name="voter[yearLevel]" id="yearLevel">
           <option value="1st Year" <%= voter.yearLevel  === '1st Year' ? 'selected':''%>>1st Year</option>
           <option value="2nd Year" <%= voter.yearLevel  === '2nd Year' ? 'selected':''%>>2nd Year</option>
           <option value="3rd Year" <%= voter.yearLevel  === '3rd Year' ? 'selected':''%>>3rd Year</option>
@@ -72,7 +41,7 @@
       </div>
 
       <div class="mb-3 d-grid">
-        <button class="btn btn-dark">Update Voter</button>
+        <button class="btn btn-dark" type="submit">Update Voter</button>
       </div>
     </form>
     <hr />
@@ -81,3 +50,41 @@
     </div>
   </div>
 </div>
+
+<%- include('../partials/message_modal') %>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script>
+  $(document).ready(function() {
+
+    $(".validated-form").on("submit", function(event) {
+      event.preventDefault();
+
+      const formData = $(this).serialize();
+
+      $.ajax({
+        type: "POST",
+        url: `/voters/<%= voter._id %>?_method=PATCH`,
+        data: formData,
+        success: function(response) {
+          $("#successMessagePlaceholder").text(response.success);
+          $('#success-modal').modal('show');
+
+          setTimeout(function() {
+            window.location.href = "/voters";
+          }, 1000);
+
+        },
+        error: function(xhr) {
+          const errorMessage = xhr.responseJSON.error;
+
+          $("#errorMessagePlaceholder").text(errorMessage);
+          $('#error-modal').modal('show');
+          // $("#username").focus();
+        }
+      });
+    });
+
+  });
+</script>

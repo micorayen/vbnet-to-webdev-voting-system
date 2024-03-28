@@ -3,25 +3,11 @@
 <div class="row">
   <!-- <h1 class="text-center mb-4">Create your account</h1> -->
   <div class="col-md-6 offset-md-3 mb-5">
-    <form
-      action="/candidates/<%= candidate._id %>?_method=PATCH"
-      method="POST"
-      novalidate
-      class="validated-form"
-    >
+    <form method="POST" novalidate class="validated-form">
       <div class="mb-3">
-        <label class="form-label" for="candidateIdNumber"
-          >Candidate Id Number:
+        <label class="form-label" for="candidateIdNumber">Candidate Id Number:
         </label>
-        <input
-          class="form-control"
-          type="text"
-          name="candidate[candidateIdNumber]"
-          id="candidateIdNumber"
-          placeholder="Provide your student number"
-          value="<%= candidate.candidateIdNumber %>"
-          required
-        />
+        <input class="form-control" type="text" name="candidate[candidateIdNumber]" id="candidateIdNumber" placeholder="Provide your student number" value="<%= candidate.candidateIdNumber %>" required />
         <div class="invalid-feedback">
           Please provide your candidate id number
         </div>
@@ -29,26 +15,16 @@
 
       <div class="mb-3">
         <label class="form-label" for="party">Party: </label>
-        <select
-          class="form-select"
-          aria-label="Default select example"
-          name="candidate[party]"
-          id="party"
-        >
+        <select class="form-select" aria-label="Default select example" name="candidate[party]" id="party">
           <% for(let party of parties) { %>
-            <option value="<%= party.party %>" <%= candidate.party  === party.party ? 'selected':''%>><%= party.party %></option>
-            <% } %>
+          <option value="<%= party.party %>" <%= candidate.party  === party.party ? 'selected':''%>><%= party.party %></option>
+          <% } %>
         </select>
       </div>
 
       <div class="mb-3">
         <label class="form-label" for="position">Position: </label>
-        <select
-          class="form-select"
-          aria-label="Default select example"
-          name="candidate[position]"
-          id="position"
-        >
+        <select class="form-select" aria-label="Default select example" name="candidate[position]" id="position">
           <% for(let position of candidatePositions) { %>
           <option value="<%= position %>" <%= candidate.position  === position ? 'selected':''%>><%= position %></option>
           <% } %>
@@ -57,62 +33,79 @@
 
       <div class="mb-3">
         <label class="form-label" for="fullName">Full name: </label>
-        <input
-          class="form-control"
-          type="text"
-          name="candidate[fullName]"
-          id="fullName"
-          placeholder="eg. John Doe"
-          value="<%= candidate.fullName %>"
-          required
-        />
+        <input class="form-control" type="text" name="candidate[fullName]" id="fullName" placeholder="eg. John Doe" value="<%= candidate.fullName %>" required />
         <div class="invalid-feedback">Please provide your full name</div>
       </div>
 
       <div class="row">
         <div class="mb-3 col">
           <label class="form-label" for="course">Course: </label>
-          <select
-            class="form-select"
-            aria-label="Default select example"
-            name="candidate[course]"
-            id="course"
-          >
-          <% for(let course of courses) { %>
+          <select class="form-select" aria-label="Default select example" name="candidate[course]" id="course">
+            <% for(let course of courses) { %>
             <option value="<%= course.course %>" <%= candidate.course  === course.course ? 'selected':''%>><%= course.course %></option>
             <% } %>
           </select>
           <div class="invalid-feedback">Please select your course</div>
-    
+
         </div>
 
         <div class="mb-3 col">
           <label class="form-label" for="yearLevel">Year Level: </label>
-          <select
-            class="form-select"
-            aria-label="Default select example"
-            name="candidate[yearLevel]"
-            id="yearLevel"
-          >
-          <option value="1st Year" <%= candidate.yearLevel  === '1st Year' ? 'selected':''%>>1st Year</option>
-          <option value="2nd Year" <%= candidate.yearLevel  === '2nd Year' ? 'selected':''%>>2nd Year</option>
-          <option value="3rd Year" <%= candidate.yearLevel  === '3rd Year' ? 'selected':''%>>3rd Year</option>
-          <option value="4th Year" <%= candidate.yearLevel  === '4th Year' ? 'selected':''%>>4th Year</option>
-          <option value="5th Year" <%= candidate.yearLevel  === '5th Year' ? 'selected':''%>>5th Year</option>
+          <select class="form-select" aria-label="Default select example" name="candidate[yearLevel]" id="yearLevel">
+            <option value="1st Year" <%= candidate.yearLevel  === '1st Year' ? 'selected':''%>>1st Year</option>
+            <option value="2nd Year" <%= candidate.yearLevel  === '2nd Year' ? 'selected':''%>>2nd Year</option>
+            <option value="3rd Year" <%= candidate.yearLevel  === '3rd Year' ? 'selected':''%>>3rd Year</option>
+            <option value="4th Year" <%= candidate.yearLevel  === '4th Year' ? 'selected':''%>>4th Year</option>
+            <option value="5th Year" <%= candidate.yearLevel  === '5th Year' ? 'selected':''%>>5th Year</option>
           </select>
           <div class="invalid-feedback">Choose your year level</div>
         </div>
       </div>
 
       <div class="mb-3 d-grid">
-        <button class="btn btn-dark">Update Candidate</button>
+        <button type="submit" class="btn btn-dark">Update Candidate</button>
       </div>
     </form>
     <hr />
     <div class="row">
-      <a class="mb-3 text-center" href="/candidates/<%= candidate._id %>"
-        >Back to Selected Candidate</a
-      >
+      <a class="mb-3 text-center" href="/candidates/<%= candidate._id %>">Back to Selected Candidate</a>
     </div>
   </div>
 </div>
+
+<%- include('../partials/message_modal') %>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script>
+  $(document).ready(function() {
+
+    $(".validated-form").on("submit", function(event) {
+      event.preventDefault();
+
+      const formData = $(this).serialize();
+
+      $.ajax({
+        type: "POST",
+        url: `/candidates/<%= candidate._id %>?_method=PATCH`,
+        data: formData,
+        success: function(response) {
+          $("#successMessagePlaceholder").text(response.success);
+          $('#success-modal').modal('show');
+
+          setTimeout(function() {
+            window.location.href = "/candidates/<%= candidate._id %>";
+          }, 1000);
+
+        },
+        error: function(xhr) {
+          const errorMessage = xhr.responseJSON.error;
+
+          $("#errorMessagePlaceholder").text(errorMessage);
+          $('#error-modal').modal('show');
+        }
+      });
+    });
+
+  });
+</script>
