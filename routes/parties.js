@@ -31,12 +31,11 @@ router.post(
 
     const existingParty = await Party.findOne({ party: party });
     if (existingParty) {
-      res.status(400).json({ error: "party's name already taken" });
-    } else {
-      await new Party({ party: party }).save();
-
-      res.json({ success: "Successfully added new partylist" });
+      return res.status(400).json({ error: "party's name already taken" });
     }
+
+    await new Party({ party: party }).save();
+    res.json({ success: "Successfully added new partylist" });
   })
 );
 
@@ -55,19 +54,18 @@ router.patch(
     });
 
     if (existingParty) {
-      res.status(400).json({ error: "party's name already taken" });
-    } else {
-      await Party.findByIdAndUpdate(
-        req.params.id,
-        { party: party },
-        {
-          runValidators: true,
-          new: true,
-        }
-      );
-
-      res.json({ success: "Successfully updated partylist's name" });
+      return res.status(400).json({ error: "party's name already taken" });
     }
+
+    await Party.findByIdAndUpdate(
+      req.params.id,
+      { party: party },
+      {
+        runValidators: true,
+        new: true,
+      }
+    );
+    res.json({ success: "Successfully updated partylist's name" });
   })
 );
 

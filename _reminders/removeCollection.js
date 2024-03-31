@@ -8,7 +8,7 @@ db.once("open", () => {
   console.log("Database connected.");
 
   // Get reference to the collection
-  const collectionName = "users"; // Change this to the name of your collection
+  const collectionName = "voters"; // Change this to the name of your collection
   const collection = db.collection(collectionName);
 
   // Drop the collection

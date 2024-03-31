@@ -1,26 +1,12 @@
 //note: if you make commit message, you must always include the reason why its added:
 
 6. Manage Voters
-    - turned "username(passportJS)" as "IdNumber"
-D    - new and update route, use of "trim" to eliminate white-space
-8. Candidates
-D    - new and update route, use of "trim" to eliminate white-space
+D    - turned "username(passportJS)" as "IdNumber"
+D    - Uses a service function allService.js with `trimData` to trim whitespace from entities data before adding & updating, improving data integrity and consistency.
 7. Admin/Facilitator (Accounts)
-D    - display messages for add, update, and delete.
-D    - New route - put additional validation for fullName and username (make sure it wont duplicate)
-D    - Update route - put additional validation for fullName and username (make sure it wont duplicate)
-D    - new and update route, use of "trim" to eliminate white-space
+D    - Uses a service function allService.js with `trimData` to trim whitespace from entities data before adding & updating, improving data integrity and consistency.
+8. Candidates
+D    - Uses a service function allService.js with `trimData` to trim whitespace from entities data before adding & updating, improving data integrity and consistency.
 
-9. Additionals
-Additionals > Courses
-D    - display messages _ courses _ add, update, and delete (Not Working _ Need Fixing)
-D    - New route _ put additional validation for candidate academic course's name (make sure it wont duplicate)
-D    - Update route _ put additional validation for candidate academic course's name (make sure it wont duplicate)
-D    - new and update route, use of "trim" to eliminate white-space
-    - courses, bootstrap validation on add and update, doesnt get triggered work.
-Additionals > Parties
-D    - display messages _ parties _ add, update, and delete (Not Working _ Need Fixing)
-D    - New route _ put additional validation for candidate partylist (make sure it wont duplicate)
-D    - Update route _ put additional validation for candidate partylist (make sure it wont duplicate)
-D    - new and update route, use of "trim" to eliminate white-space
-    - parties, bootstrap validation on add and update, doesnt get triggered work.
+
+

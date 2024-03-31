@@ -8,7 +8,7 @@ const { isLoggedIn, isAccountLoggedIn } = require("../middleware");
 const { Party, Course } = require("../models/additionals");
 const Candidate = require("../models/candidates");
 
-const { trimCandidateData } = require("../services/candidateService");
+const { trimData } = require("../services/allService");
 
 /// CANDIDATES ROUTES:
 const {
@@ -76,12 +76,9 @@ router.post(
   isAccountLoggedIn,
   validateCandidate,
   catchAsync(async (req, res) => {
-    // =====================================
-    const candidateData = req.body.candidate;
-    const trimmedCandidateData = trimCandidateData(candidateData);
-    const { candidateIdNumber, party, position, fullName } =
-      trimmedCandidateData;
-    // =====================================
+    const data = req.body.candidate;
+    const trimmedData = trimData(data);
+    const { candidateIdNumber, party, position, fullName } = trimmedData;
 
     const existingCandidate = await Candidate.findOne({
       $or: [
@@ -110,8 +107,7 @@ router.post(
       }
     }
 
-    await new Candidate(trimmedCandidateData).save();
-
+    await new Candidate(trimmedData).save();
     res.json({ success: "Successfully added new candidate" });
   })
 );
@@ -140,10 +136,9 @@ router.patch(
   isAccountLoggedIn,
   validateCandidate,
   catchAsync(async (req, res) => {
-    const candidateData = req.body.candidate;
-    const trimmedCandidateData = trimCandidateData(candidateData);
-    const { candidateIdNumber, party, position, fullName } =
-      trimmedCandidateData;
+    const data = req.body.candidate;
+    const trimmedData = trimData(data);
+    const { candidateIdNumber, party, position, fullName } = trimmedData;
 
     const existingCandidate = await Candidate.findOne({
       $or: [
@@ -175,10 +170,9 @@ router.patch(
 
     await Candidate.findByIdAndUpdate(
       req.params.id,
-      { ...trimmedCandidateData },
+      { ...trimmedData },
       { runValidators: true, new: true }
     );
-
     res.json({ success: "Successfully updated candidate's information" });
   })
 );

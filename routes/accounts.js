@@ -10,6 +10,8 @@ const Account = require("../models/accounts");
 
 const { roles } = require("../public/javascripts/tangentSelections");
 
+const { trimData } = require("../services/allService");
+
 // Account Index Page
 router.get(
   "/",
@@ -33,7 +35,11 @@ router.post(
   isAccountLoggedIn,
   validateAccount,
   catchAsync(async (req, res) => {
-    const { role, fullName, username, password } = req.body.account;
+    // =====================================
+    const data = req.body.account;
+    const trimmedData = trimData(data);
+    const { role, fullName, username, password } = trimmedData;
+    // =====================================
 
     const existingAccount = await Account.findOne({
       $or: [{ fullName: fullName }, { username: username }],
@@ -41,20 +47,19 @@ router.post(
 
     if (existingAccount) {
       if (existingAccount.fullName === fullName) {
-        res
+        return res
           .status(400)
           .json({ error: "Fullname already taken. Please choose another" });
       } else if (existingAccount.username === username) {
-        res
+        return res
           .status(400)
           .json({ error: "Username already taken. Please choose another" });
       }
-    } else {
-      const account = new Account({ role, fullName, username });
-      await Account.register(account, password);
-
-      res.json({ success: "Successfully added new account" });
     }
+    const account = new Account({ role, fullName, username });
+    await Account.register(account, password);
+
+    res.json({ success: "Successfully added new account" });
   })
 );
 
@@ -65,12 +70,13 @@ router.patch(
   isAccountLoggedIn,
   validateAccount,
   catchAsync(async (req, res) => {
-    const { fullName, username } = req.body.account;
-    const { id } = req.params;
+    const data = req.body.account;
+    const trimmedData = trimData(data);
+    const { fullName, username } = trimmedData;
 
     const existingAccount = await Account.findOne({
       $or: [{ fullName: fullName }, { username: username }],
-      _id: { $ne: id },
+      _id: { $ne: req.params.id },
     });
 
     if (existingAccount) {
@@ -83,19 +89,17 @@ router.patch(
           .status(400)
           .json({ error: "Username already taken. Please choose another" });
       }
-    } else {
-      const account = await Account.findByIdAndUpdate(
-        id,
-        { ...req.body.account },
-        {
-          runValidators: true,
-          new: true,
-        }
-      );
-      await account.save();
-
-      res.json({ success: "Successfully updated account's information" });
     }
+
+    await Account.findByIdAndUpdate(
+      req.params.id,
+      { ...trimmedData },
+      {
+        runValidators: true,
+        new: true,
+      }
+    );
+    res.json({ success: "Successfully updated account's information" });
   })
 );
 

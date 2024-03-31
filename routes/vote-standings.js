@@ -5,7 +5,7 @@ const catchAsync = require("../utils/catchAsync");
 const { isLoggedIn, isAccountLoggedIn } = require("../middleware");
 
 const Candidate = require("../models/candidates");
-const { getVoteStandings } = require("../services/leading-candidates");
+const { getVoteStandings } = require("../services/voteStandingService");
 
 const {
   candidatePositions,

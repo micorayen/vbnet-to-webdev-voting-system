@@ -15,7 +15,7 @@ module.exports.voterSchema = Joi.object({
     fullName: Joi.string().required(),
     course: Joi.string().required(),
     yearLevel: Joi.string().required(),
-    username: Joi.string().required(), // Change into Student IdNumber
+    studentIdNumber: Joi.string().required(), // Change into Student IdNumber
     password: Joi.string(),
   }).required(),
 });

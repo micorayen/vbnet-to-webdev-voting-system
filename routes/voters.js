@@ -9,7 +9,7 @@ const { isLoggedIn, isAccountLoggedIn } = require("../middleware");
 const { Course } = require("../models/additionals");
 const Voter = require("../models/voters");
 
-const { trimVoterData } = require("../services/voterService");
+const { trimData } = require("../services/allService");
 
 // index Voters
 router.get(
@@ -41,17 +41,17 @@ router.post(
   isAccountLoggedIn,
   validateVoter,
   catchAsync(async (req, res) => {
-    const voterData = req.body.voter;
-    const trimmedVoterData = trimVoterData(voterData);
-    const { username, fullName, course, yearLevel, password } =
-      trimmedVoterData;
+    const data = req.body.voter;
+    const trimmedData = trimData(data);
+    const { studentIdNumber, fullName, course, yearLevel, password } =
+      trimmedData;
 
     const existingVoter = await Voter.findOne({
-      $or: [{ username: username }, { fullName: fullName }],
+      $or: [{ studentIdNumber: studentIdNumber }, { fullName: fullName }],
     });
 
     if (existingVoter) {
-      if (existingVoter.username === username) {
+      if (existingVoter.studentIdNumber === studentIdNumber) {
         return res
           .status(400)
           .json({ error: "ID Number already taken. Please choose another" });
@@ -62,7 +62,7 @@ router.post(
       }
     }
 
-    const voter = new Voter({ username, fullName, course, yearLevel });
+    const voter = new Voter({ studentIdNumber, fullName, course, yearLevel });
     await Voter.register(voter, password);
 
     res.json({ success: "Successfully added new voter" });
@@ -76,17 +76,17 @@ router.patch(
   isAccountLoggedIn,
   validateVoter,
   catchAsync(async (req, res) => {
-    const voterData = req.body.voter;
-    const trimmedVoterData = trimVoterData(voterData);
-    const { username, fullName } = trimmedVoterData;
+    const data = req.body.voter;
+    const trimmedData = trimData(data);
+    const { studentIdNumber, fullName } = trimmedData;
 
     const existingUser = await Voter.findOne({
-      $or: [{ username }, { fullName }],
+      $or: [{ studentIdNumber }, { fullName }],
       _id: { $ne: req.params.id },
     });
 
     if (existingUser) {
-      if (existingUser.username === username) {
+      if (existingUser.studentIdNumber === studentIdNumber) {
         return res
           .status(400)
           .json({ error: "ID Number already taken. Please choose another" });
@@ -99,7 +99,7 @@ router.patch(
 
     await Voter.findByIdAndUpdate(
       req.params.id,
-      { ...trimmedVoterData },
+      { ...trimmedData },
       { runValidators: true, new: true }
     );
 

@@ -10,9 +10,7 @@ const {
 const Candidate = require("../models/candidates");
 const Voter = require("../models/voters");
 
-const {
-  getCandidatesByPosition,
-} = require("../services/candidates-by-position");
+const { getCandidatesByPosition } = require("../services/voteService");
 
 // Route accessible only to users logged in as "voter"
 router.get(

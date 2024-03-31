@@ -38,6 +38,7 @@ const VoterSchema = new Schema({
 //     PRIMARY KEY (`ID`)
 //   ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12
 
-VoterSchema.plugin(passportLocalMongoose);
+// VoterSchema.plugin(passportLocalMongoose);
+VoterSchema.plugin(passportLocalMongoose, { usernameField: "studentIdNumber" });
 
 module.exports = mongoose.model("Voter", VoterSchema);

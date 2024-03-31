@@ -29,12 +29,11 @@ router.post(
 
     const existingCourse = await Course.findOne({ course: course });
     if (existingCourse) {
-      res.status(400).json({ error: "academic's course already exist" });
-    } else {
-      await new Course({ course: course }).save();
-
-      res.json({ success: "Successfully added new academic course" });
+      return res.status(400).json({ error: "academic's course already exist" });
     }
+
+    await new Course({ course: course }).save();
+    res.json({ success: "Successfully added new academic course" });
   })
 );
 
@@ -52,19 +51,18 @@ router.patch(
       _id: { $ne: req.params.id },
     });
     if (existingCourse) {
-      res.status(400).json({ error: "academic's course already exist" });
-    } else {
-      await Course.findByIdAndUpdate(
-        req.params.id,
-        { course: course },
-        {
-          runValidators: true,
-          new: true,
-        }
-      );
-
-      res.json({ success: "Successfully updated academic course's name" });
+      return res.status(400).json({ error: "academic's course already exist" });
     }
+
+    await Course.findByIdAndUpdate(
+      req.params.id,
+      { course: course },
+      {
+        runValidators: true,
+        new: true,
+      }
+    );
+    res.json({ success: "Successfully updated academic course's name" });
   })
 );
 
