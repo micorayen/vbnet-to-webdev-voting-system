@@ -1,11 +1,5 @@
 
-done: implemented custom username field for Voter model in Passport.js authentication and remove input's whitespace.
+done: introduced controller folder and update routes
 
-1. **Manage Voters**:
-    - Added `studentIdNumber` field as the username field in the Voter schema to provide a more relevant identifier for authentication.
-    - Update voter routes to use `studentIdNumber` as the username field for authentication, ensuring consistency with the schema change.
-    - Uses a service function allService.js with `trimData` to trim whitespace from entities data before adding & updating, improving data integrity and consistency.
-2. **Accounts**:
-    - Uses a service function allService.js with `trimData` to trim whitespace from entities data before adding & updating, improving data integrity and consistency.
-3. **Candidates**:
-    - Uses a service function allService.js with `trimData` to trim whitespace from entities data before adding & updating, improving data integrity and consistency.
+- Intoduced "controller" directory.
+- Updates "routes" files, for better project structure.

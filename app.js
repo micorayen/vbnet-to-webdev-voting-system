@@ -1,3 +1,7 @@
+if (process.env.NODE_ENV !== "production") {
+  require("dotenv").config();
+}
+
 const express = require("express");
 const app = express();
 const path = require("path");
@@ -24,6 +28,7 @@ const userRoutes = require("./routes/users");
 const accountRoutes = require("./routes/accounts");
 const voterRoutes = require("./routes/voters");
 const partyRoutes = require("./routes/parties");
+const titleRoutes = require("./routes/titles");
 const courseRoutes = require("./routes/courses");
 const candidateRoutes = require("./routes/candidates");
 const voteStandingRoutes = require("./routes/vote-standings");
@@ -125,6 +130,7 @@ app.use("/accounts", accountRoutes);
 app.use("/voters", voterRoutes);
 app.use("/parties", partyRoutes);
 app.use("/courses", courseRoutes);
+app.use("/titles", titleRoutes);
 app.use("/candidates", candidateRoutes);
 app.use("/vote-standings", voteStandingRoutes);
 app.use("/votes", voteRoutes);
@@ -139,17 +145,6 @@ app.get("/", isLoggedIn, isAccountLoggedIn, async (req, res) => {
   const title = await Title.findOne();
 
   res.render("main", { loggedInAccount, title });
-});
-
-app.put("/", async (req, res) => {
-  await Title.findOneAndUpdate(
-    {},
-    { title: req.body.title }, // Update the title
-    { runValidators: true, new: true }
-  );
-
-  req.flash("success", "Successfully updated application's title");
-  res.redirect("/");
 });
 
 /// ADDITIONAL ROUTES:

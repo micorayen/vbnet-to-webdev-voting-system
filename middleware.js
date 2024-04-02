@@ -4,6 +4,7 @@ const {
   partySchema,
   courseSchema,
   candidateSchema,
+  titleSchema,
 } = require("./schemas");
 
 const Voter = require("./models/voters");
@@ -42,6 +43,16 @@ module.exports.validateParty = (req, res, next) => {
 
 module.exports.validateCourse = (req, res, next) => {
   const { error } = courseSchema.validate(req.body);
+  if (error) {
+    const msg = error.details.map((el) => el.message).join(",");
+    throw new ExpressError(msg, 400);
+  } else {
+    next();
+  }
+};
+
+module.exports.validateTitle = (req, res, next) => {
+  const { error } = titleSchema.validate(req.body);
   if (error) {
     const msg = error.details.map((el) => el.message).join(",");
     throw new ExpressError(msg, 400);

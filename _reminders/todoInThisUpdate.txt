@@ -1,12 +1,16 @@
 //note: if you make commit message, you must always include the reason why its added:
 
-6. Manage Voters
-D    - turned "username(passportJS)" as "IdNumber"
-D    - Uses a service function allService.js with `trimData` to trim whitespace from entities data before adding & updating, improving data integrity and consistency.
-7. Admin/Facilitator (Accounts)
-D    - Uses a service function allService.js with `trimData` to trim whitespace from entities data before adding & updating, improving data integrity and consistency.
-8. Candidates
-D    - Uses a service function allService.js with `trimData` to trim whitespace from entities data before adding & updating, improving data integrity and consistency.
 
+Controllers
+
+accounts
+candidates
+courses
+parties
+titles
+users
+voters
+votes
+vote-standings
 
 

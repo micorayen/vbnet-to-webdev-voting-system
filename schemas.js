@@ -28,6 +28,10 @@ module.exports.courseSchema = Joi.object({
   course: Joi.string().required(),
 });
 
+module.exports.titleSchema = Joi.object({
+  title: Joi.string().required(),
+});
+
 module.exports.candidateSchema = Joi.object({
   candidate: Joi.object({
     candidateIdNumber: Joi.string().required(),

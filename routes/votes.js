@@ -7,10 +7,8 @@ const {
   isVoterLoggedIn,
   checkVoteStatus,
 } = require("../middleware");
-const Candidate = require("../models/candidates");
-const Voter = require("../models/voters");
 
-const { getCandidatesByPosition } = require("../services/voteService");
+const votes = require("../controllers/votes");
 
 // Route accessible only to users logged in as "voter"
 router.get(
@@ -18,56 +16,9 @@ router.get(
   isLoggedIn,
   isVoterLoggedIn,
   checkVoteStatus,
-  catchAsync(async (req, res) => {
-    const loggedInVoter = req.user;
-    const {
-      presidents,
-      vpInternals,
-      vpExternals,
-      auditors,
-      treasurers,
-      secretaries,
-      pros,
-      firstYearReps,
-      secondYearReps,
-      thirdYearReps,
-      fourthYearReps,
-    } = await getCandidatesByPosition();
-
-    res.render("votes", {
-      loggedInVoter,
-      presidents,
-      vpInternals,
-      vpExternals,
-      auditors,
-      treasurers,
-      secretaries,
-      pros,
-      firstYearReps,
-      secondYearReps,
-      thirdYearReps,
-      fourthYearReps,
-    });
-  })
+  catchAsync(votes.index)
 );
 
-router.patch(
-  "/update-vote-count",
-  catchAsync(async (req, res) => {
-    await Candidate.updateMany(
-      { fullName: { $in: Object.values(req.body) } },
-      { $inc: { voteCount: 1 } }
-    );
-
-    // console.log(req.user.fullName);
-    await Voter.findOneAndUpdate(
-      { fullName: req.user.fullName },
-      { $set: { voteStatus: "Voted" } },
-      { new: true }
-    );
-
-    res.redirect("/logout");
-  })
-);
+router.patch("/update-vote-count", catchAsync(votes.updateVoteCount));
 
 module.exports = router;

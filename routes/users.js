@@ -1,52 +1,15 @@
 const express = require("express");
 const router = express.Router({ mergeParams: true });
-const catchAsync = require("../utils/catchAsync");
-const ExpressError = require("../utils/ExpressError");
 
-const passport = require("passport");
-const { storeReturnTo, isLoggedIn } = require("../middleware");
-
-const Account = require("../models/accounts");
+const users = require("../controllers/users");
 
 // renderLogin
-router.get("/login", (req, res) => {
-  res.render("users/login");
-});
+router.get("/login", users.renderLogin);
 
 // Login route
-router.post("/login", function (req, res, next) {
-  const loginType = req.body.loginType;
-  let strategyName;
+router.post("/login", users.login);
 
-  if (loginType === "account") {
-    strategyName = "account-local";
-  } else if (loginType === "voter") {
-    strategyName = "voter-local";
-  } else {
-    // Handle invalid login type
-    return res.redirect("/login");
-  }
-
-  passport.authenticate(strategyName, {
-    failureFlash: true,
-    failureRedirect: "/login",
-  })(req, res, () => {
-    const redirectUrl =
-      res.locals.returnTo || (loginType === "voter" ? "/votes" : "/");
-    delete req.session.returnTo; // Remove returnTo from session
-    res.redirect(redirectUrl);
-  });
-});
-
-router.get("/logout", (req, res) => {
-  req.logout(function (err) {
-    if (err) {
-      return next(err);
-    }
-    req.flash("success", "Goodbye!");
-    res.redirect("/login");
-  });
-});
+router.get("/logout", users.logout);
 
 module.exports = router;
 

@@ -3,10 +3,10 @@ const Schema = mongoose.Schema;
 
 const CandidateSchema = new Schema({
   // Note: To be added later
-  // images: {
-  //   url: String,
-  //   filename: String,
-  // },
+  image: {
+    url: String,
+    filename: String,
+  },
   candidateIdNumber: {
     type: String,
     required: true,
