@@ -19,21 +19,21 @@ module.exports.createAccount = async (req, res) => {
   const { role, fullName, username, password } = trimmedData;
   // =====================================
 
-  const existingAccount = await Account.findOne({
-    $or: [{ fullName: fullName }, { username: username }],
-  });
+  // const existingAccount = await Account.findOne({
+  //   $or: [{ fullName: fullName }, { username: username }],
+  // });
 
-  if (existingAccount) {
-    if (existingAccount.fullName === fullName) {
-      return res
-        .status(400)
-        .json({ error: "Fullname already taken. Please choose another" });
-    } else if (existingAccount.username === username) {
-      return res
-        .status(400)
-        .json({ error: "Username already taken. Please choose another" });
-    }
-  }
+  // if (existingAccount) {
+  //   if (existingAccount.fullName === fullName) {
+  //     return res
+  //       .status(400)
+  //       .json({ error: "Fullname already taken. Please choose another" });
+  //   } else if (existingAccount.username === username) {
+  //     return res
+  //       .status(400)
+  //       .json({ error: "Username already taken. Please choose another" });
+  //   }
+  // }
   const account = new Account({ role, fullName, username });
   await Account.register(account, password);
 

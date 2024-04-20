@@ -1,5 +1,6 @@
 
-done: introduced controller folder and update routes
+done: implemented image upload for candidate profiles.
 
-- Intoduced "controller" directory.
-- Updates "routes" files, for better project structure.
+- Add image upload feature for candidate profiles
+- Update image upload functionality for candidate profiles
+- Delete candidate image from Cloudinary along with associated data

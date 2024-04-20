@@ -1,12 +1,13 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
+const ImageSchema = new Schema({
+  url: String,
+  filename: String,
+});
+
 const CandidateSchema = new Schema({
   // Note: To be added later
-  image: {
-    url: String,
-    filename: String,
-  },
   candidateIdNumber: {
     type: String,
     required: true,
@@ -37,6 +38,7 @@ const CandidateSchema = new Schema({
     type: Number,
     default: 0,
   },
+  image: ImageSchema,
 });
 
 // CREATE TABLE IF NOT EXISTS `candidates` (

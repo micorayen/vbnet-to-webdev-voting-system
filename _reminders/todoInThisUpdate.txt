@@ -1,16 +1,12 @@
 //note: if you make commit message, you must always include the reason why its added:
 
-
 Controllers
-
 accounts
 candidates
-courses
-parties
 titles
-users
-voters
-votes
-vote-standings
 
+8. Candidates
+    [DONE 13th]- Candidate add a image upload, for candidates images, to helps voter at their candidates selection.
+    [DONE 13th]- Candidate update a image upload, for candidates images, to helps voter at their candidates selection.
+    [DONE 13th]- delete candidate image from cloudinary, along with selected candidate's data.
 

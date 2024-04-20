@@ -45,40 +45,40 @@ const titleData = [{ title: "Automated Voting System" }];
 //     mongoose.connection.close();
 //   }
 // }
-// async function seedParties() {
-//   try {
-//     // Remove existing parties
-//     await Party.deleteMany({});
-
-//     // Seed new parties
-//     await Party.create(partyData);
-
-//     console.log("Parties seeded successfully.");
-//   } catch (error) {
-//     console.error("Error seeding parties:", error);
-//   } finally {
-//     // Close the connection
-//     mongoose.connection.close();
-//   }
-// }
-
-async function seedTitles() {
+async function seedParties() {
   try {
     // Remove existing parties
-    await Title.deleteMany({});
+    await Party.deleteMany({});
 
     // Seed new parties
-    await Title.create(titleData);
+    await Party.create(partyData);
 
-    console.log("Title seeded successfully.");
+    console.log("Parties seeded successfully.");
   } catch (error) {
-    console.error("Error seeding title:", error);
+    console.error("Error seeding parties:", error);
   } finally {
     // Close the connection
     mongoose.connection.close();
   }
 }
-seedTitles();
 
-// // seedCourses();
-// seedParties();
+// async function seedTitles() {
+//   try {
+//     // Remove existing parties
+//     await Title.deleteMany({});
+
+//     // Seed new parties
+//     await Title.create(titleData);
+
+//     console.log("Title seeded successfully.");
+//   } catch (error) {
+//     console.error("Error seeding title:", error);
+//   } finally {
+//     // Close the connection
+//     mongoose.connection.close();
+//   }
+// }
+// seedTitles();
+
+// seedCourses();
+seedParties();

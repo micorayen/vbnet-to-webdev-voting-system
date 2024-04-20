@@ -10,6 +10,9 @@ const {
 const Voter = require("./models/voters");
 const ExpressError = require("./utils/ExpressError");
 
+const Candidate = require("./models/candidates");
+const { trimData } = require("./services/allService");
+
 // VALIDATION MIDDLEWARE
 module.exports.validateAccount = (req, res, next) => {
   const { error } = accountSchema.validate(req.body);
@@ -159,3 +162,5 @@ module.exports.checkDuplicateForUpdateVoter = async (req, res, next) => {
 
   next();
 };
+
+// =======================================

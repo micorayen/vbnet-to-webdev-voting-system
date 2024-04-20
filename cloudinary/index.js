@@ -11,8 +11,8 @@ const storage = new CloudinaryStorage({
   cloudinary,
   params: {
     folder: "VotingSystem",
-    // allowedFormats: ["jpeg", "png", "jpg"],
-    allowedFormats: "png",
+    allowedFormats: ["jpeg", "png", "jpg"],
+    // allowedFormats: "png",
   },
 });
 

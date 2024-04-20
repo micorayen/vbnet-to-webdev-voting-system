@@ -1,4 +1,4 @@
-const { Title } = require("./models/additionals");
+const { Title } = require("../models/additionals");
 
 module.exports.updateTitle = async (req, res) => {
   await Title.findOneAndUpdate(

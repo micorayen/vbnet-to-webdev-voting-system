@@ -66,8 +66,9 @@
     [DONE 9th]- Update route - put additional validation for candidate IdNumber and fullName (make sure it wont duplicate)
     [DONE 9th]- Validate if certain position already taken, at the same partylist
     [DONE 6th] - flash messages, for successfully creation, update and deletion, and rendering edit-form.
-    - Candidate add a image upload, for candidates images, to helps voter at their candidates selection.
-    - Candidate update a image upload, for candidates images, to helps voter at their candidates selection.
+    [DONE 13th]- Candidate add a image upload, for candidates images, to helps voter at their candidates selection.
+    [DONE 13th]- Candidate update a image upload, for candidates images, to helps voter at their candidates selection.
+    [DONE 13th]- delete candidate image from cloudinary, along with selected candidate's data.
 
 9. Additionals
 Additionals > Courses

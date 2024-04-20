@@ -1,12 +1,10 @@
 <% layout('layouts/boilerplate') %>
 
 <div class="row">
-  <!-- <h1 class="text-center mb-4">Create your account</h1> -->
   <div class="col-md-6 offset-md-3 mb-5">
-    <form method="POST" novalidate class="validated-form" enctype="multipart/form-data">
+    <form id="candidateForm" novalidate class="validated-form" enctype="multipart/form-data">
       <div class="mb-3">
-        <label class="form-label" for="candidateIdNumber">Candidate Id Number:
-        </label>
+        <label class="form-label" for="candidateIdNumber">Candidate Id Number:</label>
         <input class="form-control" type="text" name="candidate[candidateIdNumber]" id="candidateIdNumber" placeholder="Provide your student number" required />
         <div class="invalid-feedback">
           Please provide your candidate id number
@@ -60,8 +58,15 @@
         </div>
       </div>
 
+      <div class="mb-3">
+        <label for="image" class="form-label">Upload Image:</label>
+        <input class="form-control" type="file" name="image" id="image" required />
+        <div class="invalid-feedback">Choose your candidate image</div>
+      </div>
+
       <div class="mb-3 d-grid">
-        <button class="btn btn-dark" type="submit">Add Candidate</button>
+        <!-- <button class="btn btn-dark" type="submit">Add Candidate</button> -->
+        <button id="submitButton" class="btn btn-dark" type="submit">Add Candidate</button>
       </div>
     </form>
     <hr />
@@ -74,37 +79,52 @@
 <%- include('../partials/message_modal') %>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
+// Frontend JavaScript
 <script>
   $(document).ready(function() {
-    $(".validated-form").on("submit", function(event) {
+    $("#candidateForm").on("submit", function(event) {
       event.preventDefault();
 
-      const formData = $(this).serialize();
+      const form = this;
+      const submitButton = $(this).find("button[type='submit']");
+      submitButton.prop('disabled', true);
+
+      if (!form.checkValidity()) {
+        form.classList.add("was-validated");
+
+        submitButton.prop('disabled', false);
+        return;
+      }
+
+      // If the form is valid, proceed with form submission
+      const formData = new FormData(this);
+
+      // console.log("formData: ", formData);
 
       $.ajax({
         type: "POST",
         url: "/candidates",
         data: formData,
+        contentType: false,
+        processData: false,
         success: function(response) {
           $("#successMessagePlaceholder").text(response.success);
           $('#success-modal').modal('show');
-          // $('form')[0].reset();
 
           $('#success-modal').on('hidden.bs.modal', function(e) {
             window.location.reload();
           });
-
-          // document.getElementById('yourFormId').reset();
         },
         error: function(xhr) {
           const errorMessage = xhr.responseJSON.error;
-
           $("#errorMessagePlaceholder").text(errorMessage);
           $('#error-modal').modal('show');
+        },
+        complete: function() {
+          // Re-enable the submit button after form submission is complete
+          submitButton.prop('disabled', false);
         }
       });
     });
-
   });
 </script>

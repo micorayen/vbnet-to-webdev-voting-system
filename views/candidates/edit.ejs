@@ -3,7 +3,7 @@
 <div class="row">
   <!-- <h1 class="text-center mb-4">Create your account</h1> -->
   <div class="col-md-6 offset-md-3 mb-5">
-    <form method="POST" novalidate class="validated-form" enctype="multipart/form-data">
+    <form novalidate class="validated-form" enctype="multipart/form-data">
       <div class="mb-3">
         <label class="form-label" for="candidateIdNumber">Candidate Id Number:
         </label>
@@ -62,6 +62,11 @@
         </div>
       </div>
 
+      <div class="mb-3">
+        <label for="image" class="form-label">Upload Image: (Optional)</label>
+        <input class="form-control" type="file" name="image" id="image" />
+      </div>
+
       <div class="mb-3 d-grid">
         <button type="submit" class="btn btn-dark">Update Candidate</button>
       </div>
@@ -83,12 +88,26 @@
     $(".validated-form").on("submit", function(event) {
       event.preventDefault();
 
-      const formData = $(this).serialize();
+      const form = this;
+      const submitButton = $(this).find("button[type='submit']");
+      submitButton.prop('disabled', true);
+
+      if (!form.checkValidity()) {
+        form.classList.add("was-validated");
+
+        submitButton.prop('disabled', false);
+        return;
+      }
+
+      // const formData = $(this).serialize();
+      const formData = new FormData(this);
 
       $.ajax({
         type: "POST",
         url: `/candidates/<%= candidate._id %>?_method=PATCH`,
         data: formData,
+        contentType: false,
+        processData: false,
         success: function(response) {
           $("#successMessagePlaceholder").text(response.success);
           $('#success-modal').modal('show');
@@ -96,13 +115,14 @@
           $('#success-modal').on('hidden.bs.modal', function(e) {
             window.location.href = "/candidates/<%= candidate._id %>";
           });
-
         },
         error: function(xhr) {
           const errorMessage = xhr.responseJSON.error;
-
           $("#errorMessagePlaceholder").text(errorMessage);
           $('#error-modal').modal('show');
+        },
+        complete: function() {
+          submitButton.prop('disabled', false);
         }
       });
     });
